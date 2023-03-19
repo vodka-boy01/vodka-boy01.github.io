@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+.titolo {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.5s cubic-bezier(0.94, 0.93, 0.03, 1.02);/*transizione lenta inizialmente e veloce nel finale*/
+}
+@media screen and (max-width: 460px){
+    .titolo{
+        display: block;
+        justify-content: center;
+        font-size: medium;
+        padding-bottom: 15px;
+    }
+}
+.nav-bar{ /*box genitore*/
+    display: flex;
+    flex-wrap: nowrap; 
+}
+.nav-buttons{ /*box figlio*/
+    width: 50%;
+}
+nav div{
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    padding-top: 10px;
+    list-style: none;
+    
+}
+nav li {
+    margin: 15px;/*margine tra gli elementi li*/
+    margin-left: 0px;/*azzera margin-left*/
+    display: flex;
+    align-items: center;/*centraggio degli elementi li nel box dei suddetti*/
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: color  0.5s ease;
+}
+a:hover{
+    color: gray;
+}
+.search-bar{/*box figlio 2*/
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    width: 50%;
+    margin: 5px;
+}
+input[type="search"]{
+    background-color: gray;
+    width: 25%;
+    border: none;
+    outline: none;
+    border-radius: 150px;
+    margin-right: 10px;
+}
+button[type="search"]{
+    background-color: gray;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+
+
+/*distanziare button e input, cercare icona animata per button e animazione di pressione per button*/
+
+/*
+@keyframes esempio {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100px); }
+}
+
+img {
+  animation-name: esempio;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+img {
+  animation-play-state: paused;
+}
+img {
+  animation-play-state: running;
+}
+*/
+
+
+/*
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+*/
+footer {
+    background-color: #333;
+    width: 100%; 
+    bottom: 0; /* parte bassa della pagina*/
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+}
+footer div {
+    margin: 0;
+    list-style: none;
+    display: block;
+    justify-content: center;
+}
+a:hover{
+    color: gray;
+}
+footer a {
+    color: #fff;
+    text-decoration: none; /*senza linea di base*/
+    text-transform: capitalize; /*prima lettera maiuscola*/
+    font-size: 15px;
+    font-weight: bold;
+    transition: color  0.5s ease;
+}
+.footer-box{
+    display: flex;
+    width: auto;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 2em;/*il footer-box e da ridimensionare in modo tale da centra e sfruttare piu righe*/
+}
