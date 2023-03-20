@@ -1,12 +1,17 @@
 /*inizio progetto: 18/02/2023*/
+:root{/*var per colore dinamico*/
+    --bg--color: #333;
+    --main--color: #fff;
+    --hover--color: gray;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--bg--color);
+    color: var(--main--color);
     padding: 20px;
 }
 /*inizio style bottone login e titolo*/
@@ -17,13 +22,6 @@ header {
 .container-titolo{
     width: 50%;
 }
-.container__login-form{
-    width: 50%;
-}
-login-form{
-    display: flex;
-    justify-content: flex-end;
-}
 .titolo {
     margin: 0;
     font-size: 36px;
@@ -32,16 +30,25 @@ login-form{
     letter-spacing: 2px;
     transition: 0.5s ease;
 }
-/*
-@media screen and (max-width: 460px){
-    .titolo{
-        display: block;
-        justify-content: center;
-        font-size: medium;
-        padding-bottom: 15px;
-    }
+.container-login{
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
 }
-*/
+.login-button{
+    background-color: var(--bg--color);
+    padding: 0px;
+    margin: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.fa-circle-user{
+    background-color: var(--bg--color);
+    font-size: 30px;
+}
+
+
 /*inizio style barra dei link sotto il titolo*/
 .nav__bar{ /*box genitore*/
     display: flex;
@@ -65,7 +72,7 @@ nav li {
     align-items: center;/*centraggio degli elementi li nel box dei suddetti*/
 }
 nav a {
-    color: #fff;
+    color: var(--main--color);
     text-decoration: none;
     font-size: 18px;
     text-transform: uppercase;
@@ -73,7 +80,7 @@ nav a {
     transition: color  0.5s ease;
 }
 nav a:hover{
-    color: gray;
+    color: var(--hover--color);
 }
 /*inizio style barra di ricerca*/
 .search__bar{/*box figlio 2*/
@@ -98,7 +105,7 @@ nav a:hover{
     border-top-right-radius: 0px;
     font-size: larger;
     padding-left: 20px;
-    transition: 0.3s ease;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 #search-input:hover{
     width: 80%;
@@ -128,7 +135,7 @@ nav a:hover{
     border-top-left-radius: 0px;
     padding: 10px;
     transition: 0.5 ease;
-    background-color: gray;
+    background-color: var(--hover--color);
     height: 40px;
     border: none;
     outline: none;
@@ -137,6 +144,7 @@ nav a:hover{
 #submit-button:hover{
     opacity: 0.3;
 }
+
 /*
 @keyframes esempio {
   0% { transform: translateX(0); }
@@ -170,10 +178,10 @@ ul {
 }
 */
 footer {
-    background-color: #333;
+    background-color: var(--bg--color);
     width: 100%; 
     bottom: 0; /* parte bassa della pagina*/
-    color: #fff;
+    color: var(--main--color);
     padding: 20px;
     text-align: center;
     position: fixed;
@@ -185,10 +193,10 @@ footer div {
     justify-content: center;
 }
 a:hover{
-    color: gray;
+    color: var(--hover--color);
 }
 footer a {
-    color: #fff;
+    color: var(--main--color);
     text-decoration: none; /*senza linea di base*/
     text-transform: capitalize; /*prima lettera maiuscola*/
     font-size: 15px;
@@ -202,6 +210,9 @@ footer a {
     flex-wrap: wrap;
     align-content: center;
     gap: 2em;/*il footer-box e da ridimensionare in modo tale da centra e sfruttare piu righe*/
+}
+.footer-Copyright{
+    transition: 0.5s ease;
 }
 @media screen and (max-width: 991px) {
 /* start of large tablet styles */
