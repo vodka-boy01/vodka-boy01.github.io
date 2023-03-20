@@ -11,3 +11,7 @@ searchInput.addEventListener('blur', function() {
     this.value = 'CERCA';
   }
 });
+
+function clearSearch() {
+  document.getElementById("search").value = "CERCA";
+}
