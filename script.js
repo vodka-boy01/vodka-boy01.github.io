@@ -11,7 +11,21 @@ searchInput.addEventListener('blur', function() {
     this.value = 'CERCA';
   }
 });
-
-function clearSearch() {
+function clearSearch(){
   document.getElementById("search").value = "CERCA";
+}   
+/*
+function clearSearch() {//
+  document.getElementById("reset").onclick = function(){
+    setTimeout(dalayDelete, 500);
+  }
+  function dalayDelete(){
+    document.getElementById("search").value = "CERCA";
+  }     
 }
+*/
+/*
+document.getElementById("reset").onclick = function(){
+  setTimeout(clearSearch, 500);
+}     //delay per cancellare il testo
+*/ 
