@@ -1,3 +1,4 @@
+/*inizio progetto: 18/02/2023*/
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,14 +9,30 @@ header {
     color: #fff;
     padding: 20px;
 }
+/*inizio style bottone login e titolo*/
+.title__login{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.container-titolo{
+    width: 50%;
+}
+.container__login-form{
+    width: 50%;
+}
+login-form{
+    display: flex;
+    justify-content: flex-end;
+}
 .titolo {
     margin: 0;
     font-size: 36px;
     font-weight: bold;
-    text-transform: uppercase;
+    text-transform: uppercase;/*tutto maiuscolo*/
     letter-spacing: 2px;
-    transition: 0.5s cubic-bezier(0.94, 0.93, 0.03, 1.02);/*transizione lenta inizialmente e veloce nel finale*/
+    transition: 0.5s ease;
 }
+/*
 @media screen and (max-width: 460px){
     .titolo{
         display: block;
@@ -24,7 +41,9 @@ header {
         padding-bottom: 15px;
     }
 }
-.nav-bar{ /*box genitore*/
+*/
+/*inizio style barra dei link sotto il titolo*/
+.nav__bar{ /*box genitore*/
     display: flex;
     flex-wrap: nowrap; 
 }
@@ -35,7 +54,7 @@ nav div{
     display: flex;
     justify-content: flex-start;
     margin: 0;
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     list-style: none;
     
 }
@@ -53,10 +72,11 @@ nav a {
     font-weight: bold;
     transition: color  0.5s ease;
 }
-a:hover{
+nav a:hover{
     color: gray;
 }
-.search-bar{/*box figlio 2*/
+/*inizio style barra di ricerca*/
+.search__bar{/*box figlio 2*/
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -64,25 +84,29 @@ a:hover{
     width: 50%;
     margin: 5px;
 }
-#search, #reset{
+#search-input, #reset-button{
     background-color: gray;
     height: 40px;
     border: none;
     outline: none;
     cursor: pointer;/*rende il cursore una mano*/
 }
-input[type="search"]{
+#search-input{
     width: 35%;
     border-radius: 150px;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
     font-size: larger;
     padding-left: 20px;
+    transition: 0.3s ease;
 }
-input[type="search"]::-webkit-search-cancel-button{/*icona cancella ricerca*/
--webkit-appearance: none;
+#search-input:focus{
+    width: 80%;
 }
-button[type="reset"]{
+#search-input::-webkit-search-cancel-button{/*icona cancella ricerca*/
+    -webkit-appearance: none;
+}
+#reset-button{
     /*background-image: url('icone/cancell.svg');*/
     background-size: contain;
     background-repeat: no-repeat;
@@ -92,7 +116,7 @@ button[type="reset"]{
 .fa-xmark{/*cancel button*/
     font-size: 20px;
 }
-button[type="search"]{
+#submit-button{
     opacity: 0.5;
     border-radius: 10px;
     transition: .3s ease;
@@ -107,11 +131,9 @@ button[type="search"]{
     outline: none;
     cursor: pointer;/*rende il cursore una mano*/
 }
-button[type="search"]:hover{
+#submit-button:hover{
     opacity: 0.3;
 }
-/*distanziare button e input, cercare icona animata per button e animazione di pressione per button*/
-
 /*
 @keyframes esempio {
   0% { transform: translateX(0); }
@@ -177,4 +199,18 @@ footer a {
     flex-wrap: wrap;
     align-content: center;
     gap: 2em;/*il footer-box e da ridimensionare in modo tale da centra e sfruttare piu righe*/
+}
+@media screen and (max-width: 991px) {
+/* start of large tablet styles */
+    
+}
+    
+@media screen and (max-width: 767px) {
+/* start of medium tablet styles */
+    
+}
+    
+@media screen and (max-width: 479px) {
+/* start of phone styles */
+    
 }

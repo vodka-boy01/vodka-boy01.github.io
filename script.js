@@ -1,4 +1,4 @@
-const searchInput = document.querySelector('input[type="search"]');
+const searchInput = document.getElementById('search-input');
 //solo tipi di input search
 searchInput.addEventListener('focus', function() {
   if(this.value === 'CERCA') {
@@ -12,8 +12,8 @@ searchInput.addEventListener('blur', function() {
   }
 });
 function clearSearch(){
-  document.getElementById("search").value = "CERCA";
-}   
+  document.getElementById("search-input").value = "CERCA";
+}
 /*
 function clearSearch() {//
   document.getElementById("reset").onclick = function(){
