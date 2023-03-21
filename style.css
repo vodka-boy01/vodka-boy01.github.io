@@ -1,17 +1,16 @@
 /*inizio progetto: 18/02/2023*/
 :root{/*var per colore dinamico*/
-    --bg-color: rgb(32,33,35);
-    --main-color: #fff;
+    --bg-color: rgb(51, 153, 101);
+    --main-color: rgb(102, 204, 152);
+    --color-main: rgb(52,53,65);
     --opacity-value: 0.5;
-    --color-primary: #19c37d;
-    --color-secondary: #715fde;
-    --color-error: #ef4146;
-    --gradient-primary: linear-gradient(90deg,#a29bd4,#989fdd);
-    --text-primary: #202123;
-    --text-default: #353740;
-    --text-secondary: #6e6e80;
-    --text-disabled: #acacbe;
     --text-error: var(--color-error);
+    --animation-state: paused;
+    --color-error: #ef4146;
+
+    --color-1: #19c37d;
+    --color-2: #715fde;
+
 }
 body {
     font-family: Arial, sans-serif;
@@ -22,6 +21,10 @@ header {
     background-color: var(--bg-color);
     color: var(--main-color);
     padding: 20px;
+}
+::-webkit-scrollbar {
+    height: 1rem;
+    width: 0.5rem;
 }
 /*inizio style bottone login e titolo*/
 .title__login{
@@ -83,6 +86,9 @@ header {
     border: none;
     cursor: pointer;
     transition: 0.5s ease;
+    --fa-animation-duration: 1.3s;
+    --fa-animation-timing: ease;
+    animation-play-state: var(--animation-state);
 }
 .fa-circle-half-stroke:hover{
     opacity: var(--opacity-value);
@@ -182,9 +188,8 @@ nav a:hover{
 }
 /*inizio style main*/
 .main{
-    display: flex;
-    justify-content: center;
-    background-color: var();
+    
+    background-color: var(--color-main);
 }
 /*
 @keyframes esempio {
@@ -222,11 +227,10 @@ ul {
 footer {
     background-color: var(--bg-color);
     width: 100%; 
-    bottom: 0; /* parte bassa della pagina*/
     color: var(--main-color);
     padding: 15px;
     text-align: center;
-    position: fixed;
+    align-content: baseline;
 }
 footer div {
     margin: 0;
@@ -270,3 +274,4 @@ footer a {
 /* start of phone styles */
     
 }
+

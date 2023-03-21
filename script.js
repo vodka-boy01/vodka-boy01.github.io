@@ -18,11 +18,15 @@ function clearSearch(){
 }
 /*cambio dinamico dei colori del sito: std su bianco///////////////*/
 const colorChange = document.getElementById('circle-icon');
-/*var colorValue = 0;if(colorValue === )*/
 colorChange.addEventListener('click', function(){
-  /*aggiungere tutti i colori per le i cambi dinamici, e aggiungere un bottone al lato sinistro del bottone login per la transizione di colore della pagina*/
   document.documentElement.style.setProperty('--main-color', 'red');
+  document.documentElement.style.setProperty('--animation-state', 'running');
+  
+  setTimeout(function() {/*imposta il tempo di attesa per fermare l'animazione*/
+  document.documentElement.style.setProperty('--animation-state', 'paused');
+  }, 1300); 
 });
+
 
 
 /*
