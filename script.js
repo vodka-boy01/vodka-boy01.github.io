@@ -16,15 +16,24 @@ searchInput.addEventListener('blur', function() {
 function clearSearch(){
   document.getElementById("search-input").value = "CERCA";
 }
-/*cambio dinamico dei colori del sito: std su bianco///////////////*/
+/*cambio dinamico dei colori del sito: std su bianco, con save in localstorage*/
+const statoColore = localStorage.getItem("stato-colore");
 const colorChange = document.getElementById('circle-icon');
 colorChange.addEventListener('click', function(){
-  document.documentElement.style.setProperty('--main-color', 'red');
-  document.documentElement.style.setProperty('--animation-state', 'running');
-  
-  setTimeout(function() {/*imposta il tempo di attesa per fermare l'animazione*/
-  document.documentElement.style.setProperty('--animation-state', 'paused');
-  }, 1300); 
+  console.log(statoColore)
+  if(statoColore == 0){
+    document.documentElement.style.setProperty('--main-color', 'red');
+    document.documentElement.style.setProperty('--animation-state', 'running');
+    
+    setTimeout(function() {/*imposta il tempo di attesa per fermare l'animazione*/
+    document.documentElement.style.setProperty('--animation-state', 'paused');
+    }, 1300); 
+    localStorage.setItem("stato-colore", "1");
+  }
+  else{
+    localStorage.setItem("stato-colore", "0");
+  }
+  console.log(localStorage);
 });
 
 
