@@ -15,20 +15,19 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+
 }
 header {
     background-color: var(--bg-color);
     color: var(--main-color);
     padding: 20px;
 }
-::-webkit-scrollbar {
-    height: 1rem;
-    width: 0.5rem;
-}
+
 /*inizio style bottone login e titolo*/
 .title__login{
     display: flex;
     flex-wrap: nowrap;
+    align-items: center;
 }
 .container-titolo{
     width: 50%;
@@ -92,6 +91,14 @@ header {
 .fa-circle-half-stroke:hover{
     opacity: var(--opacity-value);
 }
+.hr{
+    margin: none;
+    width: 35%;
+    border: 0;
+    border-radius: 10px;
+    height: 2px;
+    background: gray;
+}
 /*inizio style barra dei link sotto il titolo*/
 .nav__bar{ /*box genitore*/
     display: flex;
@@ -104,9 +111,7 @@ nav div{
     display: flex;
     justify-content: flex-start;
     margin: 0;
-    /*padding-top: 10px;*/
     list-style: none;
-    
 }
 nav li {
     margin: 15px;/*margine tra gli elementi li*/
@@ -187,7 +192,6 @@ nav a:hover{
 }
 /*inizio style main*/
 .main{
-    
     background-color: var(--color-main);
 }
 /*
@@ -225,7 +229,7 @@ ul {
 /*inizio barra footer*/
 footer {
     background-color: var(--bg-color);
-    width: 100%; 
+    max-width: 100%; 
     color: var(--main-color);
     padding: 15px;
     text-align: center;

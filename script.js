@@ -18,7 +18,6 @@ function clearSearch(){
 }
 /*cambio dinamico dei colori del sito: std su bianco, con save in localstorage*/
 const colorChange = document.getElementById('circle-icon');
-
 colorChange.addEventListener('click', function(){
   let value = localStorage.getItem("statoColore");
 
