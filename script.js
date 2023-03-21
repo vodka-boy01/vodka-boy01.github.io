@@ -17,15 +17,16 @@ function clearSearch(){
   document.getElementById("search-input").value = "CERCA";
 }
 /*cambio dinamico dei colori del sito: std su bianco, con save in localstorage*/
-var statoColore = localStorage.getItem("statoColore");
+const statoColore = localStorage.getItem("statoColore");
 const colorChange = document.getElementById('circle-icon');
+
 colorChange.addEventListener('click', function(){
-  if(statoColore === 0){
+  console.log(localStorage)
+  if(statoColore === 0 && undefined){
     localStorage.setItem("statoColore", "1");
     console.log(statoColore)
     document.documentElement.style.setProperty('--main-color', 'red');
     document.documentElement.style.setProperty('--animation-state', 'running');
-    
     setTimeout(function() {/*imposta il tempo di attesa per fermare l'animazione*/
     document.documentElement.style.setProperty('--animation-state', 'paused');
     }, 1300); 
