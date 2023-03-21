@@ -2,7 +2,7 @@
 :root{/*var per colore dinamico*/
     --bg-color: rgb(51, 153, 101);
     --main-color: rgb(102, 204, 152);
-    --color-main: rgb(52,53,65);
+    --color-main: rgb(45, 70, 63);
     --opacity-value: 0.5;
     --text-error: var(--color-error);
     --animation-state: paused;
@@ -10,7 +10,6 @@
 
     --color-1: #19c37d;
     --color-2: #715fde;
-
 }
 body {
     font-family: Arial, sans-serif;
