@@ -21,13 +21,16 @@ const statoColore = localStorage.getItem("statoColore");
 const colorChange = document.getElementById('circle-icon');
 
 colorChange.addEventListener('click', function(){
-  console.log(localStorage)
-  if(statoColore === 0 && undefined){
+  
+  /*
+    console.log(localStorage)
+    if(statoColore === 0 ){
     localStorage.setItem("statoColore", "1");
     console.log(statoColore)
     document.documentElement.style.setProperty('--main-color', 'red');
     document.documentElement.style.setProperty('--animation-state', 'running');
-    setTimeout(function() {/*imposta il tempo di attesa per fermare l'animazione*/
+
+    setTimeout(function() {
     document.documentElement.style.setProperty('--animation-state', 'paused');
     }, 1300); 
   }
@@ -36,6 +39,7 @@ colorChange.addEventListener('click', function(){
     document.documentElement.style.setProperty('--main-color', 'green');
 
   }
+  */
 });
 
 
