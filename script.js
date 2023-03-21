@@ -17,32 +17,57 @@ function clearSearch(){
   document.getElementById("search-input").value = "CERCA";
 }
 /*cambio dinamico dei colori del sito: std su bianco, con save in localstorage*/
-const statoColore = localStorage.getItem("statoColore");
 const colorChange = document.getElementById('circle-icon');
 
 colorChange.addEventListener('click', function(){
-  
-  /*
-    console.log(localStorage)
-    if(statoColore === 0 ){
-    localStorage.setItem("statoColore", "1");
-    console.log(statoColore)
-    document.documentElement.style.setProperty('--main-color', 'red');
-    document.documentElement.style.setProperty('--animation-state', 'running');
+  let value = localStorage.getItem("statoColore");
 
-    setTimeout(function() {
-    document.documentElement.style.setProperty('--animation-state', 'paused');
-    }, 1300); 
+  if (!value) { // se il valore non esiste, lo inizializziamo a 0
+    value = 0;
+  }
+  value = Number(value);// converte il valore in un numero
+
+  value = 1 - value; // inverte il valore 
+
+  localStorage.setItem("statoColore", value);// salva il nuovo valore in localStorage
+
+  console.log(`Il nuovo valore è ${value}`); // stampa il nuovo valore nella console
+
+  document.documentElement.style.setProperty('--animation-state', 'running');
+  
+  setTimeout(function() {
+  document.documentElement.style.setProperty('--animation-state', 'paused');
+
+  }, 1300); 
+  if(value === 0){
+    document.documentElement.style.setProperty('--main-color', 'white');
+    document.documentElement.style.setProperty('--bg-color', '51, 153, 101');
+    document.documentElement.style.setProperty('--color-main', '52, 53, 65');
   }
   else{
-    localStorage.setItem("statoColore", "0");
-    document.documentElement.style.setProperty('--main-color', 'green');
-
+    document.documentElement.style.setProperty('--main-color', 'black');
+    document.documentElement.style.setProperty('--bg-color', '51, 153, 101');
+    document.documentElement.style.setProperty('--color-main', '52, 53, 65');
   }
-  */
 });
 
+/* 
+  console.log(localStorage)
+  if(statoColore === 0 ){
+  localStorage.setItem("statoColore", 1);
+  console.log(statoColore)
+  document.documentElement.style.setProperty('--main-color', 'red');
+  document.documentElement.style.setProperty('--animation-state', 'running');
 
+  setTimeout(function() {
+  document.documentElement.style.setProperty('--animation-state', 'paused');
+  }, 1300); 
+  }
+  else{
+  localStorage.setItem("statoColore", 0);
+  document.documentElement.style.setProperty('--main-color', 'green');
+  }
+*/
 
 /*
 function clearSearch() {//
