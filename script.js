@@ -33,39 +33,29 @@ statoColore();
 let value = localStorage.getItem("statoColore");
 colorChange.addEventListener('click', function(){
 
-  if (!value) { // se il valore non esiste, lo inizializziamo a 0
-    value = 0;
-  }
-  value = Number(value);// converte il valore in un numero
-
-  value = 1 - value; // inverte il valore 
-
-  localStorage.setItem("statoColore", value);// salva il nuovo valore in localStorage
-
   console.log(`Il nuovo valore è ${value}`); // stampa il nuovo valore nella console
 
+  document.body.classList.toggle("dark-theme");
+  statoColore();
+});
+function statoColore(){
+if(value === 0){
+  value = 1;
+  localStorage.setItem("statoColore", value);// salva il nuovo valore in localStorage
+}
+else{
+  value = 0;
+  localStorage.setItem("statoColore", value);
+}
+}
+/*
   document.documentElement.style.setProperty('--animation-state', 'running');
   
   setTimeout(function() {
   document.documentElement.style.setProperty('--animation-state', 'paused');
   
   }, 1300); 
-  statoColore();
-});
-function statoColore(){
-if(value === 0){
-  document.documentElement.style.setProperty('--main-color', '250, 250, 250');
-  document.documentElement.style.setProperty('--bg-color', '37, 39, 40');
-  document.documentElement.style.setProperty('--color-main', '22, 24, 25');
-  document.documentElement.style.setProperty('--color-bg-main', 'gray');
-}
-else{
-  document.documentElement.style.setProperty('--main-color', 'gray');
-  document.documentElement.style.setProperty('--bg-color', '#715fde');
-  document.documentElement.style.setProperty('--color-main', 'black');
-  document.documentElement.style.setProperty('--color-bg-main', 'white');
-}
-}
+*/
 /* 
   console.log(localStorage)
   if(statoColore === 0 ){
