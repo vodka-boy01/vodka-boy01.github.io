@@ -17,8 +17,13 @@ function clearSearch(){
   document.getElementById("search-input").value = "CERCA";
 }
 /*cambio dinamico dei colori del sito: std su bianco, con save in localstorage*/
+
+const lightIcon = document.getElementById('light');
+const darkIcon = document.getElementById('dark');
 const colorChange = document.getElementById('circle-icon');
+const iconLightDark = document.getElementById('#light');
 let value = localStorage.getItem("statoColore");
+
 
 window.onload = function(){/*quando la pagina si ricarica esegue la funzione di verifica del colore*/
 if (!value) { // se il valore non esiste, lo inizializziamo a 0
@@ -28,28 +33,34 @@ value = Number(value);// converte il valore in un numero
 localStorage.setItem("statoColore", value);
 if(value === 0){
   document.body.classList.toggle("dark-theme");
+  lightIcon.classList.add('fa-sun');
+  darkIcon.classList.remove('fa-moon');
 }
-
+else{
+  lightIcon.classList.remove('fa-sun');
+  darkIcon.classList.add('fa-moon');
+}
 console.log(localStorage);
 }
 
 colorChange.addEventListener('click', function(){
-  
-  localStorage.setItem("statoColore", value);
-  console.log(`Il nuovo valore è ${value}`); // stampa il nuovo valore nella console
-
   document.body.classList.toggle("dark-theme");
-  
   statoColore();
 });
 function statoColore(){
 if(value === 0){
   value = 1;
   localStorage.setItem("statoColore", value);// salva il nuovo valore in localStorage
+  console.log(`Il nuovo valore è ${value}`); // stampa il nuovo valore nella console
+  lightIcon.classList.remove('fa-sun');
+  darkIcon.classList.add('fa-moon');
 }
 else{
   value = 0;
   localStorage.setItem("statoColore", value);
+  console.log(`Il nuovo valore è ${value}`); // stampa il nuovo valore nella console
+  lightIcon.classList.add('fa-sun');
+  darkIcon.classList.remove('fa-moon');
 }
 }
 /*

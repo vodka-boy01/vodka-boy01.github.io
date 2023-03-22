@@ -4,7 +4,8 @@
     --main-color: white;/* colore scritte */
     --color-bg-main: white;
     --color-main: rgb(22, 24, 25);
-    --opacity-value: 0.5;
+    --opacity-value: ;
+    --color-hover: #ff4321;
     --animation-state: paused;
     --color-error: #ef4146;
 
@@ -17,7 +18,6 @@
     --color-bg-main: gray;
     --color-main: rgb(22, 24, 25);
     --opacity-value: 0.5;
-    --text-error: var(--color-error);
     --animation-state: paused;
     --color-error: #ef4146;
 }
@@ -67,6 +67,7 @@ header {
 }
 .fa-circle-user:hover{
     opacity: var(--opacity-value);
+    color: var(--color-hover);
 }
 .login-text{
     padding-right: 15px;
@@ -77,6 +78,7 @@ header {
 }
 .login-text:hover{
     opacity: var(--opacity-value);
+    color: var(--color-hover);
     cursor: pointer;
 }
 .container-colorChange{
@@ -93,12 +95,11 @@ header {
     border: none;
     cursor: pointer;
     transition: 0.5s ease;
-    --fa-animation-duration: 1.3s;
-    --fa-animation-timing: ease;
-    animation-play-state: var(--animation-state);
 }
 .fa-circle-half-stroke:hover{
     opacity: var(--opacity-value);
+    color: var(--color-hover);
+    cursor: pointer;
 }
 .hr{
     margin: none;
@@ -210,38 +211,6 @@ nav a:hover{
     color: var(--color-main);
     transition: 0.5s ease;
 }
-/*
-@keyframes esempio {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(100px); }
-}
-
-img {
-  animation-name: esempio;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-}
-img {
-  animation-play-state: paused;
-}
-img {
-  animation-play-state: running;
-}
-*/
-
-
-/*
-h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-*/
 /*inizio barra footer*/
 footer {
     background-color: var(--bg-color);
@@ -259,6 +228,7 @@ footer div {
 }
 a:hover{
     opacity: var(--opacity-value);
+    color: var(--color-hover);
 }
 footer a {
     color: var(--main-color);
