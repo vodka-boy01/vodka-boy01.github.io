@@ -86,7 +86,7 @@ header {
     align-items: center;
     padding-right: 10px;
 }
-.dark-mode{
+#light, #dark{
     color: var(--main-color);
     font-size: 20px;
     padding: none;
@@ -96,10 +96,8 @@ header {
     cursor: pointer;
     transition: 0.5s ease;
 }
-.fa-circle-half-stroke:hover{
-    opacity: var(--opacity-value);
+#light, #dark:hover{
     color: var(--color-hover);
-    cursor: pointer;
 }
 .hr{
     margin: none;
