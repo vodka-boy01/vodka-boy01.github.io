@@ -18,24 +18,28 @@ function clearSearch(){
 }
 /*cambio dinamico dei colori del sito: std su bianco, con save in localstorage*/
 const colorChange = document.getElementById('circle-icon');
+let value = localStorage.getItem("statoColore");
 
 window.onload = function(){/*quando la pagina si ricarica esegue la funzione di verifica del colore*/
 if (!value) { // se il valore non esiste, lo inizializziamo a 0
   value = 0;
 }
 value = Number(value);// converte il valore in un numero
-
-value = 1 - value; // inverte il valore 
-console.log(localStorage);
-statoColore();
+localStorage.setItem("statoColore", value);
+if(value === 0){
+  document.body.classList.toggle("dark-theme");
 }
 
-let value = localStorage.getItem("statoColore");
-colorChange.addEventListener('click', function(){
+console.log(localStorage);
+}
 
+colorChange.addEventListener('click', function(){
+  
+  localStorage.setItem("statoColore", value);
   console.log(`Il nuovo valore è ${value}`); // stampa il nuovo valore nella console
 
   document.body.classList.toggle("dark-theme");
+  
   statoColore();
 });
 function statoColore(){
