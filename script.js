@@ -18,8 +18,20 @@ function clearSearch(){
 }
 /*cambio dinamico dei colori del sito: std su bianco, con save in localstorage*/
 const colorChange = document.getElementById('circle-icon');
+
+window.onload = function(){/*quando la pagina si ricarica esegue la funzione di verifica del colore*/
+if (!value) { // se il valore non esiste, lo inizializziamo a 0
+  value = 0;
+}
+value = Number(value);// converte il valore in un numero
+
+value = 1 - value; // inverte il valore 
+console.log(localStorage);
+statoColore();
+}
+
+let value = localStorage.getItem("statoColore");
 colorChange.addEventListener('click', function(){
-  let value = localStorage.getItem("statoColore");
 
   if (!value) { // se il valore non esiste, lo inizializziamo a 0
     value = 0;
@@ -36,20 +48,24 @@ colorChange.addEventListener('click', function(){
   
   setTimeout(function() {
   document.documentElement.style.setProperty('--animation-state', 'paused');
-
+  
   }, 1300); 
-  if(value === 0){
-    document.documentElement.style.setProperty('--main-color', 'white');
-    document.documentElement.style.setProperty('--bg-color', '51, 153, 101');
-    document.documentElement.style.setProperty('--color-main', '52, 53, 65');
-  }
-  else{
-    document.documentElement.style.setProperty('--main-color', 'black');
-    document.documentElement.style.setProperty('--bg-color', '51, 153, 101');
-    document.documentElement.style.setProperty('--color-main', '52, 53, 65');
-  }
+  statoColore();
 });
-
+function statoColore(){
+if(value === 0){
+  document.documentElement.style.setProperty('--main-color', '250, 250, 250');
+  document.documentElement.style.setProperty('--bg-color', '37, 39, 40');
+  document.documentElement.style.setProperty('--color-main', '22, 24, 25');
+  document.documentElement.style.setProperty('--color-bg-main', 'gray');
+}
+else{
+  document.documentElement.style.setProperty('--main-color', 'gray');
+  document.documentElement.style.setProperty('--bg-color', '#715fde');
+  document.documentElement.style.setProperty('--color-main', 'black');
+  document.documentElement.style.setProperty('--color-bg-main', 'white');
+}
+}
 /* 
   console.log(localStorage)
   if(statoColore === 0 ){

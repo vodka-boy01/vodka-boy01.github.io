@@ -1,8 +1,9 @@
 /*inizio progetto: 18/02/2023*/
 :root{/*var per colore dinamico*/
-    --bg-color: rgb(51, 153, 101);
-    --main-color: rgb(102, 204, 152);
-    --color-main: rgb(45, 70, 63);
+    --bg-color: rgb(37, 39, 40);
+    --main-color: rgb(250, 250, 250);/* colore scritte */
+    --color-bg-main: gray;
+    --color-main: rgb(22, 24, 25);
     --opacity-value: 0.5;
     --text-error: var(--color-error);
     --animation-state: paused;
@@ -191,8 +192,15 @@ nav a:hover{
     opacity: 0.3;
 }
 /*inizio style main*/
+.main__container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 .main{
-    background-color: var(--color-main);
+    background-color: var(--color-bg-main);
+    color: var(--color-main);
+    transition: 0.5s ease;
 }
 /*
 @keyframes esempio {
