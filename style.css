@@ -210,6 +210,13 @@ nav a:hover{
     transition: 0.5s ease;
 }
 /*inizio barra footer*/
+.footer{
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*
 footer {
     background-color: var(--bg-color);
     max-width: 100%; 
@@ -230,8 +237,8 @@ a:hover{
 }
 footer a {
     color: var(--main-color);
-    text-decoration: none; /*senza linea di base*/
-    text-transform: capitalize; /*prima lettera maiuscola*/
+    text-decoration: none; /*senza linea di base*
+    text-transform: capitalize; /*prima lettera maiuscola*
     font-size: 15px;
     font-weight: bold;
     transition: 0.5s ease;
@@ -242,23 +249,22 @@ footer a {
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-content: center;
-    gap: 2em;/*il footer-box e da ridimensionare in modo tale da centra e sfruttare piu righe*/
+    gap: 2em;/*il footer-box e da ridimensionare in modo tale da centra e sfruttare piu righe*
 }
 .footer-Copyright{
     transition: 0.5s ease;
 }
 @media screen and (max-width: 991px) {
-/* start of large tablet styles */
+/* start of large tablet styles *
     
 }
     
 @media screen and (max-width: 767px) {
-/* start of medium tablet styles */
+/* start of medium tablet styles *
     
 }
     
 @media screen and (max-width: 479px) {
-/* start of phone styles */
+/* start of phone styles *
     
 }
-
