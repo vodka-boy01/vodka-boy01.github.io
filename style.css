@@ -23,6 +23,7 @@
 }
 body {
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -228,10 +229,23 @@ nav a:hover{
 footer div ul{
     list-style: none;
 }
+footer div ul li{
+    padding: 10px 0 0 0;
+}
 .collumn{
     min-width: 25%;
+    padding: 0 10px;
 }
-.collumn4{}
+.Copyright{
+    display: flex;
+    justify-content: center;
+    color: var(--main-color);
+}
+.titolo-ul{
+    font-size: larger;
+    margin-bottom: 16px;
+}
+
 
 
 
