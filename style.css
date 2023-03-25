@@ -199,23 +199,53 @@ nav a:hover{
     opacity: 0.3;
 }
 /*inizio style main*/
-.main__container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
 .main{
     background-color: var(--color-bg-main);
     color: var(--color-main);
     transition: 0.5s ease;
 }
+.main__container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
 /*inizio barra footer*/
 .footer{
     background-color: var(--bg-color);
+    box-sizing: border-box;
+    padding: 25px 0;
+}
+.container__footer{
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: none;
+    flex-wrap: wrap;    
+    text-align: center;
+    font-size: medium;
+    color: var(--main-color);
 }
+footer div ul{
+    list-style: none;
+}
+.collumn{
+    min-width: 25%;
+}
+.collumn4{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 footer {
     background-color: var(--bg-color);
