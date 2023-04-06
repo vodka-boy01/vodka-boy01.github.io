@@ -6,11 +6,12 @@
     --color-main: rgb(22, 24, 25);
     --opacity-value: ;
     --color-hover: #ff4321;
-    --animation-state: paused;
+    --animation-state: paused;/*da togliere*/
     --color-error: #ef4146;
 
     --color-1: #19c37d;
     --color-2: #715fde;
+    #EEEEEF • #C4BFBD • #FEBD2F • #110E0D • #7F7D82 • #68615F
 }
 .dark-theme{
     --bg-color: rgb(37, 39, 40);
@@ -228,6 +229,7 @@ nav a:hover{
 }
 footer div ul{
     list-style: none;
+    cursor: pointer;
 }
 footer div ul li{
     padding: 10px 0 0 0;
@@ -244,6 +246,11 @@ footer div ul li{
 .titolo-ul{
     font-size: larger;
     margin-bottom: 16px;
+    cursor: default;
+}
+.hr-footer{
+    width: 25%;
+
 }
 
 
