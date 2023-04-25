@@ -1,22 +1,32 @@
 /*inizio progetto: 18/02/2023*/
 :root{/*var per colore dinamico*/
-    --bg-color: gray;
-    --main-color: white;/* colore scritte */
-    --color-bg-main: white;
+    --bg-color: #1e1e1e;
+    --main-color: wheat;/* colore scritte */
+    --color-bg-main: gray;
     --color-main: rgb(22, 24, 25);
-    --opacity-value: ;
-    --color-hover: #ff4321;
+    --opacity-value: 0.5;
+    --color-hover: none;
     --animation-state: paused;/*da togliere*/
     --color-error: #ef4146;
 
     --color-1: #19c37d;
     --color-2: #715fde;
-    #EEEEEF • #C4BFBD • #FEBD2F • #110E0D • #7F7D82 • #68615F
+    /*
+    --principal-color: wheat;
+    --principal-background-color: #1e1e1e;
+    --principal-border-color: #000000;
+
+
+    --principal-color: rgb(0, 0, 0);
+    --principal-background-color: #ffffff;
+    --principal-border-color: #000000;
+    bianco e nero
+    */
 }
 .dark-theme{
-    --bg-color: rgb(37, 39, 40);
-    --main-color: #ff4321;/* colore scritte */
-    --color-bg-main: gray;
+    --bg-color: #82898f ;
+    --main-color: rgb(0, 0, 0);/* colore scritte */
+    --color-bg-main: white;
     --color-main: rgb(22, 24, 25);
     --opacity-value: 0.5;
     --animation-state: paused;
