@@ -220,9 +220,12 @@ nav a:hover{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    
 }
-/*inizio barra footer*/
+/*
+
+inizio barra footer
+
+*/
 .footer{
     background-color: var(--bg-color);
     box-sizing: border-box;
@@ -243,6 +246,11 @@ footer div ul{
 }
 footer div ul li{
     padding: 10px 0 0 0;
+    transition: 0.5s ease;
+}
+footer div ul li:hover{
+    transform: translate(20px);
+
 }
 .collumn{
     min-width: 25%;
@@ -260,7 +268,6 @@ footer div ul li{
 }
 .hr-footer{
     width: 25%;
-
 }
 
 
