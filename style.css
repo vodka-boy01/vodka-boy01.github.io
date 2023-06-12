@@ -219,6 +219,19 @@ nav a:hover{
     color: var(--color-main);
     transition: 0.5s ease;
 }
+.hidden{
+    display: block;
+}
+.login__popup{
+    display: block;
+    z-index: 1;
+    position: fixed;
+    height: auto;
+    width: 320px;
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
+    left: calc(50% - 160px);/*da modificare in caso si vuole modificare la dimensione del box di login*/
+}
 .main__container{
     display: flex;
     justify-content: center;
