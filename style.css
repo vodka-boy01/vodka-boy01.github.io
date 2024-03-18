@@ -16,7 +16,7 @@
     --principal-background-color: #1e1e1e;
     --principal-border-color: #000000;
 
-
+R
     --principal-color: rgb(0, 0, 0);
     --principal-background-color: #ffffff;
     --principal-border-color: #000000;
@@ -286,7 +286,7 @@ footer div ul li a{
     transition: 0.5s ease;
 }
 footer div ul li a:hover{/*da verificare*/
-    transform: translate(20px);
+    transform: translate(10px);
     opacity: var(--opacity-value);
     color: var(--color-hover);
 }
