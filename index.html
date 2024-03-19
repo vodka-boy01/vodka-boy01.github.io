@@ -16,13 +16,12 @@
 					<h1 class="titolo">Luigi-Tanzillo.com</h1>
 				</div>
 				<div class="container-login">
-					<!--<button type="button" class="login-button"><i onclick="colorChange()" id="login-icon" class="fa-solid fa-circle-user"></i></button>-->
-					<div id="login-text" class="login-text">accedi</div> 
-					<div id="login-icon" class="fa-solid fa-circle-user"></div>
+					<a id="login-text" class="login-text" href="login.html" title="Accedi al tuo account">accedi</a> 
+					<a id="login-icon" class="fa-solid fa-circle-user" title="Visualizza il tuo account"></a>
 				</div>	
 				<div onclick="" id="circle-icon" class="container-colorChange">
-						<i id="light" class="fa-regular fa-sun"></i>
-						<i id="dark" class="fa-regular fa-moon"></i>
+						<i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
+						<i id="dark" class="fa-regular fa-moon" title="Cambia tema pagina"></i>
 				</div>
 			</div>
 
@@ -37,8 +36,8 @@
 				<div class="search__bar">
 					<!--<label for="search-bar-title"></label>!-->
 					<input type="search" id="search-input" name="q" value="CERCA" spellcheck="false" onfocus="inputFocus()">
-					<button type="reset" id="reset-button" name="q" onclick="clearSearch()"><i class="fa-solid fa-xmark"></i></button>
-					<button type="search" id="submit-button" name="q"><i class="fa-solid fa-magnifying-glass"></i></button>
+					<button type="reset" id="reset-button" name="q" onclick="clearSearch()" title="Cancella la ricerca"><i class="fa-solid fa-xmark"></i></button>
+					<button type="search" id="submit-button" name="q" title="Cerca"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</div>
 			</div>
 		</nav>
@@ -47,7 +46,6 @@
 	<main class="main">
 
 		<div class="login__popup hidden">
-			ciao
 		</div>
 
 		<h1>Non attualmente ottimizzato per dispositivi mobile </h1>

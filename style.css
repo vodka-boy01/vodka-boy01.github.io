@@ -228,10 +228,12 @@ nav a:hover{
     transition: 0.5s ease;
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 .hidden{
-    display: block;
+    display: none;
 }
+/*
 .login__popup{
     display: block;
     z-index: 1;
@@ -240,11 +242,9 @@ nav a:hover{
     width: 320px;
     border: 1px solid var(--main-color);
     border-radius: 10px;
-    left: calc(50% - 160px);/*da modificare in caso si vuole modificare la dimensione del box di login*/
+    left: calc(50% - 160px);da modificare in caso si vuole modificare la dimensione del box di login
 }
-.main__container{
-    flex-direction: column;
-}
+*/
 /*------------------
 
 inizio barra footer
