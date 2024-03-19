@@ -227,6 +227,8 @@ nav a:hover{
     background-color: var(--color-bg-main);
     color: var(--color-main);
     transition: 0.5s ease;
+    display: flex;
+    align-items: center;
 }
 .hidden{
     display: block;
@@ -242,8 +244,6 @@ nav a:hover{
     left: calc(50% - 160px);/*da modificare in caso si vuole modificare la dimensione del box di login*/
 }
 .main__container{
-    display: flex;
-    align-items: center;
     flex-direction: column;
 }
 /*------------------
