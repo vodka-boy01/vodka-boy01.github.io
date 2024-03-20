@@ -4,10 +4,14 @@ session_start();
 $hostname = "localhost"; // Cambia questo con l'host del tuo database
 $username = "root"; // Cambia questo con il tuo nome utente del database
 $password = ""; // Cambia questo con la tua password del database
-$database = "chatgpt"; // Cambia questo con il nome del tuo database
+$database = "loginsito"; // Cambia questo con il nome del tuo database
 
-$conn = new mysqli($hostname, $username, $password, $database);
-
+try {
+    $conn = new mysqli($hostname, $username, $password, $database);
+}
+catch(e){
+    echo "errore di accesso al database";
+}
 if ($conn->connect_error) {
     die("Errore di connessione al database: " . $conn->connect_error);
 }

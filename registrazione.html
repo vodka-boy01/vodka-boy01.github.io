@@ -8,10 +8,16 @@
   <div class="login-container">
     <h2>Registrazione</h2>
     <form action="registrazione.php" method="post">
-      <label for="new_username">Nuovo Nome utente:</label>
+      <label for="new_name">Nome utente:</label>
+      <input type="text" name="new_name" required>
+      <br>
+      <label for="new_email">Email:</label>
+      <input type="text" name="new_email" required>
+      <br>
+      <label for="new_username">Username:</label>
       <input type="text" id="new_username" name="new_username" required>
       <br>
-      <label for="new_password">Nuova Password:</label>
+      <label for="new_password">Password:</label>
       <input type="password" id="new_password" name="new_password" required>
       <br>
       <button type="submit">Registrati</button>
