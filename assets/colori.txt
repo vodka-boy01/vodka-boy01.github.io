@@ -1,0 +1,23 @@
+ARANCIONE E NERO
+:root{/*var per colore dinamico*/
+    --bg-color: gray;
+    --main-color: white;/* colore scritte */
+    --color-bg-main: white;
+    --color-main: rgb(22, 24, 25);
+    --opacity-value: ;
+    --color-hover: #ff4321;
+    --animation-state: paused;/*da togliere*/
+    --color-error: #ef4146;
+
+    --color-1: #19c37d;
+    --color-2: #715fde;
+}
+.dark-theme{
+    --bg-color: rgb(37, 39, 40);
+    --main-color: #ff4321;/* colore scritte */
+    --color-bg-main: gray;
+    --color-main: rgb(22, 24, 25);
+    --opacity-value: 0.5;
+    --animation-state: paused;
+    --color-error: #ef4146;
+}

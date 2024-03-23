@@ -1,0 +1,33 @@
+:root{/*var per colore dinamico*/
+    --bg-color: #1e1e1e;
+    --main-color: wheat;/* colore scritte */
+    --color-bg-main: gray;
+    --color-main: rgb(22, 24, 25);
+    --opacity-value: 0.5;
+    --color-hover: none;
+    --animation-state: paused;/*da togliere*/
+    --color-error: #ef4146;
+
+    --color-1: #19c37d;
+    --color-2: #715fde;
+    /*
+    --principal-color: wheat;
+    --principal-background-color: #1e1e1e;
+    --principal-border-color: #000000;
+
+    --principal-color: rgb(0, 0, 0);
+    --principal-background-color: #ffffff;
+    --principal-border-color: #000000;
+    bianco e nero
+    */
+}
+.dark-theme{
+    --bg-color: #82898f ;
+    --main-color: rgb(0, 0, 0);/* colore scritte */
+    --color-bg-main: white;
+    --color-main: rgb(22, 24, 25);
+    --opacity-value: none;
+    --color-hover: wheat;
+    --animation-state: paused;
+    --color-error: #ef4146;
+}
