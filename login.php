@@ -1,17 +1,17 @@
 <?php
 session_start();
 
-$hostname = "localhost"; // Cambia questo con l'host del tuo database
-$username = "root"; // Cambia questo con il tuo nome utente del database
-$password = ""; // Cambia questo con la tua password del database
-$database = "loginsito"; // Cambia questo con il nome del tuo database
+$hostname = "localhost";
+$username = "root"; 
+$password = "";
+$database = "loginsito";
 
 try {
     $conn = new mysqli($hostname, $username, $password, $database);
+} catch (Exception $e) {
+    echo "Errore di accesso al database: " . $e->getMessage();
 }
-catch(e){
-    echo "errore di accesso al database";
-}
+
 if ($conn->connect_error) {
     die("Errore di connessione al database: " . $conn->connect_error);
 }
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $_SESSION['username'] = $username;
-        header("location: dashboard.php"); // Reindirizza l'utente a una pagina di successo o al pannello di controllo
+        header("location: dashboard.php"); // Reindirizza l'utente
     } else {
         echo "Credenziali non valide. Riprova.";
     }
