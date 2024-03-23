@@ -1,0 +1,407 @@
+/*inizio progetto: 18/02/2023*/
+:root{/*var per colore dinamico*/
+    --bg-color: #1e1e1e;
+    --main-color: wheat;/* colore scritte */
+    --color-bg-main: gray;
+    --color-main: rgb(22, 24, 25);
+    --opacity-value: 0.5;
+    --color-hover: none;
+    --animation-state: paused;/*da togliere*/
+    --color-error: #ef4146;
+
+    --color-1: #19c37d;
+    --color-2: #715fde;
+    /*
+    --principal-color: wheat;
+    --principal-background-color: #1e1e1e;
+    --principal-border-color: #000000;
+
+    --principal-color: rgb(0, 0, 0);
+    --principal-background-color: #ffffff;
+    --principal-border-color: #000000;
+    bianco e nero
+    */
+}
+.dark-theme{
+    --bg-color: #82898f ;
+    --main-color: rgb(0, 0, 0);/* colore scritte */
+    --color-bg-main: white;
+    --color-main: rgb(22, 24, 25);
+    --opacity-value: none;
+    --color-hover: wheat;
+    --animation-state: paused;
+    --color-error: #ef4146;
+}
+body {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: var(--bg-color);
+    color: var(--main-color);
+    padding: 20px;
+    transition: 0.5s ease;
+}
+/*
+------------------------------------------
+
+-----------inizio style nav
+
+------------------------------------------
+*/
+nav div{
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    list-style: none;
+}
+nav li {
+    margin: 15px;/*margine tra gli elementi li*/
+    margin-left: 0px;/*azzera margin-left*/
+    display: flex;
+    align-items: center;/*centraggio degli elementi li nel box dei suddetti*/
+}
+nav a {
+    color: var(--main-color);
+    text-decoration: none;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: 0.5s ease;
+}
+nav a:hover{
+    opacity: var(--opacity-value);
+    color: var(--color-hover);
+}
+#title_login{
+    flex-wrap: nowrap;
+}
+#nav_title_container{
+    width: 50%;
+}
+#nav_title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;/*tutto maiuscolo*/
+    letter-spacing: 2px;
+}
+#nav_login_container{
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    padding-right: 10px;
+}
+.fa-circle-user{
+    color: var(--main-color);
+    font-size: 35px;
+    padding: 0px;
+    margin: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.fa-circle-user:hover{
+    opacity: var(--opacity-value);
+    color: var(--color-hover);
+}
+#login-text{
+    padding-right: 15px;
+}
+.container-colorChange{
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+}
+#light, #dark{
+    color: var(--main-color);
+    font-size: 20px;
+    padding: none;
+    margin: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+#light:hover, #dark:hover{
+    color: var(--color-hover);
+    opacity: var(--opacity-value);
+}
+#nav_devider{
+    margin: none;
+    width: 35%;
+    border: 0;
+    border-radius: 10px;
+    height: 2px;
+    background-color: var(--main-color);
+}
+/*inizio style barra dei link sotto il titolo*/
+#nav_bar{ /*box genitore*/
+    display: flex;
+    flex-wrap: nowrap; 
+}
+#nav_links{ /*box figlio*/
+    width: 50%;
+}
+/*inizio stile barra di ricerca*/
+#nav_searchBar_container{/*box figlio 2*/
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+    width: 50%;
+    margin: 5px;
+}
+#search-input, #reset-button{
+    opacity: var(--opacity-value);
+    height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;/*rende il cursore una mano*/
+}
+#search-input{
+    width: 35%;
+    border-radius: 150px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    font-size: larger;
+    padding-left: 20px;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+#search-input:hover{
+    width: 80%;
+}
+#search-input:focus{
+    width: 80%;
+}
+#search-input::-webkit-search-cancel-button{/*icona cancella ricerca*/
+    -webkit-appearance: none;
+}
+#reset-button{
+    /*background-image: url('icone/cancell.svg');*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 0px;
+    padding-right: 10px;
+}
+.fa-xmark{/*cancel button*/
+    font-size: 20px;
+}
+#submit-button{
+    opacity: var(--opacity-value);
+    border-radius: 10px;
+    transition: .3s ease;
+    border-radius: 150px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    padding: 10px;
+    height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;/*rende il cursore una mano*/
+}
+#submit-button:hover{
+    opacity: 0.3;
+}
+/*
+------------------------------------------
+
+-----------inizio style main
+
+------------------------------------------
+*/
+main{
+    background-color: var(--color-bg-main);
+    color: var(--color-main);
+    transition: 0.5s ease;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.hidden{
+    display: none;
+}
+/*
+.login__popup{
+    display: block;
+    z-index: 1;
+    position: fixed;
+    height: auto;
+    width: 320px;
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
+    left: calc(50% - 160px);da modificare in caso si vuole modificare la dimensione del box di login
+}
+*/
+/*
+------------------------------------------
+
+-----------inizio style footer
+
+------------------------------------------
+*/
+footer{
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+    padding: 25px 0;
+}
+#footer_container{
+    display: flex;
+    justify-content: center;
+    margin-top: none;
+    flex-wrap: wrap;    
+    text-align: center;
+    font-size: medium;
+    color: var(--main-color);
+}
+.footer_collumn{
+    min-width: 25%;
+    padding: 0 10px;
+    
+}
+footer div ul{
+    list-style: none;
+    padding: 0;
+}
+footer div ul li{
+    padding: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer div ul li a{
+    display: block;
+    color: var(--main-color);
+    text-decoration: none;
+    transition: 0.5s ease;
+}
+footer div ul li a:hover{/*da verificare*/
+    transform: translate(10px);
+    opacity: var(--opacity-value);
+    color: var(--color-hover);
+    transition: 0.5s ease;
+}
+.footer_icon{
+    color: var(--main-color);
+}
+.footer_icon:hover{
+    color: var(--color-hover);
+    opacity: var(--opacity-value);
+}
+#Copyright{
+    display: flex;
+    justify-content: center;
+    color: var(--main-color);
+}
+.footer_title_block{
+    font-size: larger;
+    margin-bottom: 16px;
+    cursor: default;
+}
+.footer_devider_block{
+    width: 25%;
+}
+/*
+------------------------------------------
+
+-----------parte responsive
+
+------------------------------------------
+*/
+/*dimensione media dispositivo*/
+@media screen and (max-width: 767px) {
+    header {
+        padding: 10px;
+    }
+
+    nav li {
+        margin: 10px;
+    }
+
+    #nav_bar,
+    #nav_links,
+    #nav_searchBar_container {
+        width: 100%;
+    }
+
+    #search-input {
+        width: 70%;
+    }
+    #nav_title{
+        font-size: 29px;
+    }
+    nav li{ 
+        margin: 5px;
+    }
+    #main_text{
+        font-size: 30px;
+    }
+}
+
+/* dispositivo con schermo piccolo */
+@media screen and (max-width: 479px) {
+    header {
+        padding: 5px;
+    }
+
+    nav li {
+        margin: 5px;
+    }
+
+    #nav_title {
+        font-size: 24px;
+    }
+}
+/*
+footer {
+    background-color: var(--bg-color);
+    max-width: 100%; 
+    color: var(--main-color);
+    padding: 15px;
+    text-align: center;
+    align-content: baseline;
+}
+footer div {
+    margin: 0;
+    list-style: none;
+    display: block;
+    justify-content: center;
+}
+a:hover{
+    opacity: var(--opacity-value);
+    color: var(--color-hover);
+}
+footer a {
+    color: var(--main-color);
+    text-decoration: none; /*senza linea di base*
+    text-transform: capitalize; /*prima lettera maiuscola*
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.5s ease;
+}
+.footer-box{
+    display: flex;
+    width: auto;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 2em;/*il footer-box e da ridimensionare in modo tale da centra e sfruttare piu righe*
+}
+.footer-Copyright{
+    transition: 0.5s ease;
+}
+@media screen and (max-width: 991px) {
+/* start of large tablet styles *
+    
+}
+    
+@media screen and (max-width: 767px) {
+/* start of medium tablet styles *
+    
+}
+    
+@media screen and (max-width: 479px) {
+/* start of phone styles *
+    
+}
