@@ -10,6 +10,12 @@ try {
     echo "Errore di accesso al database: " . $e->getMessage();
 }
 
+try {
+    $conn = new mysqli($hostname, $username, $password, $database);
+} catch (Exception $e) {
+    echo "Errore di accesso al database: " . $e->getMessage();
+}
+
 if ($conn->connect_error) {
     die("Errore di connessione al database: " . $conn->connect_error);
 }
