@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $_SESSION['username'] = $username;
-        header("location: dashboard.php"); // Reindirizza l'utente
+        header("location: index.html"); // Reindirizza l'utente
     } else {
         echo "Credenziali non valide. Riprova.";
     }
