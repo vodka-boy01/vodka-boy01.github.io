@@ -52,13 +52,11 @@ header {
     }
 }
 /*
-
 ------------------------------------------
 
-inizio style nav
+-----------inizio style nav
 
 ------------------------------------------
-
 */
 nav div{
     display: flex;
@@ -153,15 +151,7 @@ nav a:hover{
 #nav_links{ /*box figlio*/
     width: 50%;
 }
-/*
-
-------------------------------------------
-
-inizio style barra di ricerca
-
-------------------------------------------
-
-*/
+/*inizio stile barra di ricerca*/
 #nav_searchBar_container{/*box figlio 2*/
     display: flex;
     justify-content: flex-end;
@@ -221,8 +211,14 @@ inizio style barra di ricerca
 #submit-button:hover{
     opacity: 0.3;
 }
-/*inizio style main*/
-.main{
+/*
+------------------------------------------
+
+-----------inizio style main
+
+------------------------------------------
+*/
+main{
     background-color: var(--color-bg-main);
     color: var(--color-main);
     transition: 0.5s ease;
@@ -245,17 +241,19 @@ inizio style barra di ricerca
     left: calc(50% - 160px);da modificare in caso si vuole modificare la dimensione del box di login
 }
 */
-/*------------------
+/*
+------------------------------------------
 
-inizio barra footer
+-----------inizio style footer
 
---------------------*/
-.footer{
+------------------------------------------
+*/
+footer{
     background-color: var(--bg-color);
     box-sizing: border-box;
     padding: 25px 0;
 }
-.container__footer{
+#footer_container{
     display: flex;
     justify-content: center;
     margin-top: none;
@@ -264,7 +262,7 @@ inizio barra footer
     font-size: medium;
     color: var(--main-color);
 }
-.collumn{
+.footer_collumn{
     min-width: 25%;
     padding: 0 10px;
 }
@@ -289,11 +287,10 @@ footer div ul li a:hover{/*da verificare*/
     opacity: var(--opacity-value);
     color: var(--color-hover);
 }
-.footer-icons{
+.footer_icon{
     color: var(--main-color);
-    transition: 0.5s ease;
 }
-.footer-icons:hover{
+.footer_icon:hover{
     color: var(--color-hover);
     opacity: var(--opacity-value);
 }
@@ -302,12 +299,12 @@ footer div ul li a:hover{/*da verificare*/
     justify-content: center;
     color: var(--main-color);
 }
-.titolo-ul{
+.footer_title_block{
     font-size: larger;
     margin-bottom: 16px;
     cursor: default;
 }
-.hr-footer{
+.footer_devider_block{
     width: 25%;
 }
 /*
