@@ -4,36 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\assets\css\style.css">
-	<link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="assets\css\style.css">
     <title>Luigi-Tanzillo.com</title>
 </head>
 <body>
 	<header>
 		<nav>
-			<div class="title__login">
-				<div id="container-titolo">
-					<h1 id="titolo">Luigi-Tanzillo.com</h1>
+			<div id="title_login">
+				<div id="nav_title_container">
+					<h1 id="nav_title">Luigi-Tanzillo.com</h1>
 				</div>
-				<div class="container-login">
-					<a id="login-text" class="login-text" href="login.html" title="Accedi al tuo account">accedi</a> 
+				<div id="nav_login_container">
+					<a id="login-text" href="php\views\login.php" title="Accedi al tuo account">accedi</a> 
 					<a id="login-icon" class="fa-solid fa-circle-user" title="Visualizza il tuo account"></a>
 				</div>	
-				<div onclick="" id="circle-icon" class="container-colorChange">
-						<i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
-						<i id="dark" class="fa-regular fa-moon" title="Cambia tema pagina"></i>
+				<div id="circle-icon" class="container-colorChange">
+					<i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
+					<i id="dark" class="fa-regular fa-moon" title="Cambia tema pagina"></i>
 				</div>
 			</div>
 
-			<hr class="hr">
+			<hr id="nav_devider">
 
-			<div class="nav__bar">
-				<div class="nav-buttons">
+			<div id="nav_bar">
+				<div id="nav_links">
 					<li><a href="index.html" title="Home page" class="home-button">Home</a></li>
 					<li><a href="#" title="I nostri prodotti">Prodotti</a></li>
 					<li><a href="#" title="Contattaci">Contatti</a></li>
 				</div>
-				<div class="search__bar">
+				<div id="nav_searchBar_container">
 					<!--<label for="search-bar-title"></label>!-->
 					<input type="search" id="search-input" name="q" value="CERCA" spellcheck="false" onfocus="inputFocus()">
 					<button type="reset" id="reset-button" name="q" onclick="clearSearch()" title="Cancella la ricerca"><i class="fa-solid fa-xmark"></i></button>
@@ -97,7 +96,7 @@
 			Copyright © 2023 Luigi-Tanzillo.com
 		</h5>
    	</footer>
-	<script src="..\assets\js\script.js"></script>
+	<script src="assets\js\script.js"></script>
 	<script src="https://kit.fontawesome.com/4383a54113.js" crossorigin="anonymous"></script>
 </body>
 </html>

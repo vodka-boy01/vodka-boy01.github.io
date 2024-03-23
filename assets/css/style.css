@@ -51,92 +51,15 @@ header {
         
     }
 }
+/*
+
+------------------------------------------
+
+inizio style nav
+
+------------------------------------------
+
 */
-/*inizio style bottone login e titolo*/
-.title__login{
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-}
-.container-titolo{
-    width: 50%;
-}
-#titolo {
-    margin: 0;
-    font-size: 36px;
-    font-weight: bold;
-    text-transform: uppercase;/*tutto maiuscolo*/
-    letter-spacing: 2px;
-    transition: 0.5s ease;
-}
-.container-login{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 50%;
-    padding-right: 10px;
-}
-.fa-circle-user{
-    color: var(--main-color);
-    font-size: 35px;
-    padding: 0px;
-    margin: none;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    transition: 0.5s ease;
-}
-.fa-circle-user:hover{
-    opacity: var(--opacity-value);
-    color: var(--color-hover);
-}
-.login-text{
-    padding-right: 15px;
-    color: var(--main-color);
-    font-size: large;
-    align-items: center;
-    transition: 0.5s ease;
-}
-.login-text:hover{
-    opacity: var(--opacity-value);
-    color: var(--color-hover);
-    cursor: pointer;
-}
-.container-colorChange{
-    display: flex;
-    align-items: center;
-    padding-right: 10px;
-}
-#light, #dark{
-    color: var(--main-color);
-    font-size: 20px;
-    padding: none;
-    margin: none;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    transition: 0.5s ease;
-}
-#light:hover, #dark:hover{
-    color: var(--color-hover);
-    opacity: var(--opacity-value);
-}
-.hr{
-    margin: none;
-    width: 35%;
-    border: 0;
-    border-radius: 10px;
-    height: 2px;
-    background-color: var(--main-color);
-}
-/*inizio style barra dei link sotto il titolo*/
-.nav__bar{ /*box genitore*/
-    display: flex;
-    flex-wrap: nowrap; 
-}
-.nav-buttons{ /*box figlio*/
-    width: 50%;
-}
 nav div{
     display: flex;
     justify-content: flex-start;
@@ -161,8 +84,85 @@ nav a:hover{
     opacity: var(--opacity-value);
     color: var(--color-hover);
 }
-/*inizio style barra di ricerca*/
-.search__bar{/*box figlio 2*/
+#title_login{
+    flex-wrap: nowrap;
+}
+#nav_title_container{
+    width: 50%;
+}
+#nav_title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;/*tutto maiuscolo*/
+    letter-spacing: 2px;
+}
+#nav_login_container{
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    padding-right: 10px;
+}
+.fa-circle-user{
+    color: var(--main-color);
+    font-size: 35px;
+    padding: 0px;
+    margin: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.fa-circle-user:hover{
+    opacity: var(--opacity-value);
+    color: var(--color-hover);
+}
+#login-text{
+    padding-right: 15px;
+}
+.container-colorChange{
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+}
+#light, #dark{
+    color: var(--main-color);
+    font-size: 20px;
+    padding: none;
+    margin: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+#light:hover, #dark:hover{
+    color: var(--color-hover);
+    opacity: var(--opacity-value);
+}
+#nav_devider{
+    margin: none;
+    width: 35%;
+    border: 0;
+    border-radius: 10px;
+    height: 2px;
+    background-color: var(--main-color);
+}
+/*inizio style barra dei link sotto il titolo*/
+#nav_bar{ /*box genitore*/
+    display: flex;
+    flex-wrap: nowrap; 
+}
+#nav_links{ /*box figlio*/
+    width: 50%;
+}
+/*
+
+------------------------------------------
+
+inizio style barra di ricerca
+
+------------------------------------------
+
+*/
+#nav_searchBar_container{/*box figlio 2*/
     display: flex;
     justify-content: flex-end;
     align-items: center;
