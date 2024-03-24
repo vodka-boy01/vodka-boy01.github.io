@@ -245,7 +245,6 @@ footer{
     background-color: var(--bg-color);
     box-sizing: border-box;
     padding: 25px 0;
-    transition: 0.5s ease;
 }
 #footer_container{
     display: flex;
@@ -275,6 +274,7 @@ footer div ul li a{
     display: block;
     color: var(--main-color);
     text-decoration: none;
+    transition: 0.5s ease;
 }
 footer div ul li a:hover{/*da verificare*/
     transform: translate(10px);
