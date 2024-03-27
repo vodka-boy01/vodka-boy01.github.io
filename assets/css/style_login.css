@@ -7,6 +7,7 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #f0f0f0;
+  animation: 0.5s ease;
 }
 
 .login-container {
@@ -45,4 +46,20 @@ button {
 
 button:hover {
   background-color: #2577b5;
+}
+
+.error{
+  display: block;
+  color: red;
+  font-size: small;
+
+}
+
+.error_warning{
+  border-color: red;
+  margin: 0;
+} 
+
+.error_br{
+  display: none;
 }

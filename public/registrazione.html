@@ -2,30 +2,33 @@
 <html>
 <head>
   <title>Registrazione</title>
-  <link rel="stylesheet" type="text/css" href="/assets/css/style_login.css">
+  <link rel="stylesheet" type="text/css" href="style_login.css">
 </head>
 <body>
   <div class="login-container">
     <h2>Registrazione</h2>
-    <form action="/php/views/registrazione.php" method="post">
+    <form action="registrazione.php" method="post" id="form">
       <label for="new_name">Nome:</label>
-      <input type="text" id="new_name" name="new_name" required>
+      <input type="text" id="new_name" name="new_name" placeholder="es. Mario" required>
       <br>
       <label for="new_surname">Cognome:</label>
-      <input type="text" id="new_surname" name="new_surname" required>
+      <input type="text" id="new_surname" name="new_surname" placeholder="es. Rossi" required>
       <br>
-      <label for="new_username">Username:</label>
-      <input type="text" id="new_username" name="new_username">
-      <br>
-      <label for="new_email">Email:</label>
-      <input type="text" id="new_email" name="new_email" required>
-      <br>
+      <label for="new_username" class="error_text">Username:</label>
+      <input type="text" id="new_username" name="new_username" class="error error_warning" placeholder="es. erMarione" required>
+      <div id="error_username" class="error">Username gia' utilizzato</div>
+      <br class="error_br">
+      <label for="new_email" class="error_text">Email:</label>
+      <input type="text" id="new_email" name="new_email" class="error error_warning" placeholder="es. mariorossi@esempio.it" required>
+      <div id="error_email" class="error">Email gia' utilizzata</div>
+      <br class="error_br">
       <label for="new_password">Password:</label>
-      <input type="password" id="new_password" name="new_password" required>
+      <input type="password" id="new_password" name="new_password" placeholder="123" required>
       <br>
       <button type="submit">Registrati</button>
     </form>
     <p>Hai gia' un account? <a href="login.html">Accedi</a></p>
   </div>
+  <script src="script_loginPage.js"></script>
 </body>
 </html>
