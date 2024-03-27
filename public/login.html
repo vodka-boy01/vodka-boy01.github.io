@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pagina di Login e Registrazione</title>
-  <link rel="stylesheet" type="text/css" href="style_login.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/assets/css/style_login.css">
+	<link rel="stylesheet" href="/assets/css/colors.css">
+  <title>Pagina di Login</title>
 </head>
 <body>
   <div class="login-container">
     <h2>Accesso</h2>
-    <form action="login.php" method="post" id="form">
+    <form action="/php/views/login.php" method="post" id="form">
       <label for="username">Nome utente o Email:</label>
       <input type="text" id="username" name="username" required>
       <br>
@@ -16,8 +20,8 @@
       <br>
       <button type="submit">Accedi</button>
     </form>
-    <p>Non hai un account? <a href="registrazione.html">Registrati</a></p>
+    <p>Non hai un account? <a href="/public/registrazione.html">Registrati</a></p>
   </div>
-  <script src="script_loginPage.js"></script>
+  <script src="/assets/js/script_loginPage.js"></script>
 </body>
 </html>

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Registrazione</title>
-  <link rel="stylesheet" type="text/css" href="style_login.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/assets/css/style_login.css">
+	<link rel="stylesheet" href="/assets/css/colors.css">
+  <title>Pagina di registrazione</title>
 </head>
 <body>
   <div class="login-container">
     <h2>Registrazione</h2>
-    <form action="registrazione.php" method="post" id="form">
+    <form action="/php/views/registrazione.php" method="post" id="form">
       <label for="new_name">Nome:</label>
       <input type="text" id="new_name" name="new_name" placeholder="es. Mario" required>
       <br>
@@ -27,8 +31,9 @@
       <br>
       <button type="submit">Registrati</button>
     </form>
-    <p>Hai gia' un account? <a href="login.html">Accedi</a></p>
+    <p>Hai gia' un account? <a href="/public/login.html">Accedi</a></p>
   </div>
-  <script src="script_loginPage.js"></script>
+  <script src="/assets/js/script_loginPage.js"></script>
+  <script src="https://kit.fontawesome.com/4383a54113.js" crossorigin="anonymous"></script>
 </body>
 </html>
