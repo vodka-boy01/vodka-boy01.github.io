@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Registrazione completata con successo!";
         } else {
             echo "Errore durante la registrazione: " . $conn->error;
+            exit();
         }
     }else{
         //utente gia esistente
