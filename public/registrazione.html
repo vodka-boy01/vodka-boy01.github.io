@@ -13,31 +13,33 @@
     <h2>Registrazione</h2>
     <form action="/php/views/registrazione.php" method="post" id="form">
       <label for="new_name">Nome:</label>
-      <input type="text" id="new_name" name="new_name" placeholder="es. Mario" required>
+      <input type="text" id="new_name" name="new_name" placeholder="es. Mario" >
       <br>
       <label for="new_surname">Cognome:</label>
-      <input type="text" id="new_surname" name="new_surname" placeholder="es. Rossi" required>
+      <input type="text" id="new_surname" name="new_surname" placeholder="es. Rossi" >
       <br>
 
 
       
       <label for="new_username" class="error_text">Username:</label>
-      <input type="text" id="new_username" name="new_username" class="error_warning" placeholder="es. erMarione" required>
+      <input type="text" id="new_username" name="new_username" class="error_warning" placeholder="es. erMarione" >
       <div id="error_username" class="error">Username gia' utilizzato</div>
       <br class="error_br">
 
       <label for="new_email" class="error_text">Email:</label>
-      <input type="text" id="new_email" name="new_email" class="error_warning" placeholder="es. mariorossi@esempio.it" required>
+      <input type="text" id="new_email" name="new_email" class="error_warning" placeholder="es. mariorossi@esempio.it" >
       <div id="error_email" class="error" color="red">Email gia' utilizzata</div>
       <br class="error_br">
 
       
+      
       <label for="new_password">Password:</label>
-      <input type="password" id="new_password" name="new_password" placeholder="123" required>
+      <input type="password" id="new_password" name="new_password" placeholder="123" >
       <br>
       <button type="submit">Registrati</button>
     </form>
     <p>Hai gia' un account? <a href="/public/login.html">Accedi</a></p>
+    required
   </div>
   <script src="/assets/js/script_loginPage.js"></script>
   <script src="https://kit.fontawesome.com/4383a54113.js" crossorigin="anonymous"></script>

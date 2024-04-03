@@ -1,11 +1,25 @@
 <?php
+/*
 $hostname = "localhost";
 $username = "root"; 
 $password = "";
 $database = "loginsito"; 
+*/
+$serverName = "web2.keystore.it";
+$databaseName = "luigi";
+$username = "sa"; 
+$password = "eHEW6GxuEzSC4ad5uAvuue";
+// Connessione al database
+$connectionInfo = array(
+    "UID" => $username,
+    "PWD" => $password,
+    "Database" => $databaseName,
+    "Server" => $serverName
+);
 
 try {
-    $conn = new mysqli($hostname, $username, $password, $database);
+    $conn = sqlsrv_connect($connectionInfo);
+    //$conn = new mysqli($hostname, $username, $password, $database);
 } catch (Exception $e) {
     echo "Errore di accesso al database: " . $e->getMessage();
     exit();
