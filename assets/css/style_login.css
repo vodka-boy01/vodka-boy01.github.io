@@ -9,32 +9,38 @@ body {
   background-color: #f0f0f0;
   animation: 0.5s ease;
 }
-
 .login-container {
-  background-color: #fff;
   padding: 40px;
   border-radius: 5px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
-
 h2 {
-  margin: 0 0 20px;
+  margin: 0 20px 20px;
 }
-
 label {
   display: block;
   margin-bottom: 5px;
 }
-
+#form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 5px;
   margin-bottom: 10px;
+  transition: 0.3s ease;
 }
-
+input:hover{
+  opacity: var(--opacity-value);
+  border-color: var(--color-hover);
+  cursor: pointer;
+}
 button {
   background-color: #3498db;
   color: #fff;
@@ -42,23 +48,24 @@ button {
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  transition: 0.3s ease;
 }
-
 button:hover {
   background-color: #2577b5;
 }
-
+span{
+  display: flex;
+  align-items: flex-start;
+}
 .error{
   display: block;
   color: red;
   font-size: small;
 }
-
 .error_warning{
   border-color: red;
   margin: 0;
 } 
-
 .error_br{
   display: none;
 }

@@ -42,6 +42,10 @@ nav a:hover{
     opacity: var(--opacity-value);
     color: var(--color-hover);
 }
+div{
+    color: var(--main-color);
+}
+
 #title_login{
     flex-wrap: nowrap;
 }
