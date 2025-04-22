@@ -16,14 +16,11 @@ window.onload = function() {
     console.log("Tema non presente, impostato su chiaro (false)");
   }
 
-  //se true -> dark
+  //se true -> dark    viene gia verificato nello script in index.html
   //se false -> light
-  if (tema === "true") {
-    console.log("Tema salvato: dark");
-    document.body.classList.add("dark-theme");
-  } else {
+  if (tema === "false") {
     console.log("Tema salvato: light");
-    document.body.classList.remove("dark-theme");
+    document.documentElement.classList.remove("dark-theme");
   }
 
   aggiornaIconeTema(tema === "true");
@@ -55,11 +52,11 @@ function colorChange() {
   //se attuale è chiaro → passo a scuro
   if (tema === "false") {
     tema = "true";
-    document.body.classList.add("dark-theme");
+    document.documentElement.classList.add("dark-theme");
     console.log("Tema cambiato: dark");
   } else {
     tema = "false";
-    document.body.classList.remove("dark-theme");
+    document.documentElement.classList.remove("dark-theme");
     console.log("Tema cambiato: light");
   }
 

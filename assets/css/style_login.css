@@ -6,7 +6,6 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f0f0f0;
   animation: 0.5s ease;
 }
 .login-container {
@@ -31,7 +30,7 @@ label {
 input {
   width: 100%;
   padding: 10px;
-  border: 2px solid #ccc;
+  border: 2px solid var(--main-color);
   border-radius: 5px;
   margin-bottom: 10px;
   transition: 0.3s ease;
@@ -57,16 +56,4 @@ span{
   display: flex;
   align-items: flex-start;
 }
-.error_warning {
-  border: 2px solid red !important;
-  background-color: #ffe6e6;
-}
-.error {
-  display: block;
-  color: red;
-  font-size: 0.85rem;
-  margin-top: -8px;
-  margin-bottom: 10px;
-  text-align: left;
-  width: 100%;
-}
+

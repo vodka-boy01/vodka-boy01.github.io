@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +8,15 @@
 	<link rel="stylesheet" href="/assets/css/colors.css">
   <link rel="stylesheet" href="/assets/css/style.css">
   <title>Pagina di registrazione</title>
+  <script>
+		window.onload = function() {
+		  const tema = localStorage.getItem("tema");
+		  if (tema === "true") {
+			console.log("Tema salvato: dark");
+			document.documentElement.classList.add("dark-theme");
+		  }
+		}();
+	</script>
 </head>
 <body>
   <main class="login-container">
