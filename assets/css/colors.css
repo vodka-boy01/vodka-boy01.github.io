@@ -1,11 +1,11 @@
 :root{
-    --bg-color: #1e1e1e;
-    --main-color: wheat;/* colore scritte */
-    --color-bg-main: gray;
+    --bg-color: #82898f ;
+    --main-color: rgb(0, 0, 0);/* colore scritte */
+    --color-bg-main: white;
     --color-main: rgb(22, 24, 25);
-    --opacity-value: 0.5;
-    --color-hover: none;
-    --animation-state: paused;/* da togliere */
+    --opacity-value: none;
+    --color-hover: wheat;
+    --animation-state: paused;
     --color-error: #ef4146;
 
     --color-1: #19c37d;
@@ -22,12 +22,12 @@
     */
 }
 .dark-theme{
-    --bg-color: #82898f ;
-    --main-color: rgb(0, 0, 0);/* colore scritte */
-    --color-bg-main: white;
+    --bg-color: #1e1e1e;
+    --main-color: wheat;/* colore scritte */
+    --color-bg-main: gray;
     --color-main: rgb(22, 24, 25);
-    --opacity-value: none;
-    --color-hover: wheat;
-    --animation-state: paused;
+    --opacity-value: 0.5;
+    --color-hover: none;
+    --animation-state: paused;/* da togliere */
     --color-error: #ef4146;
 }
