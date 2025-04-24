@@ -32,14 +32,14 @@ const searchModule = {
     const searchInput = document.getElementById('search-input');
 
     searchInput.addEventListener('focus', function() {
-      if (this.value === 'CERCA') {
+      if (this.value === 'Ricerca') {
         this.value = '';
       }
     });
 
     searchInput.addEventListener('blur', function() {
       if (this.value === '') {
-        this.value = 'CERCA';
+        this.value = 'Ricerca';
       }
     });
   }

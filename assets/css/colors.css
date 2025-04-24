@@ -1,3 +1,5 @@
+/*colori originali nero e wheat*/
+/*progetto: 18/02/2023*/
 :root{
     --bg-color: #82898f ;
     --main-color: rgb(0, 0, 0);/* colore scritte */
@@ -21,6 +23,7 @@
     bianco e nero
     */
 }
+
 .dark-theme{
     --bg-color: #1e1e1e;
     --main-color: wheat;/* colore scritte */

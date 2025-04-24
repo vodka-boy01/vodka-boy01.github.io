@@ -4,43 +4,34 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="/assets/css/style_login.css">
-	<link rel="stylesheet" href="/assets/css/colors.css">
+  <link rel="stylesheet" href="/assets/css/style_login.css">
+	<link rel="stylesheet" href="/assets/css/colors-purple.css">
   <link rel="stylesheet" href="/assets/css/style.css">
+	<script src="/assets/js/load.js"></script>
   <title>Pagina di Login</title>
-  <script>
-		window.onload = function() {
-		  const tema = localStorage.getItem("tema");
-		  if (tema === "true") {
-			console.log("Tema salvato: dark");
-			document.documentElement.classList.add("dark-theme");
-		  }
-		}();
-	</script>
+
 </head>
 <body>
   <main class="login-container">
     <span>
-    <h2>Accesso</h2>
-    <div id="circle-icon" class="container-colorChange" onclick="colorChange()">
-      <i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
-      <i id="dark" class="fa-regular fa-moon" title="Cambia tema pagina"></i>
-    </div>
+    <h2>ACCESSO</h2>
+      <div id="circle-icon" class="container-colorChange" onclick="colorChange()">
+        <i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
+        <i id="dark" class="fa-regular fa-moon" title="Cambia tema pagina"></i>
+        <br>
+      </div>
     </span>
     <form action="/php/views/login.php" method="post" id="form">
       <label for="username">Email:</label>
       <input type="email" id="username" name="email" placeholder="mariorossi@esempio.it" required>
-      <br>
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" placeholder="password" required>
+      <input type="password" id="password" name="password" placeholder="1234" required>
       <br>
-      <button type="submit">Accedi</button>
+      <input type="submit" value="Accedi" class="button primary">
       <br>
     </form>
     <p>Non hai ancora un account?</p>
-    <a href="/public/registrazione.html">
-      <button>Registrati</button>
-    </a>
+    <a class="button primary" href="/public/registrazione.html" title="Registra un nuovo account">Registrati</a>
   </main>
   <script src="/assets/js/script_loginPage.js"></script>
   <script src="/assets/js/script.js"></script>

@@ -1,0 +1,32 @@
+:root {
+    --bg-color: #787b80;              
+    --main-color: #1c1d26;           
+    --color-bg-main: #a8aaaf;        
+    --color-main: #111827;           
+    --opacity-value: 1;
+    --color-hover: #e44c65;           
+    --animation-state: paused;
+    --color-error: #e44c65;
+
+    --scrollbar-bg: #f0f0f0;
+    --scrollbar-thumb: #c0c0c0;
+    --scrollbar-thumb-hover: #a0a0a0;
+
+    --color-1: #19c37d;
+    --color-2: #715fde;
+}
+
+.dark-theme {
+    --bg-color: #1c1d26;                          
+    --main-color: rgba(255, 255, 255, 0.75);      
+    --color-bg-main: #4a4c5e;                     
+    --color-main: #ffffff;                        
+    --opacity-value: 0.75;
+    --color-hover: #e44c65;
+    --animation-state: paused;
+    --color-error: #e44c65;
+
+    --scrollbar-bg: #2c2c2c;
+    --scrollbar-thumb: #505050;
+    --scrollbar-thumb-hover: #707070;
+}

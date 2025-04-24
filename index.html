@@ -5,20 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/colors.css">
+	<link rel="stylesheet" href="assets/css/colors-purple.css">
+	<script src="assets\js\load.js"></script>
     <title>Luigi-Tanzillo.com</title>
-	<script>
-		// impostando subito il tema pagina sul tag html e non body si evia il flickering per il caricamento della pagina
-		window.onload = function() {
-		  const tema = localStorage.getItem("tema");
-		  if (tema === "true") {
-			console.log("Tema salvato: dark");
-			document.documentElement.classList.add("dark-theme");
-		  }
-		}();
-	</script>
 </head>
 <body>
+    <div class="loading-screen">
+        <div class="spinner"></div>
+    </div>
 	<header>
 		<nav>
 			<div id="title_login">
@@ -26,8 +20,11 @@
 					<h1 id="nav_title">Luigi-Tanzillo.com</h1>
 				</div>
 				<div id="nav_login_container">
-					<a id="login-text" href="/public/login.html" title="Accedi al tuo account">accedi</a> 
-					<a id="login-icon" class="fa-solid fa-circle-user" title="Visualizza il tuo account"></a>
+					<ul>
+						<li><a class="button primary" href="/public/login.html" title="Accedi al tuo account">Sign In</a></li>
+						<li><a class="button primary" href="/public/registrazione.html" title="Registra un nuovo account">Sing Up</a></li>
+					</ul>
+					<a id="login-icon" class="fa-solid fa-circle-user" title="Visualizza il tuo profilo"></a>
 				</div>	
 				<div id="circle-icon" class="container-colorChange" onclick="colorChange()">
 					<i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
@@ -35,7 +32,7 @@
 				</div>
 			</div>
 
-			<hr id="nav_devider">
+			<hr>
 
 			<div id="nav_bar">
 				<div id="nav_links">
@@ -47,7 +44,7 @@
 				</div>
 				<div id="nav_searchBar_container">
 					<!--<label for="search-bar-title"></label>!-->
-					<input type="search" id="search-input" name="q" value="CERCA" spellcheck="false">
+					<input type="search" id="search-input" name="q" value="Ricerca" spellcheck="false">
 					<button type="reset" id="reset-button" name="q" onclick="clearSearch()" title="Cancella la ricerca"><i class="fa-solid fa-xmark"></i></button>
 					<button type="search" id="submit-button" name="q" title="Cerca"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</div>
@@ -56,18 +53,16 @@
 	</header>
 	
 	<main>
-		<h1 id="main_text">Non attualmente ottimizzato per dispositivi mobile </h1>
-	
 		<!--slider con raccolta immagini e descrizione-->
 		<section class="image-slider">
 			<h2 class="slider-title">I miei progetti recenti</h2>
 				<div class="slider-container">
 					<div class="slide">
-					<img src="assets/img/" alt="Progetto 1">
+					<img src="assets\icons\images\gta-ii.jpg" alt="Progetto 1">
 					<p class="slide-desc">Sistema di login con database MySQL e interfaccia responsive</p>
 					</div>
 					<div class="slide">
-					<img src="assets/img/" alt="Progetto 1">
+					<img src="assets\icons\images\gta-iii.jpg" alt="Progetto 1">
 					<p class="slide-desc">Sistema di login con database MySQL e interfaccia responsive</p>
 					</div>
 					<div class="slide">
@@ -97,7 +92,7 @@
 	<footer>
 		<div id="footer_container">
 			<div class="footer_collumn">
-				<ul class="">
+				<ul>
 					<h4 class="footer_title_block">Me</h4>
 					<hr class="footer_devider_block">
 					<li><a href="#">Chi sono</a></li>
