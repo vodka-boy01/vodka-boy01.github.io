@@ -377,46 +377,52 @@ main{
 ------------------------------------------
 */
 footer{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column ;
     background-color: var(--bg-color);
     box-sizing: border-box;
+    font-size: medium;
     padding: 25px 0;
 }
 
-#footer_container{
+#footer_links{
     display: flex;
     justify-content: center;
     margin-top: none;
     flex-wrap: wrap;    
     text-align: center;
-    font-size: medium;
     color: var(--main-color);
 }
 
 .footer_collumn{
     min-width: 25%;
-    padding: 0 10px;
 }
 
-
-footer div ul li a{
-    display: block;
+footer div ul{
+    padding: 0;
 }
 
 footer div ul li a:hover{
     transform: translate(10px);
 }
 
-.footer_icon{
-    color: var(--main-color);
-}
-
-#Copyright{
+#footer_social_row{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.footer_icon{
     color: var(--main-color);
+    size-adjust: 100%;
 }
 
 .footer_title_block{
+    color: var(--color-hover);
     font-size: larger;
     margin-bottom: 16px;
     cursor: default;
@@ -426,10 +432,33 @@ footer div ul li a:hover{
     width: 25%;
 }
 
+.fa-brands{
+    font-size: 23px;
+    transition: transform 0.3s ease;
+}
+
+.fa-brands:hover{
+    transform: scale(1.2);
+}
+
+#footer_social_icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+#Copyright{
+    display: flex;
+    justify-content: center;
+    color: var(--main-color);
+}
+
 /*
 ------------------------------------------
 
------------parte responsive
+-----------queary per il responsive
 
 ------------------------------------------
 */
