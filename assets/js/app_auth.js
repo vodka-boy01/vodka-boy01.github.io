@@ -21,8 +21,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 window.addEventListener("DOMContentLoaded", () => {
-  const loginBtn = document.getElementById("loginBtn");
-  console.log("Login button:", loginBtn);
+  const loginBtn = document.getElementById("loginBtnGoogle");
   if (loginBtn) {
     loginBtn.addEventListener("click", () => {
       signInWithPopup(auth, provider)
