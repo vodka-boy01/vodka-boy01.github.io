@@ -7,10 +7,14 @@
   <link rel="stylesheet" href="/assets/css/style_login.css">
 	<link rel="stylesheet" href="/assets/css/colors-purple.css">
   <link rel="stylesheet" href="/assets/css/style.css">
+  <!--funzione loader-->
 	<script src="/assets/js/load.js"></script>
   <title>Pagina di Login</title>
 </head>
 <body>
+  <div class="loading-screen">
+    <div class="spinner"></div>
+  </div>
   <main class="login-container">
     <span>
     <h2>ACCESSO</h2>
@@ -29,11 +33,22 @@
       <input type="submit" value="Accedi" class="button primary">
       <br>
     </form>
+    <input type="button" class="button" id="loginBtn" value="Login con Google"/>
+    <!--<div id="userInfo"></div>-->
     <p>Non hai ancora un account?</p>
     <a class="button primary" href="/public/registrazione.html" title="Registra un nuovo account">Registrati</a>
+
   </main>
+  <!--main script-->
   <script src="/assets/js/script_loginPage.js"></script>
   <script src="/assets/js/script.js"></script>
+  <!--icone-->
 	<script src="https://kit.fontawesome.com/4383a54113.js" crossorigin="anonymous"></script>
+  <!--firebase webapp defer carica lo script solo dopo aver caricato gli elementi del dome-->
+  <script defer src="https://www.gstatic.com/firebasejs/7.13.1/firebase.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <script src="/assets/js/firebase-config.js"></script>
+  <script src="/assets/js/app.js"></script>  
 </body>
 </html>
