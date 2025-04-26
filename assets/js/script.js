@@ -1,12 +1,10 @@
 window.onload = function() {
-  console.log("Verifico percorso");
 
   //lancia modulo ricerca solo in index.html
   if (window.location.pathname.endsWith("index.html")) {
     searchModule.init();
   }
 
-  console.log("Verifico colore salvato in memoria");
   let tema = localStorage.getItem("tema");
 
   //default tema chiaro
