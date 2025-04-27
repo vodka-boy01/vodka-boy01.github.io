@@ -16,15 +16,17 @@
     <div class="spinner"></div>
   </div>
   <main class="login-container">
-    <span>
-    <h2>ACCESSO</h2>
-      <div id="circle-icon" class="container-colorChange" onclick="colorChange()">
-        <i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
-        <i id="dark" class="fa-regular fa-moon" title="Cambia tema pagina"></i>
-        <br>
+      <h2>ACCESSO</h2>
+      <div id="login_page_buttons">
+        <a href="/index.html"><i class="fa-solid fa-house"></i></a>
+        <div id="circle-icon" class="container-colorChange" onclick="colorChange()">
+          <i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
+          <i id="dark" class="fa-regular fa-moon" title="Cambia tema pagina"></i>
+          <br>
+        </div>
       </div>
-    </span>
-    <form action="/php/query/login.php" method="post" id="form">
+
+      <form action="/php/query/login.php" method="post" id="form">
       <label for="username">Email:</label>
       <input type="email" id="username" name="email" placeholder="mariorossi@esempio.it" required>
       <label for="password">Password:</label>
@@ -33,7 +35,7 @@
       <input type="submit" value="Accedi" class="button primary">
     </form>
 
-    
+
     <div id="social_button_container">
       <button class="gsi-material-button" id="loginBtnGoogle">
         <div class="gsi-material-button-state"></div>
@@ -70,7 +72,6 @@
     <!--<div id="userInfo"></div>-->
     <p>Non hai ancora un account?</p>
     <a class="button primary" href="/public/registrazione.html" title="Registra un nuovo account">Registrati</a>
-
   </main>
   <!--main script-->
   <script src="/assets/js/script_loginPage.js"></script>

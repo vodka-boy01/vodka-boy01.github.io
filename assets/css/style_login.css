@@ -16,6 +16,14 @@ body {
   text-align: center;
 }
 
+#login_page_buttons{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 h2 {
   margin: 0 20px 20px;
 }

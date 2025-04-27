@@ -15,14 +15,15 @@
     <div class="spinner"></div>
   </div>
   <main class="login-container">
-    <span>
-      <h2>REGISTRAZIONE</h2>
+    <h2>REGISTRAZIONE</h2>
+    <div id="login_page_buttons">
+      <a href="/index.html"><i class="fa-solid fa-house"></i></a>
       <div id="circle-icon" class="container-colorChange" onclick="colorChange()">
         <i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
         <i id="dark" class="fa-regular fa-moon" title="Cambia tema pagina"></i>
         <br>
       </div>
-    </span>
+    </div>
     <form action="/php/query/registrazione.php" method="post" id="form">
       <label for="new_name">Nome:</label>
       <input type="text" id="new_name" name="new_name" placeholder="Mario" required>
