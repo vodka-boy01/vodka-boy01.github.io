@@ -5,26 +5,20 @@ window.onload = function() {
     searchModule.init();
   }
 
-  let tema = localStorage.getItem("tema");
+  const tema = localStorage.getItem("tema");
 
-  //default tema chiaro
-  if (tema === null) {
-    tema = "false";
-    localStorage.setItem("tema", tema);
-    console.log("Tema non presente, impostato su chiaro (false)");
-  }
-
-  //se true -> dark    viene gia verificato nello script in index.html
+  //se true -> dark    viene gia verificato nello script in load.js
   //se false -> light
+  //la verifica dell'esistenza di tema viene fatta in load.js
   if (tema === "false") {
     console.log("Tema salvato: light");
     document.documentElement.classList.remove("dark-theme");
   }
 
-  aggiornaIconeTema(tema === "true");
+  aggiornaIconeTema(tema);
 };
 
-//modulo per la gestione del campo di ricerca in alternativa a placeholder
+//modulo per la gestione del campo di ricerca alternativa a placeholder
 const searchModule = {
   init: function() {
     const searchInput = document.getElementById('search-input');
