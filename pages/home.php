@@ -6,6 +6,7 @@
 </head>
 <body>
     <main>
+		
 		<!--slider con raccolta immagini e descrizione-->
 		<section class="image-slider">
 			<h2 class="slider-title">I miei progetti recenti</h2>
