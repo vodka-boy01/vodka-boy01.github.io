@@ -28,6 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
         .then(result => {
           const user = result.user;
           console.log("Login avvenuto:", user);
+          // mostra info utente se vuoi
         })
         .catch(error => {
           console.error("Errore login:", error);

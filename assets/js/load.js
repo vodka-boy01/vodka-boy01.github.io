@@ -2,14 +2,6 @@
 /*check local storage tema dark*/
 window.onload = function() {
     const tema = localStorage.getItem("tema");
-
-    //default tema scuro
-    if (tema === null) {
-        tema = "true";
-        localStorage.setItem("tema", tema);
-        console.log("Tema non presente, impostato su chiaro (false)");
-    }
-
     if (tema === "true") {
         console.log("Tema salvato: dark");
         document.documentElement.classList.add("dark-theme");
