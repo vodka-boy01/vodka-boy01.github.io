@@ -14,6 +14,8 @@
 
     --color-1: #19c37d;
     --color-2: #715fde;
+
+    --img-bg: url(/assets/img/banner_light.jpg);
 }
 
 .dark-theme {
@@ -29,4 +31,6 @@
     --scrollbar-bg: #2c2c2c;
     --scrollbar-thumb: #505050;
     --scrollbar-thumb-hover: #707070;
+
+    --img-bg: url(/assets/img/banner_dark.jpg);
 }

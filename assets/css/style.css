@@ -360,6 +360,16 @@ main{
     flex-direction: column;
 }
 
+.banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw; /*view width*/
+    height: 78vh; /*view height*/
+    background-image: var(--img-bg);
+    background-size: cover;
+}
 .image-slider {
   max-width: 1000px;
   margin: 50px auto;
