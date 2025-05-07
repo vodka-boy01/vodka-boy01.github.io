@@ -10,6 +10,10 @@ window.onload = function() {
 
 /*content load check*/
 window.addEventListener('load', function() {
+    //fade out pagina login
     const loadingScreen = document.querySelector('.loading-screen');
-    loadingScreen.classList.add('fade-out'); 
+    loadingScreen.classList.add('fade-out');
+    //interruzione spinner
+    const spinnerStop = document.querySelector('.spinner');
+    spinnerStop.classList.add('stop');
 });

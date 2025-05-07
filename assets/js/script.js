@@ -1,7 +1,7 @@
 window.onload = function() {
 
   //lancia modulo ricerca solo in index.html
-  if (window.location.pathname.endsWith("index.html")) {
+  if (window.location.pathname.endsWith("index.php")) {
     searchModule.init();
   }
 
@@ -28,6 +28,7 @@ window.onload = function() {
 const searchModule = {
   init: function() {
     const searchInput = document.getElementById('search-input');
+    const clearButton = document.getElementById('reset-button');
 
     searchInput.addEventListener('focus', function() {
       if (this.value === 'Ricerca') {
@@ -40,7 +41,17 @@ const searchModule = {
         this.value = 'Ricerca';
       }
     });
+
+    clearButton.addEventListener('click', function(){
+      searchInput = '';
+    });
   }
+}
+
+//cancella la ricerca
+function clearSearch(){
+  const searchInput = document.getElementById('search-input');
+  searchInput == '';
 }
 
 //funzione di cambio colore onclick

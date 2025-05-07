@@ -30,7 +30,7 @@ header {
     transition: opacity 0.5s ease, visibility 0.5s ease; 
 }
 
-.spinner {
+.spinner{
     border: 8px solid #f3f3f3;
     border-top: 8px solid var(--color-hover);
     border-radius: 50%;
@@ -49,6 +49,9 @@ header {
     visibility: hidden;
 }
 
+.stop{
+    animation: none;
+}
 /*
 ------------------------------------------
 

@@ -14,7 +14,7 @@ try {
 
 if ($conn->connect_error) {
     die("Errore di connessione al database: " . $conn->connect_error);
-}
+} 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $_SESSION['username'] = $username;
-        header("location: index.html"); // Reindirizza l'utente
+        header("location: index.php"); // Reindirizza l'utente
     } else {
         echo "Credenziali non valide. Riprova.";
     }
