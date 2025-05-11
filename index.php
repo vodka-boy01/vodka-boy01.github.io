@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/colors-purple.css">
     <script src="assets/js/load.js"></script>
-    <title>Luigi-Tanzillo.com</title>
+    <title>Portfolio Tanzillo</title>
 </head>
 <body>
     <!-- Loading Screen & spinner-->
@@ -19,7 +19,6 @@
     <?php include "includes/header.php"; ?>
 
     <!-- Contenuto dinamico -->
-    <main>
         <?php
 			$page = $_GET['page'] ?? 'home';
 
@@ -40,8 +39,7 @@
 					include 'pages/home.php';
 					break;
 			}
-        ?>
-    </main>
+        ?> 
 
     <!-- Footer -->
     <?php include "includes/footer.php"; ?>

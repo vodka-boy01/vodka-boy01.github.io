@@ -15,7 +15,7 @@ header {
     transition: 0.5s ease;
 }
 
-/* Styling per lo sfondo e lo spinner */
+/* style per lo sfondo iniziale e lo spinner */
 .loading-screen {
     position: fixed;
     top: 0;
@@ -271,7 +271,6 @@ nav li {
   border-radius: 6px;
   border: 3px solid transparent;
   background-clip: content-box;
-  transition: .5 ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -369,9 +368,10 @@ main{
     align-items: center;
     flex-direction: column;
     width: 100vw; /*view width*/
-    height: 78vh; /*view height*/
+    height: 78vh; /*view height */
     background-image: var(--img-bg);
     background-size: cover;
+    transition: .5s ease;
 }
 .image-slider {
   max-width: 1000px;
@@ -515,7 +515,7 @@ footer div ul li a:hover{
 /*
 ------------------------------------------
 
------------queary per il responsive
+-----------query per il responsive
 
 ------------------------------------------
 */

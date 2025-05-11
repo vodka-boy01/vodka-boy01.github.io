@@ -7,7 +7,7 @@
 <body>
     <main>
 		<section class="banner">
-			ciaoo
+			<?php include 'bio.php';?>
 		</section>
 		<!--slider con raccolta immagini e descrizione-->
 		<section class="image-slider">

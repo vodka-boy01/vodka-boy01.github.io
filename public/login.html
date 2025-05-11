@@ -18,7 +18,7 @@
   <main class="login-container">
       <h2>ACCESSO</h2>
       <div id="login_page_buttons">
-        <a href="/index.php"><i class="fa-solid fa-house"></i></a>
+        <a href="/index.php" title="Torna alla home page"><i class="fa-solid fa-house"></i></a>
         <div id="circle-icon" class="container-colorChange" onclick="colorChange()">
           <i id="light" class="fa-regular fa-sun" title="Cambia tema pagina"></i>
           <i id="dark" class="fa-regular fa-moon" title="Cambia tema pagina"></i>
@@ -27,13 +27,13 @@
       </div>
 
       <form action="/php/query/login.php" method="post" id="form">
-      <label for="username">Email:</label>
-      <input type="email" id="username" name="email" placeholder="mariorossi@esempio.it" required>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" placeholder="1234" required>
-      <br>
-      <input type="submit" value="Accedi" class="button primary">
-    </form>
+        <label for="username">Email:</label>
+        <input type="email" id="username" name="email" placeholder="mariorossi@esempio.it" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="1234" required>
+        <br>
+        <input type="submit" value="Accedi" class="button primary">
+      </form>
 
 
     <div id="social_button_container">
