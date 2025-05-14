@@ -71,7 +71,7 @@
     
     <!--<div id="userInfo"></div>-->
     <p>Non hai ancora un account?</p>
-    <a class="button primary" href="/public/registrazione.html" title="Registra un nuovo account">Registrati</a>
+    <a class="button primary" href="/public/registrazione.php" title="Registra un nuovo account">Registrati</a>
   </main>
   <!--main script-->
   <script src="/assets/js/script_loginPage.js"></script>

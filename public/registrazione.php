@@ -40,7 +40,7 @@
     </form>
     <br>
     <p>Hai gia un account?</p>
-    <a class="button primary" href="/public/login.html" title="Accedi al tuo account">Accedi</a>
+    <a class="button primary" href="/public/login.php" title="Accedi al tuo account">Accedi</a>
   </main>
   <script src="/assets/js/script_loginPage.js"></script>
   <script src="https://kit.fontawesome.com/4383a54113.js" crossorigin="anonymous"></script>

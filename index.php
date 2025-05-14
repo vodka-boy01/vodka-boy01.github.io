@@ -25,22 +25,22 @@
 			switch ($page) {
 				case 'about':
 					include 'pages/about.php';
-					break;
+				break;
 				case 'projects':
 					include 'pages/projects.php';
-					break;
+				break;
 				case 'contact':
 					include 'pages/contact.php';
-					break;
+				break;
 				case 'home':
                     include 'pages/home.php';
-                    break;
+                break;
+                
 				default:
 					include 'pages/home.php';
-					break;
+				break;
 			}
         ?> 
-
     <!-- Footer -->
     <?php include "includes/footer.php"; ?>
 

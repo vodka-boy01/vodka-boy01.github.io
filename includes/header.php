@@ -13,8 +13,8 @@
 				</div>
 				<div id="nav_login_container">
 					<ul>
-						<li><a class="button primary" href="/public/login.html" title="Accedi al tuo account">Sign In</a></li>
-						<li><a class="button primary" href="/public/registrazione.html" title="Registra un nuovo account">Sing Up</a></li>
+						<li><a class="button primary" href="/public/login.php" title="Accedi al tuo account">Sign In</a></li>
+						<li><a class="button primary" href="/public/registrazione.php" title="Registra un nuovo account">Sing Up</a></li>
 					</ul>
 					<a id="login-icon" class="fa-solid fa-circle-user" title="Visualizza il tuo profilo"></a>
 				</div>	
