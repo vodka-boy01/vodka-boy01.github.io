@@ -43,7 +43,7 @@ label {
 
 input {
   width: 100%;
-  padding: 10px;
+  padding:3px;
   border: 2px solid var(--main-color);
   border-radius: 5px;
   margin-bottom: 10px;
@@ -75,6 +75,23 @@ ul{
 
 .container-colorChange{
   padding-right: 0px !important;
+}
+
+input[type="file"] {
+  width: 265px;
+  font-size: 14px;
+}
+
+.error_message{
+  display: flex;
+  align-items: center;
+  font-size: medium;
+  color: #fd3535;
+  height: 20px;
+}
+
+.error_border{
+  border-color: #fd3535;
 }
 
 /*login con google by google code*/
@@ -204,3 +221,4 @@ ul{
   background-color: #303030;
   opacity: 8%;
 }
+

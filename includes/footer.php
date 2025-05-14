@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
     <footer>
 		<div id="footer_links">
 			<div class="footer_collumn">
@@ -69,9 +62,7 @@
 			</ul>
 		</div>
 		<h5 id="Copyright">
-			Copyright © 2023-2025 Luigi-Tanzillo.keystore.it
+			Copyright © 2023-2025 Luigi-Tanzillo.42web.io
 			All rights reserved
 		</h5>
 	</footer>
-</body>
-</html>

@@ -1,0 +1,129 @@
+<?php
+/** 
+ * questa classe contiene i metodi per gestire gli utenti:
+ * autenticazione, verifica esistenza, registrazione ed eliminazione
+ * 
+ * @author luigi tanzillo
+ * @version 1.1
+*/
+class user{
+    private $connection;
+
+    /**
+     * costruttore per inizializzare la connessione al database
+     * 
+     * @param mysqli $db connessione al dabase
+     */
+    public function __construct($db){
+        $this->connection = $db;
+    }
+
+    /**
+     * verifica se un utente con il nome utente fornito esiste nel database
+     * 
+     * @param string $username nome utente da cercare
+     * @return bool restituisce true se l'utente esiste, altrimenti false
+     */
+    public function exist($username){
+        $resSet = $this->connection->query("SELECT id FROM utenti WHERE username = '$username'");
+        if($resSet->num_rows > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * autentica l'utente verificando username e password
+     * 
+     * @param string $username nome utente
+     * @param string $password password dell'utente
+     * @return bool restituisce true se le credenziali sono corrette, altrimenti false
+     */
+    public function login($username, $password){
+        $resSet = $this->connection->query("SELECT id FROM utenti WHERE username = '$username' AND password = '$password'");
+        if($resSet->num_rows > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * registra un nuovo utente (metodo non implementato)
+     * 
+     * @param string $new_name nome dell'utente
+     * @param string $new_surname cognome dell'utente
+     * @param string $new_username nome utente
+     * @param string $new_email email dell'utente
+     * @param string $new_password password dell'utente
+     */
+    public function register($new_name, $new_surname, $new_username, $new_email, $new_password) {
+        $query = "INSERT INTO utenti (name, surname, username, email, password) 
+                VALUES ('$new_name', '$new_surname', '$new_username', '$new_email', '$new_password')";
+
+        $resSet = $this->connection->query($query);
+
+        if($resSet->num_rows > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    
+    /**
+     * elimina un utente 
+     */
+    public function delete(){
+
+    }
+
+    /*non correlate alle operazioni sugli utenti*/
+
+    /**
+    *controlla se un valore esiste in un campo
+    *@param string $field campo da controllare
+    *@param mixed $value valore da cercare
+    *@return bool true se esiste, altrimenti false
+    */
+    public function existsInField($field, $value) {
+        $resSet = $this->connection->query("SELECT id FROM utenti WHERE $field = '$value'");
+        return $resSet->num_rows > 0;
+    }
+
+    /**
+    *restituisce un campo di un utente
+    *@param string $field campo da restituire
+    *@param int $id id dell'utente
+    *@return mixed valore del campo
+    */
+    public function getUserInfo($field, $username) {
+        $resSet = $this->connection->query("SELECT * FROM utenti WHERE username = '$username'");
+        $row = $resSet->fetch_assoc();
+        return $row[$field];
+    }
+
+    /**
+    *restituisce il ruolo di un utente
+    *@param string $username username dell'utente
+    *@return mixed nome del ruolo
+    */
+    public function getUserRole($username) {
+        $query = "
+            select
+                nome as ruolo
+            from utenti u
+            inner join ruoli r on r.id = u.ruolo
+            where u.username = '$username'
+        ";
+        $resSet = $this->connection->query($query);
+        if($resSet){
+            $row = $resSet->fetch_assoc();
+            return $row['ruolo'];
+        }else{
+            echo "error";
+        }
+    }
+}
+?>

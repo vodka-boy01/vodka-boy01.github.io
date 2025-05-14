@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         #bio-tab{
             display: flex;
@@ -21,8 +16,6 @@
             font-size: xx-large;
         }
     </style>
-</head>
-<body>
     <div id="bio-tab">
         <img src="/assets/img/luigi.JPEG" alt="Errore" id="tanzillo">
         <div class="text-box">
@@ -30,13 +23,11 @@
             <h3>
                 Benvenuto sul mio web portfolio. <br>
                 Potrai tovare tutti i miei progetti e conoscenze <br>
-                Assieme ad una vasta gamma di esperienza personali <br>
+                Assieme ad una vasta gamma di esperienza personali e progetti<br>
                 Scopri come unisco passione e competenze tecniche nel mio lavoro <br>
                 Ogni progetto racconta un percorso di crescita e dedizione <br>
-                Naviga tra le sezioni per saperne di più sul mio mondo digitale. <br>
+                Naviga tra le sezioni per saperne di più su di me. <br>
 
             </h3>
         </div>
     </div>
-</body>
-</html>

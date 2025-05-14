@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         header{
             padding: 0;
@@ -11,8 +6,6 @@
             background-color: transparent !important;
         }
     </style>
-</head>
-<body>
     <header>
 		<nav>
 			<div id="nav_bar">
@@ -25,8 +18,8 @@
 				</div>
                 <div id="nav_login_container">
 					<ul>
-						<li><a class="button primary" href="/public/login.php" title="Accedi al tuo account">Sign In</a></li>
-						<li><a class="button primary" href="/public/registrazione.php" title="Registra un nuovo account">Sing Up</a></li>
+						<li><a class="button primary" href="/pages/login.php" title="Accedi al tuo account">Sign In</a></li>
+						<li><a class="button primary" href="/pages/registrazione.php" title="Registra un nuovo account">Sing Up</a></li>
 					</ul>
 					<a id="login-icon" class="fa-solid fa-circle-user" title="Visualizza il tuo profilo"></a>
 				</div>	
@@ -37,5 +30,3 @@
 			</div>
 		</nav>
 	</header>
-</body>
-</html>

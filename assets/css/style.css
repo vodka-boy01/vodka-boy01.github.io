@@ -369,7 +369,7 @@ main{
     align-items: center;
     flex-direction: column;
     width: 100vw; /*view width*/
-    height: 78vh; /*view height */
+    height: 79vh; /*view height */
     background-image: var(--img-bg);
     background-size: cover;
     transition: .5s ease;
