@@ -22,27 +22,30 @@
         <?php
             $page = $_GET['page'] ?? 'home';
 
-            if ($page === 'profile') {
+            if($page === 'profile') {
                 include 'pages/profile.php';
 
-            } elseif ($page === 'about') {
+            }elseif ($page === 'about') {
                 include 'pages/about.php';
 
-            } elseif ($page === 'projects') {
+            }elseif ($page === 'projects') {
                 include 'pages/projects.php';
 
-            } elseif ($page === 'contact') {
+            }elseif ($page === 'contact') {
                 include 'pages/contact.php';
 
-            } elseif ($page === 'home') {
+            }elseif ($page === 'home') {
                 include 'pages/home.php';
 
-            } elseif (($page === 'mysqlInfinity') && ($_SESSION['ruolo'] === "admin")) {
+            }elseif (($page === 'mysqlInfinity') && ($_SESSION['ruolo'] === "admin")) {
                 header("Location: https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo");
                 // echo '<iframe src="https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo" frameborder="0"></iframe>';
             
             }else if(($page === 'mysqlLocal') && ($_SESSION['ruolo'] === "admin")){
                 header("Location: http://localhost/phpmyadmin/");
+                
+            }else if(($page === 'dashboard') && ($_SESSION['ruolo'] === "admin")){
+                include 'php\views\dashboard.php';
                 
             }else {
                 include 'pages/home.php';

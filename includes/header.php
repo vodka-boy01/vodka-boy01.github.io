@@ -32,6 +32,7 @@
 							<?php if (isset($_SESSION['username']) && ($_SESSION['ruolo'] === "admin")): ?>
 								<a href="index.php?page=mysqlInfinity">PhpMyAdmin infinity</a>
 								<a href="index.php?page=mysqlLocal">PhpMyAdmin locale</a>
+								<a href="index.php?page=dashboard">Admin dashboard</a>
 							<?php endif; ?>	
 							<a href="includes/logout.php">Logout</a>
 						</div>
