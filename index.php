@@ -20,26 +20,34 @@
 
     <!-- Contenuto dinamico -->
         <?php
-			$page = $_GET['page'] ?? 'home';
+            $page = $_GET['page'] ?? 'home';
 
-			switch ($page) {
-				case 'about':
-					include 'pages/about.php';
-				break;
-				case 'projects':
-					include 'pages/projects.php';
-				break;
-				case 'contact':
-					include 'pages/contact.php';
-				break;
-				case 'home':
-                    include 'pages/home.php';
-                break;
+            if ($page === 'profile') {
+                include 'pages/profile.php';
+
+            } elseif ($page === 'about') {
+                include 'pages/about.php';
+
+            } elseif ($page === 'projects') {
+                include 'pages/projects.php';
+
+            } elseif ($page === 'contact') {
+                include 'pages/contact.php';
+
+            } elseif ($page === 'home') {
+                include 'pages/home.php';
+
+            } elseif (($page === 'mysqlInfinity') && ($_SESSION['ruolo'] === "admin")) {
+                header("Location: https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo");
+                // echo '<iframe src="https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo" frameborder="0"></iframe>';
+            
+            }else if(($page === 'mysqlLocal') && ($_SESSION['ruolo'] === "admin")){
+                header("Location: http://localhost/phpmyadmin/");
                 
-				default:
-					include 'pages/home.php';
-				break;
-			}
+            }else {
+                include 'pages/home.php';
+
+            }
         ?> 
     <!-- Footer -->
     <?php include "includes/footer.php"; ?>

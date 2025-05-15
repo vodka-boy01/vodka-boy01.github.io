@@ -64,11 +64,7 @@ class user{
 
         $resSet = $this->connection->query($query);
 
-        if($resSet->num_rows > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return $resSet;
     }
 
     

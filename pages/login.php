@@ -14,32 +14,36 @@
 <body>
     <?php
     if(isset($_POST['invia'])){
+      session_start();
+
       require_once "../php/query/database.php";
       require_once "../php/query/user.php";
-
-      session_start();
 
       //oggetti, connessione e variabili
       $conn = (new database())->connect();
       $userOperations = new user($conn);
+      $error = '';
 
-      //dati POST e variabili
+      //dati POST
       $username = $_POST['username'];
       $password = $_POST['password'];
       
+      //verifica esistenza username
       if($userOperations->login($username, $password)){
         $_SESSION['username'] = $username;
-        $_SESSION['name'] = $userOperations->getUserInfo("name", $username);
+        $_SESSION['nome'] = $userOperations->getUserInfo("name", $username);
         $_SESSION['ruolo'] = $userOperations->getUserRole($username);
         $conn->close();
         header("Location: ../index.php");
 
+      }else{
+        $error = "Utente non trovato";
+
       }
 
-      //print_r($_SESSION);
       $conn->close();
     }
-      ?>
+    ?>
     <div class="loading-screen">
       <div class="spinner"></div>
     </div>
@@ -67,14 +71,14 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="1234" required class="<?php if(isset($error) && $error != ''){echo "error_border";}?>">
         <br>
-
-        <!--invia-->
-        <input type="submit" name="invia" class="button primary" class="
         <?php 
-          if(isset($error) && $error != ''){
-            echo "error_border";
+          if (isset($error) && $error !== '') {
+            echo "<h3 class='error_message'>$error</h3>";
           }
-        ?>">
+        ?>
+        <!--invia-->
+        <input type="submit" name="invia" class="button primary">
+
       </form>
 
       <!--accedi con google-->

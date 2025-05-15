@@ -93,7 +93,7 @@ body, input, select, textarea {
 
 #light, #dark{
     color: var(--main-color);
-    font-size: 23px;
+    font-size: 27px;/*23px*/
     padding: none;
     margin: none;
     outline: none;
@@ -180,7 +180,7 @@ a:hover{
 /*
 ------------------------------------------
 
------------inizio style navbar
+-----------inizio style header e navbar
 
 ------------------------------------------
 */
@@ -208,6 +208,41 @@ nav li {
     align-items: center;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  cursor: pointer;
+  transition: .5s ease;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--color-bg-main);
+  z-index: 3;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px;
+  text-decoration: none;
+  display: block;
+  font-size:large;
+  white-space: nowrap;/*non andara da capo testo*/
+}
+
+.dropdown-content a:hover {
+    background-color: gray;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 #title_login{
     flex-wrap: nowrap;
     align-items: center;
@@ -226,6 +261,7 @@ nav li {
 
 #nav_login_container{
     justify-content: flex-end;
+    align-items: flex-end;
     width: 50%;
     padding-right: 10px;
 }
@@ -240,6 +276,7 @@ nav li {
     cursor: pointer;
     padding-left: 10px;
     padding-right: 5px;
+    padding-bottom: 2px;
 }
 
 .fa-circle-user:hover{
