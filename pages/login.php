@@ -70,7 +70,6 @@
         <!--password-->
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="1234" required class="<?php if(isset($error) && $error != ''){echo "error_border";}?>">
-        <br>
         <?php 
           if (isset($error) && $error !== '') {
             echo "<h3 class='error_message'>$error</h3>";
@@ -78,9 +77,10 @@
         ?>
         <!--invia-->
         <input type="submit" name="invia" class="button primary">
-
       </form>
 
+      <p>Oppure</p>
+      
       <!--accedi con google-->
       <div id="social_button_container" title="Accedi con google">
         <button class="gsi-material-button" id="loginBtnGoogle">

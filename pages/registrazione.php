@@ -117,7 +117,7 @@
 
       <!--avatar-->
       <label for="avatar">Carica un avatar:</label>
-      <input type="file" id="new_avatar" name="new_avatar" accept="image/*">  
+      <input type="file" id="new_avatar file" name="new_avatar" accept="image/*">  
 
       <!--bottone invia-->
       <input type="submit" class="button primary" name="invia">

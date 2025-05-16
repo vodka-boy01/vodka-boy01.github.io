@@ -10,7 +10,10 @@ body {
 }
 
 .login-container {
-  padding: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius: 5px;
   box-shadow: 10px 10px 10px var(--main-color);
   text-align: center;
@@ -33,7 +36,6 @@ label {
   margin-bottom: 5px;
 }
 
-
 #form{
   display: flex;
   justify-content: center;
@@ -43,13 +45,11 @@ label {
 
 input {
   width: 100%;
-  padding:3px;
   border: 2px solid var(--main-color);
   border-radius: 5px;
   margin-bottom: 10px;
   transition: 0.3s ease;
   font-size: 17px !important;
-  
 }
 
 input:hover{
