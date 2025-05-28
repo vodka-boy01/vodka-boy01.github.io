@@ -53,7 +53,7 @@
 				<div id="nav_links">
 					<li><a href="index.php" title="home" class="home-button">Home</a></li>
 					<li><a href="index.php?page=about" title= title="Informazioni">About</a></li>
-					<li><a href="index.php?page=" title="I miei Progetti">Progetti</a></li>
+					<li><a href="index.php?page=projects" title="I miei Progetti">Progetti</a></li>
 					<li><a href="index.php?page=" title="Il mio percorso fornativo">didattica</a></li>
 					<li><a href="index.php?page=" title="Contattami">Contatti</a></li>
 				</div>

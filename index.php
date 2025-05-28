@@ -19,6 +19,7 @@
     <?php include "includes/header.php"; ?>
 
     <!-- Contenuto dinamico -->
+        <main>
         <?php
             $page = $_GET['page'] ?? 'home';
 
@@ -40,7 +41,7 @@
             }elseif (($page === 'mysqlInfinity') && ($_SESSION['ruolo'] === "admin")) {
                 header("Location: https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo");
                 // echo '<iframe src="https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo" frameborder="0"></iframe>';
-            
+                
             }else if(($page === 'mysqlLocal') && ($_SESSION['ruolo'] === "admin")){
                 header("Location: http://localhost/phpmyadmin/");
                 
@@ -52,6 +53,7 @@
 
             }
         ?> 
+        </main>
     <!-- Footer -->
     <?php include "includes/footer.php"; ?>
 

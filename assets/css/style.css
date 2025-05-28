@@ -394,9 +394,6 @@ main{
     background-color: var(--color-bg-main);
     color: var(--color-main);
     transition: 0.5s ease;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
 }
 
 /*banner rules*/
