@@ -1,45 +1,64 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const form       = document.getElementById('dashboard-form');
-  const imgInput   = document.getElementById('img');
-  const preview    = document.getElementById('preview');
-  const previewImg = document.getElementById('preview-img');
-  const status     = document.getElementById('status');
-  const statusText = document.getElementById('status-text');
-  const successT   = document.getElementById('successToast');
-  const errorT     = document.getElementById('errorToast');
+  const form        = document.getElementById('form');
+  const imgs        = document.getElementById('imgs');
+  const previewGrid = document.getElementById('preview-grid');
+  const imgCount    = document.getElementById('imgCount');
+  const status      = document.getElementById('status');
+  const statusText  = document.getElementById('status-text');
+  let uploadedImages = [];
 
-    imgInput.addEventListener('change', e => {
+  imgs.addEventListener('change', e => {
     const files = Array.from(e.target.files);
-    preview.innerHTML = ''; // preview empty
+    const slots = 10 - uploadedImages.length;
+    if (files.length > slots) {
+      return showError('Puoi caricare massimo 10 immagini');
+    }
     files.forEach(file => {
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(file);
-        img.alt = 'Preview';
-        preview.appendChild(img);
-    });
-    preview.style.display = files.length ? 'flex' : 'none';
-    });
+      if (uploadedImages.length < 10) {
+        const reader = new FileReader();
+        reader.onload = evt => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'relative w-full aspect-square rounded bg-gray-800';
 
+          const imgEl = document.createElement('img');
+          imgEl.src = evt.target.result;
+          imgEl.className = 'w-full h-full object-cover rounded';
+
+          const btn = document.createElement('button');
+          btn.className = 'absolute top-2 right-2 w-8 h-8 bg-red-500 rounded-full text-white flex items-center justify-center hover:bg-red-600';
+          btn.innerHTML = '<i class="ri-close-line"></i>';
+          btn.onclick = () => {
+            wrapper.remove();
+            uploadedImages = uploadedImages.filter(f => f !== file);
+            imgCount.textContent = `(${uploadedImages.length}/10)`;
+          };
+
+          wrapper.append(imgEl, btn);
+          previewGrid.appendChild(wrapper);
+          uploadedImages.push(file);
+          imgCount.textContent = `(${uploadedImages.length}/10)`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+
+  form.addEventListener('reset', () => {
+    previewGrid.innerHTML = '';
+    uploadedImages = [];
+    imgCount.textContent = '(0/10)';
+    status.checked = true;
+    statusText.textContent = 'Attivo';
+  });
 
   status.addEventListener('change', () => {
     statusText.textContent = status.checked ? 'Attivo' : 'Inattivo';
   });
 
-  form.addEventListener('reset', () => {
-    preview.style.display = 'none';
-    status.checked = true;
-    statusText.textContent = 'Attivo';
-  });
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    // TODO: logica invio dati...
-    showToast(successT);
-  });
-
-  function showToast(el) {
-    el.classList.add('show');
-    setTimeout(() => el.classList.remove('show'), 3000);
+  function showError(msg) {
+    const toast = document.getElementById('errorToast');
+    document.getElementById('errorMessage').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
   }
-   
 });

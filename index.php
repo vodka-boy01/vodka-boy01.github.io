@@ -46,7 +46,9 @@
                 header("Location: http://localhost/phpmyadmin/");
                 
             }else if(($page === 'dashboard') && ($_SESSION['ruolo'] === "admin")){
-                include 'php\views\dashboard.php';
+                //include 'php\views\dashboard.php';
+                //echo '<script>window.open("php/views/dashboard.php", "_blank");</script>';
+                header("Location: php/views/dashboard.php");
                 
             }else {
                 include 'pages/home.php';
