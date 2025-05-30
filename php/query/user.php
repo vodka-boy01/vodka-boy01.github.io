@@ -67,15 +67,17 @@ class user{
         return $resSet;
     }
 
-    
     /**
-     * elimina un utente 
+     * elimina un utente
+     * @param string $username username dell'utente da eliminare
+     * @return bool true on success, false on failure
      */
-    public function delete(){
+    public function delete($username){
+        $query = "DELETE * FROM utenti WHERE username = '$username'";
+        $resSet = $this->connection->query($query);
 
+        return $resSet;
     }
-
-    /*non correlate alle operazioni sugli utenti*/
 
     /**
     *controlla se un valore esiste in un campo
@@ -120,6 +122,34 @@ class user{
         }else{
             echo "error";
         }
+    }
+
+    /**
+     * restituisce tutti gli utenti con i loro ruoli.
+     * @return array un array di oggetti utente, o un array vuoto se non ci sono utenti.
+     */
+    public function getAllUsers() {
+        $query = "
+            SELECT
+                u.id,
+                u.name,
+                u.surname,
+                u.username,
+                u.email,
+                r.nome AS ruolo
+            FROM utenti u
+            INNER JOIN ruoli r ON u.ruolo = r.id
+            ORDER BY u.name ASC
+        ";
+        $resSet = $this->connection->query($query);
+        $users = [];
+        if ($resSet && $resSet->num_rows > 0) {
+            while ($row = $resSet->fetch_assoc()) {
+                $users[] = $row;
+            }
+        }
+
+        return $users;
     }
 }
 ?>

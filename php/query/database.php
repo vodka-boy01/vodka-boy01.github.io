@@ -22,7 +22,7 @@ class database{
      * @return mysqli oggetto di connessione al database
      */
     public function connect(){
-        require_once "../php/protected/credenzialiMySql.php";
+       require_once __DIR__ . "/../protected/credenzialiMySQL.php";
 
         $connection = new mysqli(HOST, USER, PASSWORD, DATABASE);
 

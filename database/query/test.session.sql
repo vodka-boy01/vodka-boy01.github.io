@@ -34,3 +34,28 @@ alter table utenti add column ruolo int default '1';
 
 --@block
 ALTER TABLE utenti ADD CONSTRAINT FK_ruolo FOREIGN KEY (ruolo) REFERENCES ruoli(id);
+
+--@block
+CREATE TABLE progetti (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titolo VARCHAR(255) NOT NULL,
+    descrizione_breve VARCHAR(255) NOT NULL,
+    descrizione_completa TEXT NOT NULL,
+    data_creazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    stato BOOLEAN DEFAULT TRUE
+);
+
+--@block
+CREATE TABLE immagini_progetti (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    progetto_id INT NOT NULL,
+    nome_file VARCHAR(255) NOT NULL,
+    percorso_file VARCHAR(255) NOT NULL,
+    FOREIGN KEY (progetto_id) REFERENCES progetti(id) ON DELETE CASCADE
+);
+
+--@block
+ALTER TABLE progetti
+ADD CONSTRAINT UQ_titolo UNIQUE (titolo);
+
+--@block
