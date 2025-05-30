@@ -22,7 +22,7 @@ class Project {
      * @return bool|string true se ha successo, "duplicate_title" se il titolo esiste già, false per altri errori.
      */
     public function addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details = []) {
-        // avvia una transazione per assicurare l'integrità dei dati
+        // avvio transazione 
         $this->connection->begin_transaction();
 
         try {
@@ -32,23 +32,25 @@ class Project {
             $resSet_project->bind_param("sssi", $titolo, $descrizione_breve, $descrizione_completa, $stato);
 
             if (!$resSet_project->execute()) {
-                // errore per titolo duplicato codice 1062
-                if ($this->connection->errno == 1062) {
+                // titolo duplicato codice 1062
+                if($this->connection->errno == 1062) {
                     throw new Exception("il titolo del progetto esiste già.", 1062);
-                } else {
+
+                }else {
                     throw new Exception("errore durante l'inserimento del progetto: " . $resSet_project->error);
+
                 }
             }
 
             $project_id = $this->connection->insert_id; // id del progetto appena inserito
             $resSet_project->close();
 
-            // inserisce le immagini, se presenti
-            if (!empty($uploaded_image_details)) {
+            // inserisce le immagini
+            if(!empty($uploaded_image_details)) {
                 $query = "INSERT INTO immagini_progetti (progetto_id, nome_file, percorso_file) VALUES (?, ?, ?)";
                 $resSet_image = $this->connection->prepare($query);
 
-                if ($resSet_image === false) {
+                if($resSet_image === false) {
                     throw new Exception("errore nella preparazione della query delle immagini: " . $this->connection->error);
                 }
 
@@ -58,7 +60,7 @@ class Project {
                     $relative_web_path = "/../../assets/uploads/" . basename($image_name);
 
                     $resSet_image->bind_param("iss", $project_id, $image_name, $relative_web_path); 
-                    if (!$resSet_image->execute()) {
+                    if(!$resSet_image->execute()) {
                         throw new Exception("errore durante l'inserimento dell'immagine '" . htmlspecialchars($image_name) . "': " . $resSet_image->error);
                     }
                 }
@@ -68,15 +70,15 @@ class Project {
             $this->connection->commit();
             return true;
 
-        }catch (Exception $e) {
+        }catch(Exception $e) {
             $this->connection->rollback(); // rollback in caso di errore
             error_log("errore in addProject: " . $e->getMessage());
 
-            // restituisce "duplicate_title" per errore specifico
-            if ($e->getCode() == 1062) {
+            // restituisce "duplicate_title"
+            if($e->getCode() == 1062) {
                 return "duplicate_title";
             }
-            return false; // restituisce false per altri errori
+            return false;
         }
     }
 
@@ -89,15 +91,15 @@ class Project {
             SELECT 
                 id, 
                 titolo, 
-                data_creazione 
+                data_creazione
             FROM progetti 
             ORDER BY data_creazione DESC
             ";
         $result = $this->connection->query($query);
         $projects = [];
 
-        if ($result && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        if($result && $result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
                 $projects[] = $row;
             }
         }
@@ -114,7 +116,7 @@ class Project {
      * @return bool true se l'eliminazione ha successo, false altrimenti.
      */
     public function deleteProject($project_id) {
-        // avvia una transazione
+        // avvio transazione 
         $this->connection->begin_transaction();
         try {
             $query = "DELETE FROM progetti WHERE id = ?";
@@ -122,21 +124,24 @@ class Project {
             
             if ($resSet === false) {
                 throw new Exception("errore nella preparazione della query di eliminazione del progetto: " . $this->connection->error);
+
             }
             
             $resSet->bind_param("i", $project_id);
             
-            if (!$resSet->execute()) {
+            if(!$resSet->execute()) {
                 throw new Exception("errore durante l'eliminazione del progetto: " . $resSet->error);
+
             }
             $resSet->close();
 
             $this->connection->commit();
-            return true;
 
-        } catch (Exception $e) {
+            return true;
+        }catch(Exception $e) {
             $this->connection->rollback(); 
             error_log("errore in deleteProject: " . $e->getMessage()); 
+
             return false;
         }
     }

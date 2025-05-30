@@ -14,10 +14,9 @@
   <?php
   session_start();
 
-  // assicurati che i percorsi qui siano corretti rispetto alla posizione di dashboard.php
-  require_once "../query/database.php";
-  require_once "../query/user.php";
-  require_once "../query/project.php"; 
+  require_once __DIR__ . '/../query/database.php';
+  require_once __DIR__ . '/../query/user.php';
+  require_once __DIR__ . '/../query/project.php';
 
   $conn = (new database())->connect();
   $userOperations = new user($conn);
@@ -32,20 +31,19 @@
     $descrizione_breve = $_POST['desc'] ?? '';
     $descrizione_completa = $_POST['full'] ?? '';
     $stato = isset($_POST['status']) ? 1 : 0;
+    $uploaded_image_details = [];
+    //PERCORSO RELATIVO
+    $server_path = __DIR__ . "/../../assets/uploads/" . basename($image_name);
 
     // gestione delle immagini caricate
-    $uploaded_image_details = [];
     if(isset($_FILES['imgs']) && !empty($_FILES['imgs']['name'][0])) {
-      //PERCORSO RELATIVO
-      $target_dir = __DIR__ . "/../../assets/uploads/";
 
       if(!is_dir($target_dir)) {
         if(!mkdir($target_dir, 0755, true)) {
           $error_message = 'impossibile creare la directory';
-
         }
-
       }
+      
       // non ci sono stati errori nella creazione della directory
       if(empty($error_message)) {
         foreach ($_FILES['imgs']['name'] as $key => $image_name) {
@@ -61,7 +59,7 @@
           if(move_uploaded_file($_FILES['imgs']['tmp_name'][$key], $target_file)) {
             $uploaded_image_details[] = ['name' => $safe_image_name, 'path' => $target_file];
 
-          }else {
+          }else{
             $error_message = 'si è verificato un errore durante il caricamento dell\'immagine: ' . htmlspecialchars($image_name);
             break;
 
@@ -82,7 +80,7 @@
       }elseif ($add_result === "duplicate_title") { // titolo duplicato rilevato dalla classe Project
         $error_message = 'errore: il titolo del progetto "' . htmlspecialchars($titolo) . '" esiste già. scegli un titolo diverso.';
 
-      }else {
+      }else{
         $error_message = 'errore durante aggiunta del progetto al database.';
 
       }
@@ -91,19 +89,16 @@
 
   // gestione dell'eliminazione di un progetto
   if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_project') {
-    $project_id_to_delete = $_POST['project_id'] ?? null;
+    $project_id_to_delete = $_POST['project_id'];
     if($project_id_to_delete) {
 
       if($projectOperations->deleteProject($project_id_to_delete)) {
         $success_message = 'progetto eliminato con successo!';
 
-      }else {
+      }else{
         $error_message = 'errore durante l\'eliminazione del progetto.';
 
       }
-    }else {
-      $error_message = 'id del progetto non fornito per l\'eliminazione.';
-
     }
   }
 

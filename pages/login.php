@@ -16,8 +16,8 @@
     if(isset($_POST['invia'])){
       session_start();
 
-      require_once "../php/query/database.php";
-      require_once "../php/query/user.php";
+      require_once __DIR__ . "/../php/query/database.php";
+      require_once __DIR__ . "/../php/query/user.php";
 
       //oggetti, connessione e variabili
       $conn = (new database())->connect();
@@ -35,7 +35,8 @@
         $_SESSION['ruolo'] = $userOperations->getUserRole($username);
         $conn->close();
         header("Location: ../index.php");
-
+        exit();
+        
       }else{
         $error = "Utente non trovato";
 
