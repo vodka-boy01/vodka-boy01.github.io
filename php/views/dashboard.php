@@ -27,7 +27,7 @@
   $success_message = '';
 
   // gestione dell'aggiunta di un nuovo progetto
-  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_project') {
+  if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_project') {
     $titolo = $_POST['title'] ?? '';
     $descrizione_breve = $_POST['desc'] ?? '';
     $descrizione_completa = $_POST['full'] ?? '';
@@ -35,65 +35,75 @@
 
     // gestione delle immagini caricate
     $uploaded_image_details = [];
-    if (isset($_FILES['imgs']) && !empty($_FILES['imgs']['name'][0])) {
-      $target_dir = __DIR__ . "/../../../assets/uploads/";
+    if(isset($_FILES['imgs']) && !empty($_FILES['imgs']['name'][0])) {
+      //PERCORSO RELATIVO
+      $target_dir = __DIR__ . "/../../assets/uploads/";
 
-      if (!is_dir($target_dir)) {
-        if (!mkdir($target_dir, 0755, true)) {
-          $error_message = 'impossibile creare la directory per il caricamento delle immagini.';
+      if(!is_dir($target_dir)) {
+        if(!mkdir($target_dir, 0755, true)) {
+          $error_message = 'impossibile creare la directory';
+
         }
-      }
 
+      }
       // non ci sono stati errori nella creazione della directory
-      if (empty($error_message)) {
+      if(empty($error_message)) {
         foreach ($_FILES['imgs']['name'] as $key => $image_name) {
           $safe_image_name = basename($image_name);
           $target_file = $target_dir . $safe_image_name;
 
           // controlla eventuali errori di caricamento 
-          if ($_FILES['imgs']['error'][$key] !== UPLOAD_ERR_OK) {
+          if($_FILES['imgs']['error'][$key] !== UPLOAD_ERR_OK) {
             $error_message = 'errore di caricamento per il file ' . htmlspecialchars($image_name) . ': codice ' . $_FILES['imgs']['error'][$key];
             break;
-          }
 
-          if (move_uploaded_file($_FILES['imgs']['tmp_name'][$key], $target_file)) {
+          }
+          if(move_uploaded_file($_FILES['imgs']['tmp_name'][$key], $target_file)) {
             $uploaded_image_details[] = ['name' => $safe_image_name, 'path' => $target_file];
-          } else {
+
+          }else {
             $error_message = 'si è verificato un errore durante il caricamento dell\'immagine: ' . htmlspecialchars($image_name);
             break;
+
           }
         }
       }
     }
 
-    if (empty($error_message)) {
+    if(empty($error_message)) {
       // chiamata al metodo addProject e gestione del risultato
       $add_result = $projectOperations->addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details);
 
-      if ($add_result === true) { // progetto aggiunto con successo
+      if($add_result === true) { // progetto aggiunto con successo
         $_SESSION['message'] = 'Progetto aggiunto con successo!';
         header("Location: dashboard.php");
         exit();
 
-      } elseif ($add_result === "duplicate_title") { // titolo duplicato rilevato dalla classe Project
+      }elseif ($add_result === "duplicate_title") { // titolo duplicato rilevato dalla classe Project
         $error_message = 'errore: il titolo del progetto "' . htmlspecialchars($titolo) . '" esiste già. scegli un titolo diverso.';
-      } else {
+
+      }else {
         $error_message = 'errore durante aggiunta del progetto al database.';
+
       }
     }
   }
 
   // gestione dell'eliminazione di un progetto
-  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_project') {
+  if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_project') {
     $project_id_to_delete = $_POST['project_id'] ?? null;
-    if ($project_id_to_delete) {
-      if ($projectOperations->deleteProject($project_id_to_delete)) {
+    if($project_id_to_delete) {
+
+      if($projectOperations->deleteProject($project_id_to_delete)) {
         $success_message = 'progetto eliminato con successo!';
-      } else {
+
+      }else {
         $error_message = 'errore durante l\'eliminazione del progetto.';
+
       }
-    } else {
+    }else {
       $error_message = 'id del progetto non fornito per l\'eliminazione.';
+
     }
   }
 
@@ -113,6 +123,7 @@
       </a>
     </div>
 
+    <!--toasts-->
     <?php if (!empty($success_message)): ?>
       <div id="phpSuccessToast" class="toast success show">
         <div class="flex items-center">
@@ -156,6 +167,24 @@
             <li class="bg-gray-700 p-3 rounded">nessun progetto trovato.</li>
           <?php endif; ?>
         </ul>
+      </div>
+
+      <div id="successToast" class="toast success">
+        <div class="flex items-center">
+          <div class="w-6 h-6 mr-2 flex items-center justify-center">
+            <i class="ri-check-line ri-lg"></i>
+          </div>
+          <span id="successMessage">operazione completata con successo!</span>
+        </div>
+      </div>
+      
+      <div id="errorToast" class="toast error">
+        <div class="flex items-center">
+          <div class="w-6 h-6 mr-2 flex items-center justify-center">
+            <i class="ri-error-warning-line ri-lg"></i>
+          </div>
+          <span id="errorMessage">si è verificato un errore!</span>
+        </div>
       </div>
 
       <div class="w-1/2 bg-gray-800 rounded-lg shadow-md p-6 text-white">
@@ -204,6 +233,7 @@
       </div>
     </div>
 
+    <!--Sezione gestione utenti-->
     <div class="bg-gray-800 rounded-lg shadow-md p-6 text-white">
       <h2 class="text-2xl font-bold mb-6">utenti</h2>
       <div class="table-wrap overflow-auto">
@@ -240,23 +270,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
-
-  <div id="successToast" class="toast success">
-    <div class="flex items-center">
-      <div class="w-6 h-6 mr-2 flex items-center justify-center">
-        <i class="ri-check-line ri-lg"></i>
-      </div>
-      <span id="successMessage">operazione completata con successo!</span>
-    </div>
-  </div>
-  <div id="errorToast" class="toast error">
-    <div class="flex items-center">
-      <div class="w-6 h-6 mr-2 flex items-center justify-center">
-        <i class="ri-error-warning-line ri-lg"></i>
-      </div>
-      <span id="errorMessage">si è verificato un errore!</span>
     </div>
   </div>
 

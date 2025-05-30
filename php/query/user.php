@@ -42,6 +42,7 @@ class user{
      */
     public function login($username, $password){
         $resSet = $this->connection->query("SELECT id FROM utenti WHERE username = '$username' AND password = '$password'");
+        
         if($resSet->num_rows > 0){
             return true;
         }else{

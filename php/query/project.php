@@ -6,7 +6,6 @@ class Project {
     private $connection;
 
     /**
-     * costruttore per inizializzare la connessione al database.
      * @param mysqli $db connessione al database.
      */
     public function __construct($db) {
@@ -27,56 +26,51 @@ class Project {
         $this->connection->begin_transaction();
 
         try {
-            // prepara e esegui l'inserimento del progetto
             $query_project = "INSERT INTO progetti (titolo, descrizione_breve, descrizione_completa, stato) VALUES (?, ?, ?, ?)";
-            $stmt_project = $this->connection->prepare($query_project);
+            $resSet_project = $this->connection->prepare($query_project);
 
-            if ($stmt_project === false) {
-                throw new Exception("errore nella preparazione della query del progetto: " . $this->connection->error);
-            }
+            $resSet_project->bind_param("sssi", $titolo, $descrizione_breve, $descrizione_completa, $stato);
 
-            $stmt_project->bind_param("sssi", $titolo, $descrizione_breve, $descrizione_completa, $stato);
-
-            if (!$stmt_project->execute()) {
-                // cattura l'errore per titolo duplicato (codice 1062 di MySQL)
+            if (!$resSet_project->execute()) {
+                // errore per titolo duplicato codice 1062
                 if ($this->connection->errno == 1062) {
                     throw new Exception("il titolo del progetto esiste già.", 1062);
                 } else {
-                    throw new Exception("errore durante l'inserimento del progetto: " . $stmt_project->error);
+                    throw new Exception("errore durante l'inserimento del progetto: " . $resSet_project->error);
                 }
             }
 
             $project_id = $this->connection->insert_id; // id del progetto appena inserito
-            $stmt_project->close();
+            $resSet_project->close();
 
             // inserisce le immagini, se presenti
             if (!empty($uploaded_image_details)) {
-                $query_image = "INSERT INTO immagini_progetti (progetto_id, nome_file, percorso_file) VALUES (?, ?, ?)";
-                $stmt_image = $this->connection->prepare($query_image);
+                $query = "INSERT INTO immagini_progetti (progetto_id, nome_file, percorso_file) VALUES (?, ?, ?)";
+                $resSet_image = $this->connection->prepare($query);
 
-                if ($stmt_image === false) {
+                if ($resSet_image === false) {
                     throw new Exception("errore nella preparazione della query delle immagini: " . $this->connection->error);
                 }
 
                 foreach ($uploaded_image_details as $image) {
                     $image_name = $image['name'];
-                    // --- PERCORSO CHIAVE ---
-                    $relative_web_path = "assets/uploads/" . basename($image_name); // Costruiamo il percorso relativo desiderato
+                    // --- PERCORSO CHIAVE RELATIVO---
+                    $relative_web_path = "/../../assets/uploads/" . basename($image_name);
 
-                    $stmt_image->bind_param("iss", $project_id, $image_name, $relative_web_path); 
-                    if (!$stmt_image->execute()) {
-                        throw new Exception("errore durante l'inserimento dell'immagine '" . htmlspecialchars($image_name) . "': " . $stmt_image->error);
+                    $resSet_image->bind_param("iss", $project_id, $image_name, $relative_web_path); 
+                    if (!$resSet_image->execute()) {
+                        throw new Exception("errore durante l'inserimento dell'immagine '" . htmlspecialchars($image_name) . "': " . $resSet_image->error);
                     }
                 }
-                $stmt_image->close();
+                $resSet_image->close();
             }
 
-            $this->connection->commit(); // conferma la transazione
+            $this->connection->commit();
             return true;
 
-        } catch (Exception $e) {
-            $this->connection->rollback(); // annulla la transazione in caso di errore
-            error_log("errore in addProject: " . $e->getMessage()); // logga l'errore
+        }catch (Exception $e) {
+            $this->connection->rollback(); // rollback in caso di errore
+            error_log("errore in addProject: " . $e->getMessage());
 
             // restituisce "duplicate_title" per errore specifico
             if ($e->getCode() == 1062) {
@@ -91,14 +85,23 @@ class Project {
      * @return array un array di progetti.
      */
     public function getAllProjects() {
-        $query = "SELECT id, titolo, data_creazione FROM progetti ORDER BY data_creazione DESC";
+        $query = "
+            SELECT 
+                id, 
+                titolo, 
+                data_creazione 
+            FROM progetti 
+            ORDER BY data_creazione DESC
+            ";
         $result = $this->connection->query($query);
         $projects = [];
+
         if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $projects[] = $row;
             }
         }
+
         return $projects;
     }
 
@@ -114,30 +117,29 @@ class Project {
         // avvia una transazione
         $this->connection->begin_transaction();
         try {
-            // elimina il progetto dal database
-            // grazie a ON DELETE CASCADE, i record delle immagini_progetti verranno eliminati automaticamente
-            $query_delete_project = "DELETE FROM progetti WHERE id = ?";
-            $stmt_delete_project = $this->connection->prepare($query_delete_project);
+            $query = "DELETE FROM progetti WHERE id = ?";
+            $resSet = $this->connection->prepare($query);
             
-            if ($stmt_delete_project === false) {
+            if ($resSet === false) {
                 throw new Exception("errore nella preparazione della query di eliminazione del progetto: " . $this->connection->error);
             }
             
-            $stmt_delete_project->bind_param("i", $project_id);
+            $resSet->bind_param("i", $project_id);
             
-            if (!$stmt_delete_project->execute()) {
-                throw new Exception("errore durante l'eliminazione del progetto: " . $stmt_delete_project->error);
+            if (!$resSet->execute()) {
+                throw new Exception("errore durante l'eliminazione del progetto: " . $resSet->error);
             }
-            $stmt_delete_project->close();
+            $resSet->close();
 
-            $this->connection->commit(); // conferma la transazione
+            $this->connection->commit();
             return true;
 
         } catch (Exception $e) {
-            $this->connection->rollback(); // annulla la transazione in caso di errore
-            error_log("errore in deleteProject: " . $e->getMessage()); // logga l'errore
+            $this->connection->rollback(); 
+            error_log("errore in deleteProject: " . $e->getMessage()); 
             return false;
         }
     }
+    
 }
 ?>
