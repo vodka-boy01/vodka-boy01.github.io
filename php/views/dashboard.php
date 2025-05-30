@@ -32,60 +32,71 @@
     $descrizione_completa = $_POST['full'] ?? '';
     $stato = isset($_POST['status']) ? 1 : 0;
     $uploaded_image_details = [];
-    //PERCORSO RELATIVO
-    $server_path = __DIR__ . "/../../assets/uploads/" . basename($image_name);
+    $target_dir = __DIR__ . "/../../assets/uploads/";
 
     // gestione delle immagini caricate
     if(isset($_FILES['imgs']) && !empty($_FILES['imgs']['name'][0])) {
-
+      
       if(!is_dir($target_dir)) {
         if(!mkdir($target_dir, 0755, true)) {
-          $error_message = 'impossibile creare la directory';
+          die;
         }
       }
       
       // non ci sono stati errori nella creazione della directory
       if(empty($error_message)) {
-        foreach ($_FILES['imgs']['name'] as $key => $image_name) {
-          $safe_image_name = basename($image_name);
-          $target_file = $target_dir . $safe_image_name;
-
-          // controlla eventuali errori di caricamento 
+        foreach ($_FILES['imgs']['name'] as $key => $original_image_name) {
+          
+          // Controlla eventuali errori di caricamento PHP prima di procedere
           if($_FILES['imgs']['error'][$key] !== UPLOAD_ERR_OK) {
-            $error_message = 'errore di caricamento per il file ' . htmlspecialchars($image_name) . ': codice ' . $_FILES['imgs']['error'][$key];
-            break;
-
+            $error_message = 'Errore di caricamento per il file ' . htmlspecialchars($original_image_name) . ': codice ' . $_FILES['imgs']['error'][$key];
+            break; 
           }
+
+          // Estrai l'estensione del file originale (es. jpg, png)
+          $file_extension = pathinfo($original_image_name, PATHINFO_EXTENSION);
+          // Estrai il nome del file senza estensione (es. miafoto)
+          $filename_without_ext = pathinfo($original_image_name, PATHINFO_FILENAME);
+
+          $unique_filename = $filename_without_ext . '_' . time() . '_' . uniqid() . '.' . $file_extension;
+          
+          $safe_unique_filename = basename($unique_filename); 
+          
+          $target_file = $target_dir . $safe_unique_filename;
+
           if(move_uploaded_file($_FILES['imgs']['tmp_name'][$key], $target_file)) {
-            $uploaded_image_details[] = ['name' => $safe_image_name, 'path' => $target_file];
+            $relative_web_path = "assets/uploads/" . $safe_unique_filename;
+            $uploaded_image_details[] = ['name' => $safe_unique_filename, 'path' => $relative_web_path];
 
-          }else{
-            $error_message = 'si è verificato un errore durante il caricamento dell\'immagine: ' . htmlspecialchars($image_name);
-            break;
-
+          } else {
+            $error_message = 'Si è verificato un errore durante il caricamento dell\'immagine: ' . htmlspecialchars($original_image_name);
+            break; 
           }
         }
       }
     }
 
     if(empty($error_message)) {
-      // chiamata al metodo addProject e gestione del risultato
+      // gestione del risultato
       $add_result = $projectOperations->addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details);
 
-      if($add_result === true) { // progetto aggiunto con successo
+      if($add_result === true) { 
+        // progetto aggiunto con successo
         $_SESSION['message'] = 'Progetto aggiunto con successo!';
         header("Location: dashboard.php");
         exit();
 
-      }elseif ($add_result === "duplicate_title") { // titolo duplicato rilevato dalla classe Project
-        $error_message = 'errore: il titolo del progetto "' . htmlspecialchars($titolo) . '" esiste già. scegli un titolo diverso.';
+      }elseif ($add_result === "duplicate_title") { 
+        // titolo duplicato rilevato dalla classe Project
+        $error_message = 'Errore: il titolo del progetto "' . htmlspecialchars($titolo) . '" esiste già. Scegli una\'altro titolo diverso.';
 
       }else{
-        $error_message = 'errore durante aggiunta del progetto al database.';
+        $error_message = 'Errore durante l\'aggiunta del progetto al database.';
 
       }
     }
   }
+
 
   // gestione dell'eliminazione di un progetto
   if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_project') {
@@ -102,67 +113,45 @@
     }
   }
 
-  // recupera tutti i progetti esistenti
+  // tutti i progetti esistenti
   $existingProjects = $projectOperations->getAllProjects();
 
-  // recupera tutti gli utenti
+  // tutti gli utenti
   $users = $userOperations->getAllUsers();
 
   $conn->close();
   ?>
+    <!--Titolo e home button-->
     <div class="container mx-auto">
-    <div class="flex items-center justify-center mb-8  gap-x-4">
-      <h1 class="text-3xl font-bold">Admin Dashboard</h1>
-      <a href="/index.php" title="torna alla home page" class="text-xl">
-        <i class="fa-solid fa-house" title="torna alla home"></i>
-      </a>
-    </div>
+      <div class="flex items-center justify-center mb-8  gap-x-4">
+        <h1 class="text-3xl font-bold">Admin Dashboard</h1>
+        <a href="/index.php" title="torna alla home page" class="text-xl">
+          <i class="fa-solid fa-house" title="torna alla home"></i>
+        </a>
+      </div>
 
-    <!--toasts-->
-    <?php if (!empty($success_message)): ?>
-      <div id="phpSuccessToast" class="toast success show">
-        <div class="flex items-center">
-          <div class="w-6 h-6 mr-2 flex items-center justify-center">
-            <i class="ri-check-line ri-lg"></i>
+      <!--toasts & messages-->
+      <?php if (!empty($success_message)): ?>
+        <div id="phpSuccessToast" class="toast success show">
+          <div class="flex items-center">
+            <div class="w-6 h-6 mr-2 flex items-center justify-center">
+              <i class="ri-check-line ri-lg"></i>
+            </div>
+            <span><?php echo $success_message; ?></span>
           </div>
-          <span><?php echo $success_message; ?></span>
         </div>
-      </div>
-    <?php endif; ?>
+      <?php endif; ?>
 
-    <?php if (!empty($error_message)): ?>
-      <div id="phpErrorToast" class="toast error show">
-        <div class="flex items-center">
-          <div class="w-6 h-6 mr-2 flex items-center justify-center">
-            <i class="ri-error-warning-line ri-lg"></i>
+      <?php if (!empty($error_message)): ?>
+        <div id="phpErrorToast" class="toast error show">
+          <div class="flex items-center">
+            <div class="w-6 h-6 mr-2 flex items-center justify-center">
+              <i class="ri-error-warning-line ri-lg"></i>
+            </div>
+            <span><?php echo $error_message; ?></span>
           </div>
-          <span><?php echo $error_message; ?></span>
         </div>
-      </div>
-    <?php endif; ?>
-
-    <div class="flex gap-6 mb-8">
-      <div class="w-1/2 bg-gray-800 rounded-lg shadow-md p-6 text-white">
-        <h2 class="text-2xl font-semibold mb-4">Progetti Esistenti</h2>
-        <ul class="space-y-3" id="project-list">
-          <?php if (!empty($existingProjects)): ?>
-            <?php foreach ($existingProjects as $project): ?>
-              <li class="bg-gray-700 p-3 rounded flex justify-between items-center">
-                <span><?php echo htmlspecialchars($project['titolo']); ?> (creato il: <?php echo date("d/m/Y", strtotime($project['data_creazione'])); ?>)</span>
-                <form method="POST" style="display:inline;" onsubmit="return confirm('sei sicuro di voler eliminare questo progetto?');">
-                  <input type="hidden" name="action" value="delete_project">
-                  <input type="hidden" name="project_id" value="<?php echo $project['id']; ?>">
-                  <button type="submit" class="w-8 h-8 flex items-center justify-center text-red-400 hover:text-red-600" title="elimina progetto">
-                    <i class="ri-delete-bin-line ri-lg"></i>
-                  </button>
-                </form>
-              </li>
-            <?php endforeach; ?>
-          <?php else: ?>
-            <li class="bg-gray-700 p-3 rounded">nessun progetto trovato.</li>
-          <?php endif; ?>
-        </ul>
-      </div>
+      <?php endif; ?>
 
       <div id="successToast" class="toast success">
         <div class="flex items-center">
@@ -182,22 +171,57 @@
         </div>
       </div>
 
+      <!--Progetti esistenti-->
+      <div class="flex gap-6 mb-8">
+      <div class="w-1/2 bg-gray-800 rounded-lg shadow-md p-6 text-white">
+        <h2 class="text-2xl font-semibold mb-4">Progetti Esistenti</h2>
+        <ul class="space-y-3" id="project-list">
+          <?php if (!empty($existingProjects)): ?>
+            <?php foreach ($existingProjects as $project): ?>
+              <li class="bg-gray-700 p-3 rounded flex justify-between items-center">
+                <span><?php echo htmlspecialchars($project['titolo']); ?> (creato il: <?php echo date("d/m/Y", strtotime($project['data_creazione'])); ?>)</span>
+
+                <!--Conferma eliminazione con action request allert-->
+                <form method="POST" style="display:inline;" onsubmit="return confirm('sei sicuro di voler eliminare questo progetto?');">
+
+                  <input type="hidden" name="action" value="delete_project">
+
+                  <input type="hidden" name="project_id" value="<?php echo $project['id']; ?>">
+
+                  <button type="submit" class="w-8 h-8 flex items-center justify-center text-red-400 hover:text-red-600" title="elimina progetto">
+                    <i class="ri-delete-bin-line ri-lg"></i>
+                  </button>
+
+                </form>
+              </li>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <li class="bg-gray-700 p-3 rounded">nessun progetto trovato.</li>
+          <?php endif; ?>
+        </ul>
+      </div>
+
+      <!--Nuovo progetto-->
       <div class="w-1/2 bg-gray-800 rounded-lg shadow-md p-6 text-white">
         <h2 class="text-2xl font-bold mb-6">Nuovo Progetto</h2>
         <form id="project-form" method="POST" enctype="multipart/form-data">
+
           <input type="hidden" name="action" value="add_project">
           <div class="mb-4">
             <label for="title" class="block mb-2">titolo</label>
-            <input type="text" id="title" name="title" class="input w-full" placeholder="titolo progetto" required/>
+            <input type="text" id="title" name="title" class="input w-full" placeholder="titolo progetto (massimo 30 caratteri)" maxlength="30" required/>
           </div>
+
           <div class="mb-4">
             <label for="desc" class="block mb-2">descrizione</label>
-            <input type="text" id="desc" name="desc" class="input w-full" placeholder="breve descrizione" maxlength="150" required/>
+            <input type="text" id="desc" name="desc" class="input w-full" placeholder="descrizione breve (massimo 50 caratteri)" maxlength="50" required/>
           </div>
+
           <div class="mb-4">
             <label for="full" class="block mb-2">descrizione completa</label>
-            <textarea id="full" name="full" rows="5" class="input resize-none w-full" placeholder="descrizione dettagliata" required></textarea>
+            <textarea id="full" name="full" rows="5" class="input resize-none w-full" placeholder="descrizione dettagliata (massimo 500 caratteri)" maxlength="500" required></textarea>
           </div>
+
           <div class="mb-6">
             <label class="block mb-2">immagini <span id="imgCount" class="text-sm text-gray-400">(0/10)</span></label>
             <div class="w-full mb-4">
@@ -211,8 +235,9 @@
             </div>
             <div id="preview-grid" class="grid grid-cols-5 gap-4"></div>
           </div>
+
           <div class="mb-4">
-            <label class="block mb-2">stato</label>
+            <label class="block mb-2">stato progetto</label>
             <label class="switch">
               <input type="checkbox" id="status" name="status" checked />
               <span class="slider"></span>

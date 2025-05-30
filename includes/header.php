@@ -1,11 +1,11 @@
-<style>
-	nav{
-		z-index: 2;
-	}
-</style>
-<?php
-	session_start();
-?>
+	<style>
+		nav{
+			z-index: 2;
+		}
+	</style>
+	<?php
+		session_start();
+	?>
     <header>
 		<nav>
 			<div id="title_login">

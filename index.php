@@ -16,13 +16,22 @@
     </div>
 
     <!-- Header -->
-    <?php include "includes/header.php"; ?>
+    <?php 
+        $page = $_GET['page'] ?? 'home';
+
+        if($page === 'home' || $page === ' '){
+            include "includes/header.php"; 
+
+        }else{
+            include "includes/headerSmall.php"; 
+
+        }
+    
+    ?>
 
     <!-- Contenuto dinamico -->
         <main>
         <?php
-            $page = $_GET['page'] ?? 'home';
-
             if($page === 'profile') {
                 include 'pages/profile.php';
 

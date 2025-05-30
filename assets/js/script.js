@@ -22,7 +22,60 @@ window.onload = function() {
   }
 
   aggiornaIconeTema(tema === "true");
-};
+
+  //SLIDER SECTION
+  const sliderContainer = document.querySelector('.slider-container');
+  const prevButton = document.querySelector('.prev-button');
+  const nextButton = document.querySelector('.next-button');
+  const slides = document.querySelectorAll('.slide');
+  const slideWidth = slides[0].offsetWidth + 20; 
+  let currentSlide = 0;
+  let autoScrollInterval;
+
+  const scrollToSlide = (index) => {
+   if (index < 0) {
+     currentSlide = slides.length - 1; 
+      }else if(index >= slides.length) {
+        currentSlide = 0; 
+      }else{
+        currentSlide = index;
+      }
+      sliderContainer.scrollTo({
+        left: currentSlide * slideWidth,
+        behavior: 'smooth'
+      });
+  };
+
+  prevButton.addEventListener('click', () => {
+    scrollToSlide(currentSlide - 1);
+  });
+
+  nextButton.addEventListener('click', () => {
+    scrollToSlide(currentSlide + 1);
+  });
+
+  const startAutoScroll = () => {
+    autoScrollInterval = setInterval(() => {
+    scrollToSlide(currentSlide + 1);
+    }, 5000); 
+  };
+
+  const stopAutoScroll = () => {
+    clearInterval(autoScrollInterval);
+  };
+
+  startAutoScroll();
+
+  sliderContainer.style.overflowX = 'hidden'; 
+  sliderContainer.style.scrollSnapType = 'none';
+
+  //entrata mouse 
+  prevButton.addEventListener('mouseenter', stopAutoScroll);
+  nextButton.addEventListener('mouseenter', stopAutoScroll);
+  prevButton.addEventListener('mouseleave', startAutoScroll);
+  nextButton.addEventListener('mouseleave', startAutoScroll);
+
+}
 
 //modulo per la gestione del campo di ricerca in alternativa a placeholder
 const searchModule = {
