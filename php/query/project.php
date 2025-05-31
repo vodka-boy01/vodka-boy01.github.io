@@ -42,7 +42,7 @@ class Project {
                 }
             }
 
-            $project_id = $this->connection->insert_id; // id del progetto appena inserito
+            $project_id = $this->connection->insert_id;
             $resSet_project->close();
 
             // inserisce le immagini
@@ -56,13 +56,7 @@ class Project {
 
                 foreach ($uploaded_image_details as $image) {
                     $image_name = $image['name'];
-                    // ATTENZIONE: Questo percorso file è quello che viene salvato nel DB.
-                    // Deve essere il percorso web relativo per l'accesso frontend.
-                    // Assicurati che $image['path'] da dashboard.php sia già il percorso web corretto (es. "assets/uploads/nome_file.jpg")
-                    // Se $image['path'] contiene già il percorso web, non usare basename() qui.
-                    // L'esempio di dashboard.php che ti ho dato usa $relative_web_path = "assets/uploads/" . $safe_unique_filename;
-                    // quindi dovresti usare $image['path'] direttamente qui.
-                    $relative_web_path = $image['path']; // Usa direttamente il percorso già preparato da dashboard.php
+                    $relative_web_path = $image['path']; 
 
                     $resSet_image->bind_param("iss", $project_id, $image_name, $relative_web_path); 
                     if(!$resSet_image->execute()) {

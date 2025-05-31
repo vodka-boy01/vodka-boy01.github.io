@@ -21,7 +21,8 @@
 ?>
 <section class="image-slider">
     <div id="slider-title">
-        <h1>I miei progetti</h1> </div>
+        <h1>I miei progetti</h1> 
+    </div>
 
     <div class="slider-container" id="projectSlider">
         <?php if (!empty($projects)): ?>
@@ -32,7 +33,7 @@
 
                         <div class="main-project-image-container">
                             <?php
-                            // prima immagine
+                            // prima immagine con alt custom 
                             $main_image_src = !empty($project['images'][0]['path']) ? htmlspecialchars($project['images'][0]['path']) : 'https://placehold.co/500x300/333/ffffff?text=Immagine+Non+Disponibile';
                             ?>
                             <img src="<?php echo $main_image_src; ?>" alt="<?php echo htmlspecialchars($project['titolo']); ?>" class="main-project-image">

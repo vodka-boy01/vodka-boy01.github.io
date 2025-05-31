@@ -57,3 +57,4 @@ CREATE TABLE immagini_progetti (
 --@block
 ALTER TABLE progetti
 ADD CONSTRAINT UQ_titolo UNIQUE (titolo);
+

@@ -165,3 +165,10 @@ input:checked + .slider:before {
 ::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
 }
+
+/*Restrizione di altezza per classe new project*/
+#new_project{
+  max-height: 788px; 
+  overflow-y: auto; 
+  padding-right: 15px; 
+}

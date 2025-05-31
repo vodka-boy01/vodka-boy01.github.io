@@ -173,7 +173,7 @@
 
       <!--Progetti esistenti-->
       <div class="flex gap-6 mb-8">
-      <div class="w-1/2 bg-gray-800 rounded-lg shadow-md p-6 text-white">
+      <div class="w-1/2 bg-gray-800 rounded-lg shadow-md p-6 text-white z" id="new_project">
         <h2 class="text-2xl font-semibold mb-4">Progetti Esistenti</h2>
         <ul class="space-y-3" id="project-list">
           <?php if (!empty($existingProjects)): ?>
@@ -204,6 +204,7 @@
       <!--Nuovo progetto-->
       <div class="w-1/2 bg-gray-800 rounded-lg shadow-md p-6 text-white">
         <h2 class="text-2xl font-bold mb-6">Nuovo Progetto</h2>
+        
         <form id="project-form" method="POST" enctype="multipart/form-data">
 
           <input type="hidden" name="action" value="add_project">

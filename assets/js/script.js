@@ -22,8 +22,27 @@ window.onload = function() {
   }
 
   aggiornaIconeTema(tema === "true");
+  
+  //TODO: da modificare
+  //STATIC SLIDER SECTION
+  const projectImageContainers = document.querySelectorAll('.project-card');
 
-  //SLIDER SECTION
+  projectImageContainers.forEach(projectCard => {
+      const mainImage = projectCard.querySelector('.main-project-image');
+      const thumbnails = projectCard.querySelectorAll('.thumbnail-image');
+
+      thumbnails.forEach(thumbnail => {
+          thumbnail.addEventListener('click', function() {
+            thumbnails.forEach(t => t.classList.remove('active-thumbnail'));
+
+            this.classList.add('active-thumbnail');
+
+            mainImage.src = this.src;
+          });
+      });
+  });
+
+  //DINAMIC SLIDER SECTION
   const sliderContainer = document.querySelector('.slider-container');
   const prevButton = document.querySelector('.prev-button');
   const nextButton = document.querySelector('.next-button');
@@ -37,8 +56,10 @@ window.onload = function() {
      currentSlide = slides.length - 1; 
       }else if(index >= slides.length) {
         currentSlide = 0; 
+
       }else{
         currentSlide = index;
+
       }
       sliderContainer.scrollTo({
         left: currentSlide * slideWidth,
@@ -57,7 +78,7 @@ window.onload = function() {
   const startAutoScroll = () => {
     autoScrollInterval = setInterval(() => {
     scrollToSlide(currentSlide + 1);
-    }, 5000); 
+    }, 3000); 
   };
 
   const stopAutoScroll = () => {
