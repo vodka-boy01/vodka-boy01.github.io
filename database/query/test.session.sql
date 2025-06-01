@@ -58,3 +58,11 @@ CREATE TABLE immagini_progetti (
 ALTER TABLE progetti
 ADD CONSTRAINT UQ_titolo UNIQUE (titolo);
 
+--@block
+CREATE TABLE progetti_ruoli (
+    progetto_id INT NOT NULL,
+    ruolo_id INT NOT NULL,
+    PRIMARY KEY (progetto_id, ruolo_id),
+    FOREIGN KEY (progetto_id) REFERENCES progetti(id) ON DELETE CASCADE,
+    FOREIGN KEY (ruolo_id) REFERENCES ruoli(id) ON DELETE CASCADE
+);

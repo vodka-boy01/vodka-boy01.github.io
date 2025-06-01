@@ -17,10 +17,12 @@
   require_once __DIR__ . '/../query/database.php';
   require_once __DIR__ . '/../query/user.php';
   require_once __DIR__ . '/../query/project.php';
+  require_once __DIR__ . '/../query/operations.php';
 
   $conn = (new database())->connect();
   $userOperations = new user($conn);
   $projectOperations = new project($conn); 
+  $operations = new operations($conn);
 
   $error_message = '';
   $success_message = '';
@@ -49,7 +51,7 @@
           
           // Controlla eventuali errori di caricamento PHP prima di procedere
           if($_FILES['imgs']['error'][$key] !== UPLOAD_ERR_OK) {
-            $error_message = 'Errore di caricamento per il file ' . htmlspecialchars($original_image_name) . ': codice ' . $_FILES['imgs']['error'][$key];
+            $error_message = 'Errore di caricamento per il file ';
             break; 
           }
 
@@ -118,6 +120,9 @@
 
   // tutti gli utenti
   $users = $userOperations->getAllUsers();
+
+  //tutti i ruoli
+  $roles = $operations->getAllRoles();
 
   $conn->close();
   ?>
@@ -237,13 +242,34 @@
             <div id="preview-grid" class="grid grid-cols-5 gap-4"></div>
           </div>
 
+          <!--Stato progetto-->
           <div class="mb-4">
             <label class="block mb-2">stato progetto</label>
-            <label class="switch">
+              <label class="switch">
               <input type="checkbox" id="status" name="status" checked />
               <span class="slider"></span>
             </label>
             <span class="ml-2" id="status-text">attivo</span>
+          </div>
+
+          <!--Raggruppamento visualizzazione progetto-->
+          <div class="mb-4 relative inline-block">
+            <label class="block mb-2">Visualizza Progetto Per Ruoli</label>
+            <div class="roles-dropdown-trigger input" id="selected-roles-display">
+              Seleziona Ruoli
+            </div>
+
+            <!--lista di tutti i ruoli-->
+            <div class="roles-dropdown-content" id="roles-options">
+              <?php foreach ($roles as $role): ?>
+                <label class="block">
+                  <input type="checkbox" name="roles[]" value="<?= $role['id'] ?>" data-label="<?= htmlspecialchars($role['ruolo']) ?>">
+                  <?= htmlspecialchars($role['ruolo']) ?>
+                </label>
+              <?php endforeach; ?>
+            </div>
+
+            <input type="hidden" name="selected_roles_hidden" id="selected-roles-hidden">
           </div>
 
           <div class="flex gap-4">

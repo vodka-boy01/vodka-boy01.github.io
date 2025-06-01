@@ -172,3 +172,54 @@ input:checked + .slider:before {
   overflow-y: auto; 
   padding-right: 15px; 
 }
+
+/*Drop down select*/
+.roles-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1f2937;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  margin: none;
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 4px;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; 
+}
+
+.relative.inline-block:hover .roles-dropdown-content,
+.roles-dropdown-content:hover { 
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.roles-dropdown-content label {
+  padding: 8px 0;
+  color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.roles-dropdown-content label:hover {
+  background-color: var(--color-hover);
+  border-radius: 4px;
+}
+
+.roles-dropdown-content input[type="checkbox"] {
+  margin-right: 8px;
+  background-color: #374151;
+  border: 1px solid #4b5563;
+}
+
+.roles-dropdown-trigger {
+  cursor: pointer;
+  padding-right: 12px;
+  position: relative;
+  width: fit-content;
+}

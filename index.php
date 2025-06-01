@@ -18,6 +18,7 @@
     <!-- Header -->
     <?php 
         $page = $_GET['page'] ?? 'home';
+        //$project = $_GET['project']; 
 
         if($page === 'home' || $page === ' '){
             include "includes/header.php"; 
@@ -47,14 +48,14 @@
             }elseif ($page === 'home') {
                 include 'pages/home.php';
 
-            }elseif (($page === 'mysqlInfinity') && ($_SESSION['ruolo'] === "admin")) {
+            }elseif (($page === 'mysqlInfinity') && (($_SESSION['ruolo'] === "admin") || ($_SESSION['ruolo'] === "owner"))) {
                 header("Location: https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo");
                 // echo '<iframe src="https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo" frameborder="0"></iframe>';
                 
-            }else if(($page === 'mysqlLocal') && ($_SESSION['ruolo'] === "admin")){
+            }else if(($page === 'mysqlLocal') && (($_SESSION['ruolo'] === "admin") || ($_SESSION['ruolo'] === "owner"))){
                 header("Location: http://localhost/phpmyadmin/");
                 
-            }else if(($page === 'dashboard') && ($_SESSION['ruolo'] === "admin")){
+            }else if(($page === 'dashboard') && (($_SESSION['ruolo'] === "admin") || ($_SESSION['ruolo'] === "owner"))){
                 //include 'php\views\dashboard.php';
                 //echo '<script>window.open("php/views/dashboard.php", "_blank");</script>';
                 header("Location: php/views/dashboard.php");
@@ -63,6 +64,12 @@
                 include 'pages/home.php';
 
             }
+
+            //if($project === ''){
+
+            //}elseif(){
+
+            //}
         ?> 
         </main>
     <!-- Footer -->

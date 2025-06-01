@@ -33,7 +33,7 @@
                         <h1 class="dropdown-button">Benvenuto <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h1>
                         <div class="dropdown-content">
                             <a href="index.php?page=profile" title="Visualizza il tuo profilo">Visualizza profilo</a>
-                            <?php if ($_SESSION['ruolo'] === "admin"): ?>
+                            <?php if (isset($_SESSION['username']) && (($_SESSION['ruolo'] === "admin") || ($_SESSION['ruolo'] === "owner"))): ?>
                                 <a href="index.php?page=mysqlInfinity">PhpMyAdmin infinity</a>
                                 <a href="index.php?page=mysqlLocal">PhpMyAdmin locale</a>
                                 <a href="index.php?page=dashboard">Admin dashboard</a>

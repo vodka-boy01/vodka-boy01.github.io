@@ -36,25 +36,33 @@
                             // prima immagine con alt custom 
                             $main_image_src = !empty($project['images'][0]['path']) ? htmlspecialchars($project['images'][0]['path']) : 'https://placehold.co/500x300/333/ffffff?text=Immagine+Non+Disponibile';
                             ?>
-                            <img src="<?php echo $main_image_src; ?>" alt="<?php echo htmlspecialchars($project['titolo']); ?>" class="main-project-image">
+                            <!--Immagine cliccabile, link get con id progetto, verso index che includera project selective.php in main view-->
+							<a href="index.php?project=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                                <!--Prima immagine del progetto-->
+                                <img src="<?php echo $main_image_src; ?>" alt="<?php echo htmlspecialchars($project['titolo']); ?>" class="main-project-image">
+
+                            </a>
+
                         </div>
 
+                        <!--sezione non attiva max=0-->
                         <?php if (!empty($project['images'])): ?>
                             <div class="project-images">
                                 <?php
-								//numero massimo di immagini una sopra laltra
-                                $max = 0;
-                                foreach (array_slice($project['images'], 0, $max) as $index => $image):
+                                    //numero massimo di immagini una sopra laltra
+                                    $max = 0;
+                                    foreach (array_slice($project['images'], 0, $max) as $index => $image):
                                 ?>
-                                    <img src="<?php echo htmlspecialchars($image['path']); ?>" alt="Thumbnail <?php echo $index + 1; ?>"
-                                        class="thumbnail-image <?php echo ($index === 0) ? 'active-thumbnail' : ''; ?>"
-                                        data-main-image-target=".main-project-image">
+                                <img src="<?php echo htmlspecialchars($image['path']); ?>" alt="Thumbnail <?php echo $index + 1; ?>"
+                                    class="thumbnail-image <?php echo ($index === 0) ? 'active-thumbnail' : ''; ?>"
+                                    data-main-image-target=".main-project-image"
+                                >
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
 
                         <p class="short-description"><?php echo htmlspecialchars($project['descrizione_breve']); ?></p>
-                        </div>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>

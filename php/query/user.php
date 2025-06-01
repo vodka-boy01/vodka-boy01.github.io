@@ -120,8 +120,10 @@ class user{
         if($resSet){
             $row = $resSet->fetch_assoc();
             return $row['ruolo'];
+
         }else{
             echo "error";
+            
         }
     }
 

@@ -82,10 +82,11 @@ class Project {
     }
 
     /**
-     * recupera tutti i progetti dal database.
+     * recupera tutti i progetti dal database, di base 
+     * altrimenti con project id ne restituisce uno
      * @return array un array di progetti.
      */
-    public function getAllProjects() {
+    public function getAllProjects($id = null) {
         $query = "
             SELECT
                 p.id,
