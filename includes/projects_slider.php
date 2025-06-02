@@ -17,8 +17,9 @@
   $projects = $projectOperations->getAllProjects();
 
   $conn->close();
-
+//TODO: se il raggrupopoamento di visualizzazione del progetto è uguale a null è visualizzabile a tutti, altrimenti solo a quelli presenti nellarray 
 ?>
+
 <section class="image-slider">
     <div id="slider-title">
         <h1>I miei progetti</h1> 
@@ -36,8 +37,8 @@
                             // prima immagine con alt custom 
                             $main_image_src = !empty($project['images'][0]['path']) ? htmlspecialchars($project['images'][0]['path']) : 'https://placehold.co/500x300/333/ffffff?text=Immagine+Non+Disponibile';
                             ?>
-                            <!--Immagine cliccabile, link get con id progetto, verso index che includera project selective.php in main view-->
-							<a href="index.php?project=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                            <!--Immagine cliccabile, link get con id progetto, verso index con p.id-->
+							<a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
                                 <!--Prima immagine del progetto-->
                                 <img src="<?php echo $main_image_src; ?>" alt="<?php echo htmlspecialchars($project['titolo']); ?>" class="main-project-image">
 

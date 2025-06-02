@@ -61,7 +61,8 @@ class user{
      */
     public function register($new_name, $new_surname, $new_username, $new_email, $new_password) {
         $query = "INSERT INTO utenti (name, surname, username, email, password) 
-                VALUES ('$new_name', '$new_surname', '$new_username', '$new_email', '$new_password')";
+            VALUES ('$new_name', '$new_surname', '$new_username', '$new_email', '$new_password')
+        ";
 
         $resSet = $this->connection->query($query);
 
@@ -97,10 +98,17 @@ class user{
     *@param int $id id dell'utente
     *@return mixed valore del campo
     */
-    public function getUserInfo($field, $username) {
-        $resSet = $this->connection->query("SELECT * FROM utenti WHERE username = '$username'");
+    public function getUserInfo($username) {
+        $query = "
+            SELECT 
+                *
+            FROM utenti 
+            WHERE username = '$username'
+        ";
+
+        $resSet = $this->connection->query($query);
         $row = $resSet->fetch_assoc();
-        return $row[$field];
+        return $row;
     }
 
     /**

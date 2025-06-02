@@ -18,6 +18,22 @@
   require_once __DIR__ . '/../query/user.php';
   require_once __DIR__ . '/../query/project.php';
   require_once __DIR__ . '/../query/operations.php';
+  require_once __DIR__ . "/../protected/minimum_authorization_level.php";
+
+	//utente loggato?
+	$loggedIn = isset($_SESSION['username']);
+
+	//utente autorizzato per l'accesso alla pagina cpanel?
+	if($loggedIn){
+		$ruoloId = intval($_SESSION['ruoloId']);
+
+		//livello di autorizzazione richiesto
+		$authorized = $ruoloId <= MINIMUM_REQUIRED_AUTHORIZATION_LEVEL;	
+    
+	}else{
+    header('location: pages\login.php');
+
+  }
 
   $conn = (new database())->connect();
   $userOperations = new user($conn);
@@ -32,9 +48,11 @@
     $titolo = $_POST['title'] ?? '';
     $descrizione_breve = $_POST['desc'] ?? '';
     $descrizione_completa = $_POST['full'] ?? '';
-    $stato = isset($_POST['status']) ? 1 : 0;
+    $stato = isset($_POST['status']) ? 1 : 0;//conversione da on off a 1 : 0
+    //$raggruppamento = 
+    //TODO: aggiungere all'array raggruppamento tutti gli utenti con autorizzazione minima sufficente e: 1 e 0, oltre a quelli opzionali di aggiunta per gli utenti
     $uploaded_image_details = [];
-    $target_dir = __DIR__ . "/../../assets/uploads/";
+    $target_dir = __DIR__ . "/../../assets/uploads/projects/";//percorso
 
     // gestione delle immagini caricate
     if(isset($_FILES['imgs']) && !empty($_FILES['imgs']['name'][0])) {
@@ -55,22 +73,23 @@
             break; 
           }
 
-          // Estrai l'estensione del file originale (es. jpg, png)
+          // estensione del file
           $file_extension = pathinfo($original_image_name, PATHINFO_EXTENSION);
-          // Estrai il nome del file senza estensione (es. miafoto)
+
+          // nome del file 
           $filename_without_ext = pathinfo($original_image_name, PATHINFO_FILENAME);
 
-          $unique_filename = $filename_without_ext . '_' . time() . '_' . uniqid() . '.' . $file_extension;
+          $unique_filename = $filename_without_ext . '_' . time() . uniqid() . '.' . $file_extension;
           
-          $safe_unique_filename = basename($unique_filename); 
+          $safe_unique_filename = basename($unique_filename);  
           
           $target_file = $target_dir . $safe_unique_filename;
 
           if(move_uploaded_file($_FILES['imgs']['tmp_name'][$key], $target_file)) {
-            $relative_web_path = "assets/uploads/" . $safe_unique_filename;
+            $relative_web_path = "assets/uploads/projects/" . $safe_unique_filename;//percorso
             $uploaded_image_details[] = ['name' => $safe_unique_filename, 'path' => $relative_web_path];
 
-          } else {
+          }else{
             $error_message = 'Si è verificato un errore durante il caricamento dell\'immagine: ' . htmlspecialchars($original_image_name);
             break; 
           }
@@ -260,13 +279,20 @@
             </div>
 
             <!--lista di tutti i ruoli-->
+            <!--Mostra solo la lista dei ruoli al di sotto del MINIMUM_REQUIRED_AUTHORIZATION_LEVEL dei ruoli che amministratore che possono vedere tutti i progetti a prescindere-->
             <div class="roles-dropdown-content" id="roles-options">
-              <?php foreach ($roles as $role): ?>
-                <label class="block">
-                  <input type="checkbox" name="roles[]" value="<?= $role['id'] ?>" data-label="<?= htmlspecialchars($role['ruolo']) ?>">
-                  <?= htmlspecialchars($role['ruolo']) ?>
-                </label>
-              <?php endforeach; ?>
+              <?php 
+                foreach ($roles as $role): 
+                if(intval($role['id']) > MINIMUM_REQUIRED_AUTHORIZATION_LEVEL){
+                  ?>
+                    <label class="block">
+                      <input type="checkbox" name="roles[]" value="<?= $role['id'] ?>" data-label="<?= htmlspecialchars($role['ruolo']) ?>">
+                      <?= htmlspecialchars($role['ruolo']) ?>
+                    </label>
+                  <?php
+                }
+                endforeach; 
+              ?>
             </div>
 
             <input type="hidden" name="selected_roles_hidden" id="selected-roles-hidden">

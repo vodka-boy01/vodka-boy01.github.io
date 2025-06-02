@@ -30,10 +30,15 @@
       
       //verifica esistenza username
       if($userOperations->login($username, $password)){
+        $userInfo = $userOperations->getUserInfo($username);
+
         $_SESSION['username'] = $username;
-        $_SESSION['nome'] = $userOperations->getUserInfo("name", $username);
+        $_SESSION['nome'] = $userInfo['name'];
+        $_SESSION['ruoloId'] = $userInfo['ruolo'];
         $_SESSION['ruolo'] = $userOperations->getUserRole($username);
+
         $conn->close();
+        
         header("Location: ../index.php");
         exit();
         

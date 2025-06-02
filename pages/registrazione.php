@@ -44,10 +44,14 @@
       $emailError = "Email già associata ad un account.";
     }
 
+    //registrazione nuovo utente
     if($usernameError == '' && $emailError == ''){
       if($userOperations->register($name, $surname, $username, $email, $password)){
+        $userInfo = $userOperations->getUserInfo($username);
+
         $_SESSION['username'] = $username;
-        $_SESSION['nome'] = $name;
+        $_SESSION['nome'] = $userInfo['name'];
+        $_SESSION['ruoloId'] = $userInfo['ruolo'];
         $_SESSION['ruolo'] = $userOperations->getUserRole($username);
         $conn->close();
         header("Location: ../index.php");

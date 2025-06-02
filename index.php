@@ -17,9 +17,11 @@
 
     <!-- Header -->
     <?php 
+        //pagina da includere
         $page = $_GET['page'] ?? 'home';
-        //$project = $_GET['project']; 
 
+        //header solo per home page
+        //header small per le altre pagine
         if($page === 'home' || $page === ' '){
             include "includes/header.php"; 
 
@@ -60,16 +62,14 @@
                 //echo '<script>window.open("php/views/dashboard.php", "_blank");</script>';
                 header("Location: php/views/dashboard.php");
                 
+            }else if($page === 'project'){
+                include 'pages/project_selective.php';
+            
             }else {
                 include 'pages/home.php';
 
             }
 
-            //if($project === ''){
-
-            //}elseif(){
-
-            //}
         ?> 
         </main>
     <!-- Footer -->

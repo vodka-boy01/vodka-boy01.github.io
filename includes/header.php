@@ -3,9 +3,25 @@
 			z-index: 2;
 		}
 	</style>
+	
 	<?php
+    	require_once __DIR__ . "/../php/protected/minimum_authorization_level.php";
+
 		session_start();
+
+		//utente loggato?
+		$loggedIn = isset($_SESSION['username']);
+
+		//utente autorizzato per l'accesso alla pagina cpanel?
+		if($loggedIn){
+			$ruoloId = intval($_SESSION['ruoloId']);
+
+			//livello di autorizzazione richiesto
+			$authorized = $ruoloId <= MINIMUM_REQUIRED_AUTHORIZATION_LEVEL;	
+
+		}
 	?>
+
     <header>
 		<nav>
 			<div id="title_login">
@@ -15,7 +31,7 @@
 				
 				<div id="nav_login_container">
 					<!--Rimozione bottone login e registrazione in caso l'utente ha effettuato l'accesso-->
-					<?php if (!isset($_SESSION['username'])): ?>
+					<?php if (!$loggedIn): ?>
 					<ul>
 						<li><a class="button primary" href="/pages/login.php" title="Accedi al tuo account">Sign In</a></li>
 						<li><a class="button primary" href="/pages/registrazione.php" title="Registra un nuovo account">Sing Up</a></li>
@@ -23,13 +39,13 @@
 					<?php endif; ?>	
 
 					<!--Rimozione benvenuto, nome utente, menu utente, avatar utente in caso l'utente non sia loggato-->
-					<?php if (isset($_SESSION['username'])): ?>
+					<?php if($loggedIn): ?>
 					<div class="dropdown">
 						<h1 class="dropdown-button">Benvenuto <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h1>
 						<div class="dropdown-content">
 							<a href="index.php?page=profile" title="Visualizza il tuo profilo">Visualizza profilo</a>
 							<!--opzioni disponibili solo per gli utenti con ruolo admin e owner-->
-							<?php if (isset($_SESSION['username']) && (($_SESSION['ruolo'] === "admin") || ($_SESSION['ruolo'] === "owner"))): ?>
+							<?php if($loggedIn && $authorized): ?>
 								<a href="index.php?page=mysqlInfinity">PhpMyAdmin infinity</a>
 								<a href="index.php?page=mysqlLocal">PhpMyAdmin locale</a>
 								<a href="index.php?page=dashboard">Admin dashboard</a>

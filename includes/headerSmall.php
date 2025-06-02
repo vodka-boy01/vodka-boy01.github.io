@@ -10,7 +10,22 @@
     }
 </style>
 
-<?php session_start(); ?>
+<?php 
+    require_once __DIR__ . "/../php/protected/minimum_authorization_level.php";
+
+    session_start(); 
+	//utente loggato?
+	$loggedIn = isset($_SESSION['username']);
+
+	//utente autorizzato per l'accesso alla pagina cpanel?
+	if($loggedIn){
+		$ruoloId = intval($_SESSION['ruoloId']);
+
+		//livello di autorizzazione richiesto
+		$authorized = $ruoloId <= MINIMUM_REQUIRED_AUTHORIZATION_LEVEL;	
+    }
+?>
+
 <header>
     <nav>
         <div id="nav_bar">
@@ -23,7 +38,7 @@
             </div>
 
             <div id="nav_login_container">
-                <?php if (!isset($_SESSION['username'])): ?>
+                <?php if (!$loggedIn): ?>
                     <ul>
                         <li><a class="button primary" href="/pages/login.php" title="Accedi al tuo account">Sign In</a></li>
                         <li><a class="button primary" href="/pages/registrazione.php" title="Registra un nuovo account">Sign Up</a></li>
@@ -33,7 +48,7 @@
                         <h1 class="dropdown-button">Benvenuto <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h1>
                         <div class="dropdown-content">
                             <a href="index.php?page=profile" title="Visualizza il tuo profilo">Visualizza profilo</a>
-                            <?php if (isset($_SESSION['username']) && (($_SESSION['ruolo'] === "admin") || ($_SESSION['ruolo'] === "owner"))): ?>
+                            <?php if ($loggedIn && $authorized): ?>
                                 <a href="index.php?page=mysqlInfinity">PhpMyAdmin infinity</a>
                                 <a href="index.php?page=mysqlLocal">PhpMyAdmin locale</a>
                                 <a href="index.php?page=dashboard">Admin dashboard</a>

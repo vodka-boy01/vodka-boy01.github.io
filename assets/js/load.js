@@ -5,6 +5,7 @@ window.onload = function() {
     if (tema === "true") {
         console.log("Tema salvato: dark");
         document.documentElement.classList.add("dark-theme");
+        document.documentElement.classList.add("dark-theme");
     }
 }();
 

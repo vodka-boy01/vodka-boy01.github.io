@@ -1,14 +1,14 @@
 window.onload = function() {
-
+  
   //lancia modulo ricerca solo in index.html
-  if (window.location.pathname.endsWith("index.php")) {
+  if(window.location.pathname.endsWith("index.php")) {
     searchModule.init();
   }
 
   let tema = localStorage.getItem("tema");
 
   //default tema chiaro
-  if (tema === null) {
+  if(tema === null) {
     tema = "false";
     localStorage.setItem("tema", tema);
     console.log("Tema non presente, impostato su chiaro (false)");
@@ -16,7 +16,7 @@ window.onload = function() {
 
   //se true -> dark    viene gia verificato nello script in index.html
   //se false -> light
-  if (tema === "false") {
+  if(tema === "false") {
     console.log("Tema salvato: light");
     document.documentElement.classList.remove("dark-theme");
   }
