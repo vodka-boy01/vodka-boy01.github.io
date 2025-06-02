@@ -168,7 +168,7 @@ input:checked + .slider:before {
 
 /*Restrizione di altezza per classe new project*/
 #new_project{
-  max-height: 788px; 
+  max-height: 1064; 
   overflow-y: auto; 
   padding-right: 15px; 
 }
@@ -184,7 +184,6 @@ input:checked + .slider:before {
   margin: none;
   border-radius: 4px;
   padding: 12px;
-  margin-top: 4px;
   transform: translateY(-10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none; 

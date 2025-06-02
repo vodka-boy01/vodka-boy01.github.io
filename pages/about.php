@@ -1,6 +1,19 @@
 <?php
     $image_alt = 'https://placehold.co/500x300/333/ffffff?text=Immagine+Non+Disponibile';
 
+    require_once __DIR__ . '/../php/query/database.php';
+    require_once __DIR__ . '/../php/query/project.php';
+    require_once __DIR__ . '/../php/query/user.php';
+
+    $conn = (new database())->connect();
+    $userOperations = new user($conn);
+    $projectOperations = new project($conn); 
+    $role = $_SESSION['ruoloId'] ?? USER_AUTHORIZATION_LEVEL;
+
+    // Recupera tutti i progetti dal database con ruolo about
+    $projects = $projectOperations->getAllProjectsByRole($role);//TODO:verifica funzionalita
+
+    $conn->close();
 ?>
 <section id="about" class="about-section">
     <div class="about-content-wrapper">
@@ -27,41 +40,57 @@
         <div class="about-text-left">
             <section class="image-slider">
                 <div class="slider-container" id="projectSlider">
-                    <div class="slide">
-                        <div class="project-card">
-                            <h1>Build fascia alta gaming</h1>
+                    <?php if (!empty($projects)): ?>
+                        <?php foreach ($projects as $project): ?>
+                            <div class="slide">
+                                <div class="project-card">
+                                    <h1 id="slider-title" class="project-text"><?php echo htmlspecialchars($project['titolo']); ?></h1>
 
-                            <div class="project-images">
-                                <img src="<?php echo $image_alt; ?>" alt=""class="thumbnail-image <?php echo($index === 0); ?>">
+                                    <div class="main-project-image-container">
+                                        <?php
+                                        // prima immagine con alt custom 
+                                        $main_image_src = !empty($project['images'][0]['path']) ? htmlspecialchars($project['images'][0]['path']) : 'https://placehold.co/500x300/333/ffffff?text=Immagine+Non+Disponibile';
+                                        ?>
+                                        <!--Immagine cliccabile, link get con id progetto, verso index con p.id-->
+                                        <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                                            <!--Prima immagine del progetto-->
+                                            <img src="<?php echo $main_image_src; ?>" alt="<?php echo htmlspecialchars($project['titolo']); ?>" class="main-project-image">
+
+                                        </a>
+
+                                    </div>
+
+                                    <!--sezione non attiva max=0-->
+                                    <?php if (!empty($project['images'])): ?>
+                                        <div class="project-images">
+                                            <?php
+                                                //numero massimo di immagini una sopra laltra
+                                                $max = 0;
+                                                foreach (array_slice($project['images'], 0, $max) as $index => $image):
+                                            ?>
+                                            <img src="<?php echo htmlspecialchars($image['path']); ?>" alt="Thumbnail <?php echo $index + 1; ?>"
+                                                class="thumbnail-image <?php echo ($index === 0) ? 'active-thumbnail' : ''; ?>"
+                                                data-main-image-target=".main-project-image"
+                                            >
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <p id="short-description" class="project-text"><?php echo htmlspecialchars($project['descrizione_breve']); ?></p>
+                                    
+                                    <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                                        <div id="container-link-scheda-progetto">
+                                            <h3 class="link-scheda-progetto">Apri scheda progetto</h3>
+                                            <i class="fa-solid fa-link link-scheda-progetto"></i>
+                                        </div>
+                                    </a>
+
+                                </div>
                             </div>
-
-                            <p class="short-description">PC da circa 1800 euro</p>
-                        </div>
-                    </div>
-
-                    <div class="slide">
-                        <div class="project-card">
-                            <h1>Riparazione Iphone 7</h1>
-
-                            <div class="project-images">
-                                <img src="<?php echo $image_alt; ?>" alt=""class="thumbnail-image <?php echo($index === 0); ?>">
-                            </div>
-
-                            <p class="short-description">Sostituzione schermo</p>
-                        </div>
-                    </div>
-
-                    <div class="slide">
-                        <div class="project-card">
-                            <h1>Riparazione Laptop</h1>
-
-                            <div class="project-images">
-                                <img src="<?php echo $image_alt; ?>" alt=""class="thumbnail-image <?php echo($index === 0); ?>">
-                            </div>
-
-                            <p class="short-description">Rebuild pc</p>
-                        </div>
-                    </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-center text-gray-400">Nessun progetto trovato.</p>
+                    <?php endif; ?>
                 </div>
 
                 <div class="slider-navigation">

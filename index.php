@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/colors-purple.css">
-    <script src="assets/js/load.js"></script>
+    <script src="assets/js/script.js"></script>
+    <!--<script src="assets/js/load.js"></script>-->
     <title>Portfolio Tanzillo</title>
 </head>
 <body>
@@ -14,9 +15,9 @@
     <div class="loading-screen">
         <div class="spinner"></div>
     </div>
-
     <!-- Header -->
     <?php 
+    
         //pagina da includere
         $page = $_GET['page'] ?? 'home';
 
@@ -75,7 +76,6 @@
     <!-- Footer -->
     <?php include "includes/footer.php"; ?>
 
-    <script src="assets/js/script.js"></script>
     <script src="https://kit.fontawesome.com/4383a54113.js" crossorigin="anonymous"></script>
 </body>
 </html>

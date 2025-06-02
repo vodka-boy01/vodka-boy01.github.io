@@ -66,3 +66,6 @@ CREATE TABLE progetti_ruoli (
     FOREIGN KEY (progetto_id) REFERENCES progetti(id) ON DELETE CASCADE,
     FOREIGN KEY (ruolo_id) REFERENCES ruoli(id) ON DELETE CASCADE
 );
+
+--@block
+ALTER TABLE progetti ADD column(titolo_footer varchar(21) not null);

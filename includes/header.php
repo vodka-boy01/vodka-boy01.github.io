@@ -41,7 +41,7 @@
 					<!--Rimozione benvenuto, nome utente, menu utente, avatar utente in caso l'utente non sia loggato-->
 					<?php if($loggedIn): ?>
 					<div class="dropdown">
-						<h1 class="dropdown-button">Benvenuto <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h1>
+						<h1 class="dropdown-button"><?php echo htmlspecialchars($_SESSION['ruolo']). ' ' . htmlspecialchars($_SESSION['nome']); ?></h1>
 						<div class="dropdown-content">
 							<a href="index.php?page=profile" title="Visualizza il tuo profilo">Visualizza profilo</a>
 							<!--opzioni disponibili solo per gli utenti con ruolo admin e owner-->

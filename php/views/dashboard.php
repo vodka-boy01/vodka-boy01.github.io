@@ -8,7 +8,32 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet"/>
   <link rel="stylesheet" href="/assets/css/dashboard.css" />
   <link rel="stylesheet" href="/assets/css/colors-purple.css" />
-  <script src="/assets/js/load.js"></script>
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      // tutti i campi input 
+      const campi = document.querySelectorAll("input[type='text'], textarea");
+
+      campi.forEach(campo => {
+        // Ottieni l'ID del campo di input
+        const inputId = campo.id;
+        // span del contatore corrispondente
+        const counterSpan = document.getElementById(`contatore-${inputId}`);
+
+        if(counterSpan){
+            const aggiornaContatore = () => {
+            const count = campo.value.length;
+            counterSpan.textContent = `${count}`; // Aggiorna solo il conteggio
+          };
+
+          campo.addEventListener("input", aggiornaContatore);
+          aggiornaContatore();
+        }
+      });
+  });
+</script>
+
+
 </head>
 <body class="min-h-screen p-6">
   <?php
@@ -46,11 +71,14 @@
   // gestione dell'aggiunta di un nuovo progetto
   if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_project') {
     $titolo = $_POST['title'] ?? '';
+    $titolo_footer = $_POST['footer-title'] ?? '';
     $descrizione_breve = $_POST['desc'] ?? '';
     $descrizione_completa = $_POST['full'] ?? '';
     $stato = isset($_POST['status']) ? 1 : 0;//conversione da on off a 1 : 0
-    //$raggruppamento = 
-    //TODO: aggiungere all'array raggruppamento tutti gli utenti con autorizzazione minima sufficente e: 1 e 0, oltre a quelli opzionali di aggiunta per gli utenti
+    //la lista di ruoli che possono visionare il progetto 
+    $raggruppamento = $_POST['roles'];
+    ///print_r($raggruppamento);
+    //exit;
     $uploaded_image_details = [];
     $target_dir = __DIR__ . "/../../assets/uploads/projects/";//percorso
 
@@ -99,7 +127,7 @@
 
     if(empty($error_message)) {
       // gestione del risultato
-      $add_result = $projectOperations->addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details);
+      $add_result = $projectOperations->addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details, $titolo_footer, $raggruppamento);
 
       if($add_result === true) { 
         // progetto aggiunto con successo
@@ -206,17 +234,27 @@
                 <span><?php echo htmlspecialchars($project['titolo']); ?> (creato il: <?php echo date("d/m/Y", strtotime($project['data_creazione'])); ?>)</span>
 
                 <!--Conferma eliminazione con action request allert-->
-                <form method="POST" style="display:inline;" onsubmit="return confirm('sei sicuro di voler eliminare questo progetto?');">
-
-                  <input type="hidden" name="action" value="delete_project">
-
-                  <input type="hidden" name="project_id" value="<?php echo $project['id']; ?>">
-
-                  <button type="submit" class="w-8 h-8 flex items-center justify-center text-red-400 hover:text-red-600" title="elimina progetto">
-                    <i class="ri-delete-bin-line ri-lg"></i>
+                <div class="flex items-center gap-[5px]">
+                  <!--Link al progetto-->
+                  <button onclick="window.location.href='/../index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>'" class="w-8 h-8 flex items-center justify-center text-green-400 hover:text-green-600" title="vai al progetto">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   </button>
 
-                </form>
+                  <!--Elimina progetto-->
+                  <form method="POST" style="display:inline;" onsubmit="return confirm('sei sicuro di voler eliminare questo progetto?');">
+
+                    <input type="hidden" name="action" value="delete_project">
+
+                    <input type="hidden" name="project_id" value="<?php echo $project['id']; ?>">
+                    
+                    <button type="submit" class="w-8 h-8 flex items-center justify-center text-red-400 hover:text-red-600" title="elimina progetto">
+                      <i class="ri-delete-bin-line ri-lg"></i>
+
+                    </button>
+                  </form>
+
+                </div>
+
               </li>
             <?php endforeach; ?>
           <?php else: ?>
@@ -232,23 +270,33 @@
         <form id="project-form" method="POST" enctype="multipart/form-data">
 
           <input type="hidden" name="action" value="add_project">
+
           <div class="mb-4">
-            <label for="title" class="block mb-2">titolo</label>
-            <input type="text" id="title" name="title" class="input w-full" placeholder="titolo progetto (massimo 30 caratteri)" maxlength="30" required/>
+            <label for="title" class="block mb-2">Titolo</label>
+            <p class="text-gray-400">Caratteri: <span id="contatore-title" class="contatore">0</span> / 30</p>
+            <input type="text" id="title" name="title" class="input w-full" placeholder="Titolo progetto (massimo 30 caratteri)" maxlength="30" required />
           </div>
 
           <div class="mb-4">
-            <label for="desc" class="block mb-2">descrizione</label>
-            <input type="text" id="desc" name="desc" class="input w-full" placeholder="descrizione breve (massimo 50 caratteri)" maxlength="50" required/>
+            <label for="footer-title" class="block mb-2">Titolo per footer</label>
+            <p class="text-gray-400">Caratteri: <span id="contatore-footer-title" class="contatore">0</span> / 20</p>
+            <input type="text" id="footer-title" name="footer-title" class="input w-full" placeholder="Descrizione breve (massimo 20 caratteri)" maxlength="20" required />
+          </div>
+
+          <div class="mb-4">
+            <label for="desc" class="block mb-2">Descrizione</label>
+            <p class="text-gray-400">Caratteri: <span id="contatore-project-description" class="contatore">0</span> / 50</p>
+            <input type="text" id="project-description" name="desc" class="input w-full" placeholder="Descrizione breve (massimo 50 caratteri)" maxlength="50" required />
           </div>
 
           <div class="mb-4">
             <label for="full" class="block mb-2">descrizione completa</label>
+            <p class="text-gray-400">Caratteri: <span id="contatore-full" class="contatore">0</span> / 500</p>
             <textarea id="full" name="full" rows="5" class="input resize-none w-full" placeholder="descrizione dettagliata (massimo 500 caratteri)" maxlength="500" required></textarea>
           </div>
 
           <div class="mb-6">
-            <label class="block mb-2">immagini <span id="imgCount" class="text-sm text-gray-400">(0/10)</span></label>
+            <label class="block mb-2 text-gray-400">immagini <span id="imgCount" class="text-sm text-gray-400">(0/10)</span></label>
             <div class="w-full mb-4">
               <label for="imgs" class="flex items-center justify-center h-32 border-2 border-dashed border-gray-500 rounded cursor-pointer bg-gray-800 hover:bg-gray-700">
                 <div class="text-center">
@@ -277,7 +325,6 @@
             <div class="roles-dropdown-trigger input" id="selected-roles-display">
               Seleziona Ruoli
             </div>
-
             <!--lista di tutti i ruoli-->
             <!--Mostra solo la lista dei ruoli al di sotto del MINIMUM_REQUIRED_AUTHORIZATION_LEVEL dei ruoli che amministratore che possono vedere tutti i progetti a prescindere-->
             <div class="roles-dropdown-content" id="roles-options">
@@ -295,7 +342,7 @@
               ?>
             </div>
 
-            <input type="hidden" name="selected_roles_hidden" id="selected-roles-hidden">
+            <!--<input type="hidden" name="selected_roles_hidden" id="selected-roles-hidden">-->
           </div>
 
           <div class="flex gap-4">

@@ -5,6 +5,7 @@
 class Project {
     private $connection;
 
+
     /**
      * @param mysqli $db connessione al database.
      */
@@ -12,31 +13,35 @@ class Project {
         $this->connection = $db;
     }
 
-    /**
+/**
      * aggiunge un nuovo progetto e le sue immagini al database.
      * @param string $titolo titolo del progetto.
      * @param string $descrizione_breve breve descrizione.
      * @param string $descrizione_completa descrizione dettagliata.
      * @param int $stato stato del progetto (1=attivo, 0=inattivo).
      * @param array $uploaded_image_details dettagli delle immagini caricate (nome e percorso).
+     * @param string $titolo_footer titolo per il footer.
+     * @param array $raggruppamento array contenente gli ID dei ruoli.
      * @return bool|string true se ha successo, "duplicate_title" se il titolo esiste già, false per altri errori.
      */
-    public function addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details = []) {
-        // avvio transazione 
+    public function addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details = [], $titolo_footer, $raggruppamento = []) {
+        // avvio transazione
         $this->connection->begin_transaction();
 
         try {
-            $query_project = "INSERT INTO progetti (titolo, descrizione_breve, descrizione_completa, stato) VALUES (?, ?, ?, ?)";
+            //query per l'inserimento del progetto
+            $query_project = "INSERT INTO progetti (titolo, descrizione_breve, descrizione_completa, stato, titolo_footer) VALUES (?, ?, ?, ?, ?)"; // Aggiunto un placeholder '?' per titolo_footer
+
             $resSet_project = $this->connection->prepare($query_project);
 
-            $resSet_project->bind_param("sssi", $titolo, $descrizione_breve, $descrizione_completa, $stato);
+            $resSet_project->bind_param("sssss", $titolo, $descrizione_breve, $descrizione_completa, $stato, $titolo_footer); 
 
-            if (!$resSet_project->execute()) {
+            if(!$resSet_project->execute()) {
                 // titolo duplicato codice 1062
                 if($this->connection->errno == 1062) {
                     throw new Exception("il titolo del progetto esiste già.", 1062);
 
-                }else {
+                } else {
                     throw new Exception("errore durante l'inserimento del progetto: " . $resSet_project->error);
 
                 }
@@ -45,31 +50,51 @@ class Project {
             $project_id = $this->connection->insert_id;
             $resSet_project->close();
 
-            // inserisce le immagini
+            //inserisce le immagini
             if(!empty($uploaded_image_details)) {
-                $query = "INSERT INTO immagini_progetti (progetto_id, nome_file, percorso_file) VALUES (?, ?, ?)";
-                $resSet_image = $this->connection->prepare($query);
+                $query_image = "INSERT INTO immagini_progetti (progetto_id, nome_file, percorso_file) VALUES (?, ?, ?)";
+                $resSet_image = $this->connection->prepare($query_image);
 
                 if($resSet_image === false) {
                     throw new Exception("errore nella preparazione della query delle immagini: " . $this->connection->error);
                 }
 
-                foreach ($uploaded_image_details as $image) {
+                foreach($uploaded_image_details as $image) {
                     $image_name = $image['name'];
-                    $relative_web_path = $image['path']; 
+                    $relative_web_path = $image['path'];
 
-                    $resSet_image->bind_param("iss", $project_id, $image_name, $relative_web_path); 
-                    if(!$resSet_image->execute()) {
+                    $resSet_image->bind_param("iss", $project_id, $image_name, $relative_web_path);
+                    if(!$resSet_image->execute()){
                         throw new Exception("errore durante l'inserimento dell'immagine '" . htmlspecialchars($image_name) . "': " . $resSet_image->error);
                     }
                 }
                 $resSet_image->close();
             }
 
+            if(!empty($raggruppamento)) {
+                //query inserimento ruoli al progetto
+                $query_project_role = "INSERT INTO progetti_ruoli (progetto_id, ruolo_id) VALUES (?, ?)";
+                $resSet_project_role = $this->connection->prepare($query_project_role);
+
+                if($resSet_project_role === false){
+                    throw new Exception("errore nella preparazione della query per i ruoli del progetto: " . $this->connection->error);
+                }
+
+                foreach ($raggruppamento as $ruolo_id) {
+                    //casting
+                    $ruolo_id = (int) $ruolo_id;
+                    $resSet_project_role->bind_param("ii", $project_id, $ruolo_id);
+                    if (!$resSet_project_role->execute()) {
+                        throw new Exception("errore durante l'inserimento del ruolo '" . htmlspecialchars($ruolo_id) . "' per il progetto: " . $resSet_project_role->error);
+                    }
+                }
+                $resSet_project_role->close();
+            }
+
             $this->connection->commit();
             return true;
 
-        }catch(Exception $e) {
+        } catch(Exception $e) {
             $this->connection->rollback(); // rollback in caso di errore
             error_log("errore in addProject: " . $e->getMessage());
 
@@ -87,20 +112,44 @@ class Project {
      * @return array un array di progetti.
      */
     public function getAllProjects($id = null) {
-        $query = "
-            SELECT
-                p.id,
-                p.titolo,
-                p.data_creazione,
-                p.descrizione_breve,
-                p.descrizione_completa,
-                GROUP_CONCAT(CONCAT(img.percorso_file, '|||', img.nome_file) ORDER BY img.id ASC) AS immagini_details
-            FROM progetti p
-            LEFT JOIN immagini_progetti img ON p.id = img.progetto_id
-            GROUP BY p.id, p.titolo, p.data_creazione, p.descrizione_breve, p.descrizione_completa
-            ORDER BY p.data_creazione DESC
-        ";
-
+        if($id === null){
+            //caso tutti i progetti richiesti
+            $query = "
+                SELECT
+                    p.id,
+                    p.titolo,
+                    p.titolo_footer,   
+                    p.data_creazione,
+                    p.descrizione_breve,
+                    p.descrizione_completa,
+                    GROUP_CONCAT(CONCAT(img.percorso_file, '|||', img.nome_file) ORDER BY img.id ASC) AS immagini_details,
+                    GROUP_CONCAT(DISTINCT pr.ruolo_id ORDER BY pr.ruolo_id ASC) AS ruoli_ids
+                FROM progetti p
+                LEFT JOIN immagini_progetti img ON p.id = img.progetto_id
+                LEFT JOIN progetti_ruoli pr ON p.id = pr.progetto_id 
+                GROUP BY p.id, p.titolo, p.titolo_footer, p.data_creazione, p.descrizione_breve, p.descrizione_completa
+                ORDER BY p.data_creazione DESC
+            ";
+        }else{
+            //caso singolo progetto richiesto
+            $query = "
+                SELECT
+                    p.id,
+                    p.titolo,
+                    p.titolo_footer,   
+                    p.data_creazione,
+                    p.descrizione_breve,
+                    p.descrizione_completa,
+                    GROUP_CONCAT(CONCAT(img.percorso_file, '|||', img.nome_file) ORDER BY img.id ASC) AS immagini_details,
+                    GROUP_CONCAT(DISTINCT pr.ruolo_id ORDER BY pr.ruolo_id ASC) AS ruoli_ids
+                FROM progetti p
+                LEFT JOIN immagini_progetti img ON p.id = img.progetto_id
+                LEFT JOIN progetti_ruoli pr ON p.id = pr.progetto_id 
+                GROUP BY p.id, p.titolo, p.titolo_footer, p.data_creazione, p.descrizione_breve, p.descrizione_completa
+                WHERE p.id = '$id'
+                ORDER BY p.data_creazione DESC
+            ";
+        }
         $resSet = $this->connection->query($query);
         $projects = [];
 
@@ -108,12 +157,15 @@ class Project {
             $project_data = [
                 'id' => $row['id'],
                 'titolo' => $row['titolo'],
+                'titolo_footer' => $row['titolo_footer'],
                 'data_creazione' => $row['data_creazione'],
                 'descrizione_breve' => $row['descrizione_breve'],
                 'descrizione_completa' => $row['descrizione_completa'],
-                'images' => []
+                'images' => [],
+                'roles' => []
             ];
 
+            //elabora dettagli immagini
             if (!empty($row['immagini_details'])) {
                 $all_image_details = explode(',', $row['immagini_details']);
 
@@ -127,9 +179,103 @@ class Project {
                     }
                 }
             }
+
+            // elabora gli ID dei ruoli
+            if (!empty($row['ruoli_ids'])) {
+                $all_role_ids = explode(',', $row['ruoli_ids']);
+                $project_data['roles'] = array_map('intval', $all_role_ids); // ogni ID di ruolo a intero
+            }
+
             $projects[] = $project_data;
         }
 
+        return $projects;
+    }
+
+    /**
+     * Recupera i progetti visibili per un dato ID ruolo.
+     * Un ruolo con un ID più alto può vedere i progetti associati al suo ID e a tutti gli ID ruolo inferiori.
+     *
+     * @param int $role_id L'ID del ruolo per cui recuperare i progetti.
+     * @return array Un array di progetti visibili per il ruolo specificato, inclusi quelli di livelli inferiori.
+     */
+    public function getAllProjectsByRole(int $role_id) {
+        require_once __DIR__ . "/../protected/minimum_authorization_level.php";
+
+        $query = "
+            SELECT
+                p.id,
+                p.titolo,
+                p.titolo_footer,
+                p.data_creazione,
+                p.descrizione_breve,
+                p.descrizione_completa,
+                GROUP_CONCAT(DISTINCT CONCAT(img.percorso_file, '|||', img.nome_file) ORDER BY img.id ASC) AS immagini_details,
+                GROUP_CONCAT(DISTINCT pr.ruolo_id ORDER BY pr.ruolo_id ASC) AS ruoli_ids
+            FROM progetti p
+            LEFT JOIN immagini_progetti img ON p.id = img.progetto_id
+            LEFT JOIN progetti_ruoli pr ON p.id = pr.progetto_id
+            WHERE
+                pr.ruolo_id >= ? -- (1) Progetti assegnati, visibili per il ruolo corrente o ruoli inferiori.
+                OR (
+                    pr.progetto_id IS NULL
+                    AND ? <= " . MINIMUM_REQUIRED_AUTHORIZATION_LEVEL . "
+                )
+            GROUP BY p.id, p.titolo, p.titolo_footer, p.data_creazione, p.descrizione_breve, p.descrizione_completa
+            ORDER BY p.data_creazione DESC
+        ";
+
+        $resSet = $this->connection->prepare($query);
+
+        if ($resSet === false) {
+            error_log("Errore nella preparazione della query getProjectsByRole: " . $this->connection->error);
+            return [];
+        }
+
+        // Lega l'ID del ruolo come parametro intero
+        // doppio parametro
+        $resSet->bind_param("ii", $role_id, $role_id);
+
+        $resSet->execute();
+        $result = $resSet->get_result();
+        $projects = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $project_data = [
+                'id' => $row['id'],
+                'titolo' => $row['titolo'],
+                'titolo_footer' => $row['titolo_footer'],
+                'data_creazione' => $row['data_creazione'],
+                'descrizione_breve' => $row['descrizione_breve'],
+                'descrizione_completa' => $row['descrizione_completa'],
+                'images' => [],
+                'roles' => []
+            ];
+
+            // Elaborazione delle immagini
+            if (!empty($row['immagini_details'])) {
+                $all_image_details = explode(',', $row['immagini_details']);
+                foreach ($all_image_details as $image_detail_string) {
+                    $parts = explode('|||', $image_detail_string);
+                    if (count($parts) === 2) {
+                        $project_data['images'][] = [
+                            'path' => trim($parts[0]),
+                            'name' => trim($parts[1])
+                        ];
+                    }
+                }
+            }
+
+            // Elaborazione degli ID dei ruoli
+            if (!empty($row['ruoli_ids'])) {
+                $all_role_ids = explode(',', $row['ruoli_ids']);
+                $project_data['roles'] = array_map('intval', $all_role_ids);
+            }
+
+            $projects[] = $project_data;
+        }
+
+        $resSet->close();
         return $projects;
     }
 
@@ -155,12 +301,10 @@ class Project {
 
         while ($row = $result->fetch_assoc()) {
             // Ricostruisci il percorso fisico completo del file
-            // Assumi che il "percorso_file" nel DB sia relativo alla root web (es. assets/uploads/nome_file.jpg)
-            // e che la root web sia 3 livelli sopra la directory di questa classe (Project.php)
             $base_dir = __DIR__ . "/../../"; // Risale a luigi-tanzillo.com/
             $full_path = realpath($base_dir . $row['percorso_file']); // Combina con il percorso relativo dal DB
 
-            if ($full_path !== false) { // Assicurati che il percorso sia valido
+            if ($full_path !== false) {
                 $paths[] = $full_path;
             }
         }

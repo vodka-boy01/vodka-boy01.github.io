@@ -417,7 +417,8 @@ main{
     padding-bottom: 30px;
 }
 
-#slider-title {
+#page-title {
+    text-align: center;
     background-color: var(--color-hover);
     min-width: 100vw;
     font-size: clamp(30px, 4vw, 50px);
@@ -427,12 +428,41 @@ main{
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-#slider-title h1 {
+#slider-title {
+    font-size: clamp(30px, 3vw, 30px);
     margin: 0;
-    padding: 0;
+    padding: 6px;
+    cursor: auto;
+    min-height: 94px;
 }
 
-.slider-container {
+#short-description {
+    font-size: clamp(20px, 3vw, 20px);
+    margin: 0;
+    padding: 6px;
+    cursor: auto;
+    min-height: 91px;
+}
+
+.link-scheda-progetto{
+    font-size: clamp(13px, 2vw, 16px);
+    padding-right: 10px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.link-scheda-progetto:hover{
+    color: var(--color-hover);
+}
+
+#container-link-scheda-progetto{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.slider-container{
     display: flex;
     justify-content: flex-start;
     gap: 20px;
@@ -448,7 +478,7 @@ main{
     display: none;
 }
 
-.slide {
+.slide{
     flex: 0 0 auto;
     width: clamp(280px, 80vw, 400px);
     scroll-snap-align: center;
@@ -476,12 +506,15 @@ main{
 }
 
 .slide-desc {
-    padding: 15px;
     font-size: clamp(14px, 2vw, 16px);
     color: var(--main-color, #555);
     line-height: 1.5;
-    text-align: left;
-    text-align: center;
+}
+
+.project-text{
+    word-wrap: break-word;     
+    overflow-wrap: break-word; 
+    white-space: normal;   
 }
 
 .slider-navigation {
@@ -518,6 +551,8 @@ main{
     transform: scale(1.1);
 }
 
+
+
 @media (max-width: 768px) {
     .slider-container {
         padding: 1rem;
@@ -540,6 +575,61 @@ main{
         width: 40px;
         height: 40px;
         font-size: 20px;
+    }
+}
+/* Container per la visualizzazione a griglia dei progetti */
+.projects-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 2rem;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.projects-grid-container::-webkit-scrollbar {
+    display: none;
+}
+
+.project-grid-card {
+    flex: 0 0 auto;
+    width: clamp(280px, 45%, 400px);
+    background-color: var(--bg-color, #f4f4f4);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-grid-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.hidden-navigation {
+    display: none;
+}
+
+.project-grid-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .project-grid-card {
+        width: clamp(250px, 90vw, 350px);
+    }
+
+    .project-grid-image {
+        height: 200px;
     }
 }
 

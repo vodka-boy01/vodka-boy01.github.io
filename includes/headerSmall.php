@@ -45,7 +45,7 @@
                     </ul>
                 <?php else: ?>
                     <div class="dropdown">
-                        <h1 class="dropdown-button">Benvenuto <?php echo htmlspecialchars($_SESSION['nome']); ?>!</h1>
+                        <h1 class="dropdown-button"><?php echo htmlspecialchars($_SESSION['ruolo']). ' ' . htmlspecialchars($_SESSION['nome']); ?></h1>
                         <div class="dropdown-content">
                             <a href="index.php?page=profile" title="Visualizza il tuo profilo">Visualizza profilo</a>
                             <?php if ($loggedIn && $authorized): ?>

@@ -1,8 +1,3 @@
-<style>
-	#testo12{
-		padding: 20px;
-	}
-</style>
 <?php
 
   require_once __DIR__ . '/../php/query/database.php';
@@ -12,25 +7,22 @@
   $conn = (new database())->connect();
   $userOperations = new user($conn);
   $projectOperations = new project($conn); 
-  
+  $userRoleId = $_SESSION['ruoloId'] ?? USER_AUTHORIZATION_LEVEL;
+
   // Recupera tutti i progetti dal database
-  $projects = $projectOperations->getAllProjects();
+  $projects = $projectOperations->getAllProjectsByRole($userRoleId);//TODO:verifica funzionalita
 
   $conn->close();
 //TODO: se il raggrupopoamento di visualizzazione del progetto è uguale a null è visualizzabile a tutti, altrimenti solo a quelli presenti nellarray 
 ?>
 
 <section class="image-slider">
-    <div id="slider-title">
-        <h1>I miei progetti</h1> 
-    </div>
-
     <div class="slider-container" id="projectSlider">
         <?php if (!empty($projects)): ?>
             <?php foreach ($projects as $project): ?>
                 <div class="slide">
                     <div class="project-card">
-                        <h1><?php echo htmlspecialchars($project['titolo']); ?></h1>
+                        <h1 id="slider-title" class="project-text"><?php echo htmlspecialchars($project['titolo']); ?></h1>
 
                         <div class="main-project-image-container">
                             <?php
@@ -62,7 +54,15 @@
                             </div>
                         <?php endif; ?>
 
-                        <p class="short-description"><?php echo htmlspecialchars($project['descrizione_breve']); ?></p>
+                        <p id="short-description" class="project-text"><?php echo htmlspecialchars($project['descrizione_breve']); ?></p>
+                        
+                        <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                            <div id="container-link-scheda-progetto">
+                                <h3 class="link-scheda-progetto">Apri scheda progetto</h3>
+                                <i class="fa-solid fa-arrow-up-right-from-square link-scheda-progetto"></i>
+                            </div>
+                        </a>
+
                     </div>
                 </div>
             <?php endforeach; ?>
