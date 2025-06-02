@@ -5,8 +5,7 @@
 	</style>
 	
 	<?php
-    	require_once __DIR__ . "/../php/protected/minimum_authorization_level.php";
-
+	//in questo punto su inifinity free il percorso non viene trovato, va definita una cartella di lavoro statica e fatto riferimento li, poi eliminate tutte le chiamamte a classi e inserite nel main 
 		session_start();
 
 		//utente loggato?
