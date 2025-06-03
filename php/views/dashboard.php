@@ -234,7 +234,7 @@
                 <span><?php echo htmlspecialchars($project['titolo']); ?> (creato il: <?php echo date("d/m/Y", strtotime($project['data_creazione'])); ?>)</span>
 
                 <!--Conferma eliminazione con action request allert-->
-                <div class="flex items-center gap-[5px]">
+                <div class="flex items-center gap-[5px]"x>
                   <!--Link al progetto-->
                   <button onclick="window.location.href='/../index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>'" class="w-8 h-8 flex items-center justify-center text-green-400 hover:text-green-600" title="vai al progetto">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -320,14 +320,15 @@
           </div>
 
           <!--Raggruppamento visualizzazione progetto-->
+          <label class="block mb-2">Impostazione visualizzazione progetto</label>
           <div class="mb-4 relative inline-block">
-            <label class="block mb-2">Visualizza Progetto Per Ruoli</label>
             <div class="roles-dropdown-trigger input" id="selected-roles-display">
-              Seleziona Ruoli
+              Visualizzabile
             </div>
             <!--lista di tutti i ruoli-->
             <!--Mostra solo la lista dei ruoli al di sotto del MINIMUM_REQUIRED_AUTHORIZATION_LEVEL dei ruoli che amministratore che possono vedere tutti i progetti a prescindere-->
             <div class="roles-dropdown-content" id="roles-options">
+              <p>Per utenti:</p>
               <?php 
                 foreach ($roles as $role): 
                 if(intval($role['id']) > MINIMUM_REQUIRED_AUTHORIZATION_LEVEL){
@@ -341,7 +342,7 @@
                 endforeach; 
               ?>
             </div>
-
+            
             <!--<input type="hidden" name="selected_roles_hidden" id="selected-roles-hidden">-->
           </div>
 

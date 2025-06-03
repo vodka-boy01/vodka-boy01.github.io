@@ -17,7 +17,23 @@
     </div>
     <!-- Header -->
     <?php 
-    
+    	require_once __DIR__ . "../php/protected/minimum_authorization_level.php";
+    	require_once __DIR__ . "../php/query/database.php";
+    	require_once __DIR__ . "../php/query/operations.php";
+    	require_once __DIR__ . "../php/query/project.php";
+    	require_once __DIR__ . "../php/query/user.php";
+        session_start(); 
+        $loggedIn = isset($_SESSION['username']);
+
+		//utente autorizzato per l'accesso alla pagina cpanel?
+		if($loggedIn){
+			$ruoloId = intval($_SESSION['ruoloId']);
+
+			//livello di autorizzazione richiesto
+			$authorized = $ruoloId <= MINIMUM_REQUIRED_AUTHORIZATION_LEVEL;	
+
+		}
+
         //pagina da includere
         $page = $_GET['page'] ?? 'home';
 
@@ -51,14 +67,14 @@
             }elseif ($page === 'home') {
                 include 'pages/home.php';
 
-            }elseif (($page === 'mysqlInfinity') && (($_SESSION['ruolo'] === "admin") || ($_SESSION['ruolo'] === "owner"))) {
+            }elseif (($page === 'mysqlInfinity') && ($loggedIn && $authorized)) {
                 header("Location: https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo");
                 // echo '<iframe src="https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo" frameborder="0"></iframe>';
                 
-            }else if(($page === 'mysqlLocal') && (($_SESSION['ruolo'] === "admin") || ($_SESSION['ruolo'] === "owner"))){
+            }else if(($page === 'mysqlLocal') && ($loggedIn && $authorized)){
                 header("Location: http://localhost/phpmyadmin/");
                 
-            }else if(($page === 'dashboard') && (($_SESSION['ruolo'] === "admin") || ($_SESSION['ruolo'] === "owner"))){
+            }else if(($page === 'dashboard') && ($loggedIn && $authorized)){
                 //include 'php\views\dashboard.php';
                 //echo '<script>window.open("php/views/dashboard.php", "_blank");</script>';
                 header("Location: php/views/dashboard.php");

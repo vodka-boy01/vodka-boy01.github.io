@@ -1,8 +1,4 @@
 <?php
-    require_once __DIR__ . "/../php/query/database.php";
-    require_once __DIR__ . "/../php/query/project.php";
-    require_once __DIR__ . "/../php/query/user.php";
-    
     $conn = (new database())->connect();
     $userOperations = new user($conn);
     $projectOperations = new project($conn); 
@@ -62,7 +58,7 @@
         </div>
     </section>
     <?php else:?>
-        <h1 style="text-align: center;">Il progetto selezionato non ha contenuti multimediali</h1>
+        <h1 style="text-align: center; padding-bottom: 20px; font-size:30px;">Il progetto selezionato non ha contenuti multimediali</h1>
     <?php endif?>
     
     <!--

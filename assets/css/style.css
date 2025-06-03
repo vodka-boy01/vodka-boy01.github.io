@@ -658,7 +658,7 @@ main{
     flex: 1;
     min-width: 300px;
     text-align: left;
-    padding: 20px;
+    padding: 25px;
     background-color: var(--bg-color);
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);

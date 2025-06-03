@@ -1,7 +1,4 @@
 <?php
-	require_once __DIR__ . "/../php/query/database.php";
-    require_once __DIR__ . "/../php/query/project.php";
-    
     $conn = (new database())->connect();
     $projectOperations = new project($conn); 
     
@@ -11,6 +8,7 @@
 	$allProjects = $projectOperations->getAllProjectsByRole($userRoleId);
 	$lastFour = array_slice($allProjects, 0, 4);
 
+	$conn->close();
 ?>
 <footer>
 	<div id="footer_links">

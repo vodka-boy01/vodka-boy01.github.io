@@ -1,10 +1,5 @@
 <?php
     $image_alt = 'https://placehold.co/500x300/333/ffffff?text=Immagine+Non+Disponibile';
-
-    require_once __DIR__ . '/../php/query/database.php';
-    require_once __DIR__ . '/../php/query/project.php';
-    require_once __DIR__ . '/../php/query/user.php';
-
     $conn = (new database())->connect();
     $userOperations = new user($conn);
     $projectOperations = new project($conn); 
