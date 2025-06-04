@@ -11,9 +11,6 @@
 </style>
 
 <?php 
-    require_once __DIR__ . "/../php/protected/minimum_authorization_level.php";
-
-    session_start(); 
 	//utente loggato?
 	$loggedIn = isset($_SESSION['username']);
 

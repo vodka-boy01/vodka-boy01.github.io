@@ -222,3 +222,4 @@ input:checked + .slider:before {
   position: relative;
   width: fit-content;
 }
+

@@ -1,9 +1,4 @@
 <?php
-
-  require_once __DIR__ . '/../php/query/database.php';
-  require_once __DIR__ . '/../php/query/project.php';
-  require_once __DIR__ . '/../php/query/user.php';
-
   $conn = (new database())->connect();
   $userOperations = new user($conn);
   $projectOperations = new project($conn); 

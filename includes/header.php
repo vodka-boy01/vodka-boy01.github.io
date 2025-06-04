@@ -5,9 +5,7 @@
 	</style>
 	
 	<?php
-	//in questo punto su inifinity free il percorso non viene trovato, va definita una cartella di lavoro statica e fatto riferimento li, poi eliminate tutte le chiamamte a classi e inserite nel main 
-		session_start();
-
+		//in questo punto su inifinity free il percorso non viene trovato, va definita una cartella di lavoro statica e fatto riferimento li, poi eliminate tutte le chiamamte a classi e inserite nel main 
 		//utente loggato?
 		$loggedIn = isset($_SESSION['username']);
 
