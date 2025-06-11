@@ -55,20 +55,35 @@
     <!-- Contenuto dinamico -->
         <main>
             <?php
-                if($page === 'profile') {
+                if($page === 'profilo') {
+                    ?>
+                        <div id="page-title">
+                            <h1><?php echo $page?></h1> 
+                        </div>
+                    <?php
                     include 'pages/profile.php';
 
                 }elseif ($page === 'about') {
+                    ?>
+                        <div id="page-title">
+                            <h1><?php echo $page?></h1> 
+                        </div>
+                    <?php
                     include 'pages/about.php';
 
-                }elseif ($page === 'projects') {
+                }elseif ($page === 'progetti') {
                     include 'pages/projects.php';
 
-                }elseif ($page === 'events') {
+                }elseif ($page === 'eventi') {
                     include 'pages/projects.php';
 
-                }elseif ($page === 'contact') {
-                    include 'pages/contact.php';
+                }elseif ($page === 'contatti') {
+                    ?>
+                        <div id="page-title">
+                            <h1><?php echo $page?></h1> 
+                        </div>
+                    <?php
+                    include 'pages/contacts.php';
 
                 }elseif ($page === 'home') {
                     include 'pages/home.php';
@@ -88,7 +103,8 @@
                     //echo '<script>window.open("php/views/dashboard.php", "_blank");</script>';
                     header("Location: php/views/dashboard.php");
                     
-                }else if($page === 'project'){
+                }else if($page === 'progetto'){
+
                     include 'pages/project_selective.php';
 
                 }else {

@@ -25,7 +25,7 @@
                             $main_image_src = !empty($project['images'][0]['path']) ? htmlspecialchars($project['images'][0]['path']) : 'https://placehold.co/500x300/333/ffffff?text=Immagine+Non+Disponibile';
                             ?>
                             <!--Immagine cliccabile, link get con id progetto, verso index con p.id-->
-							<a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+							<a href="index.php?page=progetto&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
                                 <!--Prima immagine del progetto-->
                                 <img src="<?php echo $main_image_src; ?>" alt="<?php echo htmlspecialchars($project['titolo']); ?>" class="main-project-image">
 
@@ -51,7 +51,7 @@
 
                         <p id="short-description" class="project-text"><?php echo htmlspecialchars($project['descrizione_breve']); ?></p>
                         
-                        <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda">
+                        <a href="index.php?page=progetto&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda">
                             <div id="container-link-scheda-progetto">
                                 <h3 class="link-scheda-progetto">Apri scheda <?php echo htmlspecialchars($project['tipo'])?></h3>
                                 <i class="fa-solid fa-arrow-up-right-from-square link-scheda-progetto"></i>

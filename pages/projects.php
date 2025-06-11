@@ -6,10 +6,10 @@
     $allProjects = $projectOperations->getAllProjectsByRole($userRoleId);
 
 
-    if($_GET['page'] === 'events'){
+    if($_GET['page'] === 'eventi'){
         $richiesta_visualizzazione = "evento";
 
-    }else if($_GET['page'] === 'projects'){
+    }else if($_GET['page'] === 'progetti'){
         $richiesta_visualizzazione = "progetto";
 
     }
@@ -45,14 +45,14 @@
                             <?php
                             $main_image_src = !empty($project['images'][0]['path']) ? htmlspecialchars($project['images'][0]['path']) : 'https://placehold.co/500x300/333/ffffff?text=Immagine+Non+Disponibile';
                             ?>
-                            <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                            <a href="index.php?page=progetto&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
                                 <img src="<?php echo $main_image_src; ?>" alt="<?php echo htmlspecialchars($project['titolo']); ?>" class="project-grid-image">
                             </a>
                         </div>
 
                         <p id="short-description" class="project-text"><?php echo htmlspecialchars($project['descrizione_breve']); ?></p>
                         
-                        <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                        <a href="index.php?page=progetto&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
                             <div id="container-link-scheda-progetto">
                                 <h3 class="link-scheda-progetto">Apri scheda <?php echo htmlspecialchars($project['tipo'])?></h3>
                                 <i class="fa-solid fa-link link-scheda-progetto"></i>

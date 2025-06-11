@@ -41,12 +41,25 @@ class user{
      * @return bool restituisce true se le credenziali sono corrette, altrimenti false
      */
     public function login($username, $password){
+        $current_dateTime = date('Y-m-d H:i:s');
+        //verifica presenza utente
         $resSet = $this->connection->query("SELECT id FROM utenti WHERE username = '$username' AND password = '$password'");
-        
+        //aggiorna ultimo login query 
+        $queryLatestLogin = "UPDATE utenti SET latest_login = '$current_dateTime' WHERE username = '$username' ";
+
         if($resSet->num_rows > 0){
-            return true;
+            $resSet2 = $this->connection->query($queryLatestLogin);
+
+            if($resSet2 && $this->connection->affected_rows > 0){
+                return true;
+
+            }else{
+                return false;
+
+            }
         }else{
             return false;
+
         }
     }
 
@@ -75,7 +88,7 @@ class user{
      * @return bool true on success, false on failure
      */
     public function delete($username){
-        $query = "DELETE * FROM utenti WHERE username = '$username'";
+        $query = "DELETE FROM utenti WHERE username = '$username'";
         $resSet = $this->connection->query($query);
 
         return $resSet;

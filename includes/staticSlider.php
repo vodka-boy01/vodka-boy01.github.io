@@ -5,7 +5,7 @@
                             <h1>Build fascia alta gaming</h1>
 
                             <div class="project-images">
-                                <img src="<?php echo $image_alt; ?>" alt=""class="thumbnail-image <?php echo($index === 0); ?>">
+                                <img src="<?php echo $image_alt; ?>" alt="errore" class="thumbnail-image <?php echo($index === 0); ?>">
                             </div>
 
                             <p class="short-description">PC da circa 1800 euro</p>

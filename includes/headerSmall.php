@@ -29,8 +29,8 @@
             <div id="nav_links">
                 <li><a href="index.php" title="Home" class="home-button">Home</a></li>
                 <li><a href="index.php?page=about" title="Informazioni">About</a></li>
-                <li><a href="index.php?page=projects" title="I miei Progetti">Progetti</a></li>
-                <li><a href="index.php?page=events" title="Il mio percorso formativo">Eventi</a></li>
+                <li><a href="index.php?page=progetti" title="I miei Progetti">Progetti</a></li>
+                <li><a href="index.php?page=eventi" title="Il mio percorso formativo">Eventi</a></li>
                 <li><a href="index.php?page=contatti" title="Contattami">Contatti</a></li>
             </div>
 
@@ -44,7 +44,7 @@
                     <div class="dropdown">
                         <h1 class="dropdown-button"><?php echo htmlspecialchars($_SESSION['ruolo']). ' ' . htmlspecialchars($_SESSION['nome']); ?></h1>
                         <div class="dropdown-content">
-                            <a href="index.php?page=profile" title="Visualizza il tuo profilo">Visualizza profilo</a>
+                            <a href="index.php?page=profilo" title="Visualizza il tuo profilo">Visualizza profilo</a>
                             <?php if ($loggedIn && $authorized): ?>
                                 <a href="index.php?page=mysqlInfinity">PhpMyAdmin infinity</a>
                                 <a href="index.php?page=mysqlLocal">PhpMyAdmin locale</a>
@@ -54,7 +54,7 @@
                             <a href="includes/logout.php">Logout</a>
                         </div>
                     </div>
-                    <a href="index.php?page=profile" id="login-icon" class="fa-solid fa-circle-user" title="Visualizza il tuo profilo"></a>
+                    <a href="index.php?page=profilo" id="login-icon" class="fa-solid fa-circle-user" title="Visualizza il tuo profilo"></a>
                 <?php endif; ?>
             </div>
 

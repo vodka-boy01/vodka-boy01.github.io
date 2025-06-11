@@ -76,8 +76,6 @@
     $stato = isset($_POST['status']) ? 1 : 0;//conversione da on off a 1 : 0 1===progetto 0===evento
     //la lista di ruoli che possono visionare il progetto 
     $raggruppamento = $_POST['roles'] ?? '';
-    ///print_r($raggruppamento);
-    //exit;
     $uploaded_image_details = [];
     $target_dir = __DIR__ . "/../../assets/uploads/projects/";//percorso
 
