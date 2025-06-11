@@ -122,6 +122,7 @@ class Project {
                     p.data_creazione,
                     p.descrizione_breve,
                     p.descrizione_completa,
+                    p.stato,
                     GROUP_CONCAT(CONCAT(img.percorso_file, '|||', img.nome_file) ORDER BY img.id ASC) AS immagini_details,
                     GROUP_CONCAT(DISTINCT pr.ruolo_id ORDER BY pr.ruolo_id ASC) AS ruoli_ids
                 FROM progetti p
@@ -140,6 +141,7 @@ class Project {
                     p.data_creazione,
                     p.descrizione_breve,
                     p.descrizione_completa,
+                    p.stato,
                     GROUP_CONCAT(CONCAT(img.percorso_file, '|||', img.nome_file) ORDER BY img.id ASC) AS immagini_details,
                     GROUP_CONCAT(DISTINCT pr.ruolo_id ORDER BY pr.ruolo_id ASC) AS ruoli_ids
                 FROM progetti p
@@ -161,11 +163,12 @@ class Project {
                 'data_creazione' => $row['data_creazione'],
                 'descrizione_breve' => $row['descrizione_breve'],
                 'descrizione_completa' => $row['descrizione_completa'],
+                'tipo' => ($row['stato'] === 1) ? 'progetto' : 'evento',//tipo scheda
                 'images' => [],
                 'roles' => []
             ];
 
-            //elabora dettagli immagini
+            // dettagli immagini
             if (!empty($row['immagini_details'])) {
                 $all_image_details = explode(',', $row['immagini_details']);
 
@@ -210,6 +213,7 @@ class Project {
                 p.data_creazione,
                 p.descrizione_breve,
                 p.descrizione_completa,
+                p.stato,
                 GROUP_CONCAT(DISTINCT CONCAT(img.percorso_file, '|||', img.nome_file) ORDER BY img.id ASC) AS immagini_details,
                 GROUP_CONCAT(DISTINCT pr.ruolo_id ORDER BY pr.ruolo_id ASC) AS ruoli_ids
             FROM progetti p
@@ -248,6 +252,7 @@ class Project {
                 'data_creazione' => $row['data_creazione'],
                 'descrizione_breve' => $row['descrizione_breve'],
                 'descrizione_completa' => $row['descrizione_completa'],
+                'tipo' => ($row['stato'] === 1) ? 'progetto' : 'evento',//tipo scheda
                 'images' => [],
                 'roles' => []
             ];

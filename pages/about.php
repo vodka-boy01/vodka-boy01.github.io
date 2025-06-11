@@ -73,9 +73,9 @@
 
                                     <p id="short-description" class="project-text"><?php echo htmlspecialchars($project['descrizione_breve']); ?></p>
                                     
-                                    <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                                    <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda">
                                         <div id="container-link-scheda-progetto">
-                                            <h3 class="link-scheda-progetto">Apri scheda progetto</h3>
+                                            <h3 class="link-scheda-progetto">Apri scheda</h3>
                                             <i class="fa-solid fa-link link-scheda-progetto"></i>
                                         </div>
                                     </a>
@@ -84,7 +84,7 @@
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <p class="text-center text-gray-400">Nessun progetto trovato.</p>
+                        <p class="text-center text-gray-400">Nessuna Scheda trovata.</p>
                     <?php endif; ?>
                 </div>
 

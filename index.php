@@ -51,43 +51,48 @@
 
     <!-- Contenuto dinamico -->
         <main>
-        <?php
-            if($page === 'profile') {
-                include 'pages/profile.php';
+            <?php
+                if($page === 'profile') {
+                    include 'pages/profile.php';
 
-            }elseif ($page === 'about') {
-                include 'pages/about.php';
+                }elseif ($page === 'about') {
+                    include 'pages/about.php';
 
-            }elseif ($page === 'projects') {
-                include 'pages/projects.php';
+                }elseif ($page === 'projects') {
+                    include 'pages/projects.php';
 
-            }elseif ($page === 'contact') {
-                include 'pages/contact.php';
+                }elseif ($page === 'events') {
+                    include 'pages/projects.php';
 
-            }elseif ($page === 'home') {
-                include 'pages/home.php';
+                }elseif ($page === 'contact') {
+                    include 'pages/contact.php';
 
-            }elseif (($page === 'mysqlInfinity') && ($loggedIn && $authorized)) {
-                header("Location: https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo");
-                // echo '<iframe src="https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo" frameborder="0"></iframe>';
-                
-            }else if(($page === 'mysqlLocal') && ($loggedIn && $authorized)){
-                header("Location: http://localhost/phpmyadmin/");
-                
-            }else if(($page === 'dashboard') && ($loggedIn && $authorized)){
-                //include 'php\views\dashboard.php';
-                //echo '<script>window.open("php/views/dashboard.php", "_blank");</script>';
-                header("Location: php/views/dashboard.php");
-                
-            }else if($page === 'project'){
-                include 'pages/project_selective.php';
-            
-            }else {
-                include 'pages/home.php';
+                }elseif ($page === 'home') {
+                    include 'pages/home.php';
 
-            }
+                }elseif (($page === 'mysqlInfinity') && ($loggedIn && $authorized)) {
+                    header("Location: https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo");
+                    // echo '<iframe src="https://php-myadmin.net/db_structure.php?db=if0_38885359_luigi_tanzillo" frameborder="0"></iframe>';
+                    
+                }else if(($page === 'mysqlLocal') && ($loggedIn && $authorized)){
+                    header("Location: http://localhost/phpmyadmin/");
+                    
+                }else if(($page === 'phpInfo') && ($loggedIn && $authorized)){
+                    header("Location: pages/phpInfo.php");
+                    
+                }else if(($page === 'dashboard') && ($loggedIn && $authorized)){
+                    //include 'php\views\dashboard.php';
+                    //echo '<script>window.open("php/views/dashboard.php", "_blank");</script>';
+                    header("Location: php/views/dashboard.php");
+                    
+                }else if($page === 'project'){
+                    include 'pages/project_selective.php';
 
-        ?> 
+                }else {
+                    include 'pages/home.php';
+
+                }
+            ?> 
         </main>
     <!-- Footer -->
     <?php include "includes/footer.php"; ?>

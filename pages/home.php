@@ -4,7 +4,7 @@
 </section>
 
 <div id="page-title">
-    <h1>I miei progetti</h1>
+    <h1>Progetti ed eventi recenti</h1>
 </div>
 
 <!--slider con raccolta immagini e descrizione-->

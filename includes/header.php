@@ -45,6 +45,7 @@
 							<?php if($loggedIn && $authorized): ?>
 								<a href="index.php?page=mysqlInfinity">PhpMyAdmin infinity</a>
 								<a href="index.php?page=mysqlLocal">PhpMyAdmin locale</a>
+								<a href="index.php?page=phpInfo">Php info</a>
 								<a href="index.php?page=dashboard">Admin dashboard</a>
 							<?php endif; ?>	
 							<a href="includes/logout.php">Logout</a>
@@ -67,7 +68,7 @@
 					<li><a href="index.php" title="home" class="home-button">Home</a></li>
 					<li><a href="index.php?page=about" title= title="Informazioni">About</a></li>
 					<li><a href="index.php?page=projects" title="I miei Progetti">Progetti</a></li>
-					<li><a href="index.php?page=" title="Il mio percorso fornativo">didattica</a></li>
+                	<li><a href="index.php?page=events" title="Il mio percorso formativo">Eventi</a></li>
 					<li><a href="index.php?page=" title="Contattami">Contatti</a></li>
 				</div>
 				<div id="nav_searchBar_container">

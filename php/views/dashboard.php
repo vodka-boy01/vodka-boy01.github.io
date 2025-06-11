@@ -38,7 +38,6 @@
 <body class="min-h-screen p-6">
   <?php
   session_start();
-
   require_once __DIR__ . '/../query/database.php';
   require_once __DIR__ . '/../query/user.php';
   require_once __DIR__ . '/../query/project.php';
@@ -74,9 +73,9 @@
     $titolo_footer = $_POST['footer-title'] ?? '';
     $descrizione_breve = $_POST['desc'] ?? '';
     $descrizione_completa = $_POST['full'] ?? '';
-    $stato = isset($_POST['status']) ? 1 : 0;//conversione da on off a 1 : 0
+    $stato = isset($_POST['status']) ? 1 : 0;//conversione da on off a 1 : 0 1===progetto 0===evento
     //la lista di ruoli che possono visionare il progetto 
-    $raggruppamento = $_POST['roles'];
+    $raggruppamento = $_POST['roles'] ?? '';
     ///print_r($raggruppamento);
     //exit;
     $uploaded_image_details = [];
@@ -226,7 +225,7 @@
       <!--Progetti esistenti-->
       <div class="flex gap-6 mb-8">
       <div class="w-1/2 bg-gray-800 rounded-lg shadow-md p-6 text-white z" id="new_project">
-        <h2 class="text-2xl font-semibold mb-4">Progetti Esistenti</h2>
+        <h2 class="text-2xl font-semibold mb-4">Progetti/Eventi Esistenti</h2>
         <ul class="space-y-3" id="project-list">
           <?php if (!empty($existingProjects)): ?>
             <?php foreach ($existingProjects as $project): ?>
@@ -236,18 +235,18 @@
                 <!--Conferma eliminazione con action request allert-->
                 <div class="flex items-center gap-[5px]"x>
                   <!--Link al progetto-->
-                  <button onclick="window.location.href='/../index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>'" class="w-8 h-8 flex items-center justify-center text-green-400 hover:text-green-600" title="vai al progetto">
+                  <button onclick="window.location.href='/../index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>'" class="w-8 h-8 flex items-center justify-center text-green-400 hover:text-green-600" title="vai alla scheda estesa">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   </button>
 
                   <!--Elimina progetto-->
-                  <form method="POST" style="display:inline;" onsubmit="return confirm('sei sicuro di voler eliminare questo progetto?');">
+                  <form method="POST" style="display:inline;" onsubmit="return confirm('sei sicuro di voler eliminare questa scheda?');">
 
                     <input type="hidden" name="action" value="delete_project">
 
                     <input type="hidden" name="project_id" value="<?php echo $project['id']; ?>">
                     
-                    <button type="submit" class="w-8 h-8 flex items-center justify-center text-red-400 hover:text-red-600" title="elimina progetto">
+                    <button type="submit" class="w-8 h-8 flex items-center justify-center text-red-400 hover:text-red-600" title="elimina scheda">
                       <i class="ri-delete-bin-line ri-lg"></i>
 
                     </button>
@@ -258,14 +257,14 @@
               </li>
             <?php endforeach; ?>
           <?php else: ?>
-            <li class="bg-gray-700 p-3 rounded">nessun progetto trovato.</li>
+            <li class="bg-gray-700 p-3 rounded">nessuna scheda trovata.</li>
           <?php endif; ?>
         </ul>
       </div>
 
       <!--Nuovo progetto-->
       <div class="w-1/2 bg-gray-800 rounded-lg shadow-md p-6 text-white">
-        <h2 class="text-2xl font-bold mb-6">Nuovo Progetto</h2>
+        <h2 class="text-2xl font-bold mb-6">Nuovo Progetto/Evento</h2>
         
         <form id="project-form" method="POST" enctype="multipart/form-data">
 
@@ -280,28 +279,28 @@
           <div class="mb-4">
             <label for="footer-title" class="block mb-2">Titolo per footer</label>
             <p class="text-gray-400">Caratteri: <span id="contatore-footer-title" class="contatore">0</span> / 20</p>
-            <input type="text" id="footer-title" name="footer-title" class="input w-full" placeholder="Descrizione breve (massimo 20 caratteri)" maxlength="20" required />
+            <input type="text" id="footer-title" name="footer-title" class="input w-full" placeholder="Titolo footer (massimo 20 caratteri)" maxlength="20" required />
           </div>
 
           <div class="mb-4">
             <label for="desc" class="block mb-2">Descrizione</label>
-            <p class="text-gray-400">Caratteri: <span id="contatore-project-description" class="contatore">0</span> / 50</p>
-            <input type="text" id="project-description" name="desc" class="input w-full" placeholder="Descrizione breve (massimo 50 caratteri)" maxlength="50" required />
+            <p class="text-gray-400">Caratteri: <span id="contatore-project-description" class="contatore">0</span> / 70</p>
+            <input type="text" id="project-description" name="desc" class="input w-full" placeholder="Descrizione breve (massimo 70 caratteri)" maxlength="70" required />
           </div>
 
           <div class="mb-4">
             <label for="full" class="block mb-2">descrizione completa</label>
-            <p class="text-gray-400">Caratteri: <span id="contatore-full" class="contatore">0</span> / 500</p>
-            <textarea id="full" name="full" rows="5" class="input resize-none w-full" placeholder="descrizione dettagliata (massimo 500 caratteri)" maxlength="500" required></textarea>
+            <p class="text-gray-400">Caratteri: <span id="contatore-full" class="contatore">0</span> / 1500</p>
+            <textarea id="full" name="full" rows="5" class="input resize-none w-full" placeholder="descrizione dettagliata (massimo 1500 caratteri)" maxlength="1500" required></textarea>
           </div>
 
           <div class="mb-6">
-            <label class="block mb-2 text-gray-400">immagini <span id="imgCount" class="text-sm text-gray-400">(0/10)</span></label>
+            <label class="block mb-2 text-gray-400">immagini <span id="imgCount" class="text-sm text-gray-400">(0/20)</span></label>
             <div class="w-full mb-4">
               <label for="imgs" class="flex items-center justify-center h-32 border-2 border-dashed border-gray-500 rounded cursor-pointer bg-gray-800 hover:bg-gray-700">
                 <div class="text-center">
                   <i class="ri-upload-2-line ri-xl"></i>
-                  <p class="mt-1 text-sm">carica immagini (max 10)</p>
+                  <p class="mt-1 text-sm">carica immagini (max 20)</p>
                 </div>
                 <input id="imgs" type="file" name="imgs[]" class="hidden" accept="image/*" multiple/>
               </label>
@@ -309,18 +308,18 @@
             <div id="preview-grid" class="grid grid-cols-5 gap-4"></div>
           </div>
 
-          <!--Stato progetto-->
+          <!--Tipo Scheda-->
           <div class="mb-4">
-            <label class="block mb-2">stato progetto</label>
+            <label class="block mb-2">tipo</label>
               <label class="switch">
               <input type="checkbox" id="status" name="status" checked />
               <span class="slider"></span>
             </label>
-            <span class="ml-2" id="status-text">attivo</span>
+            <span class="ml-2" id="status-text">Progetto</span>
           </div>
 
           <!--Raggruppamento visualizzazione progetto-->
-          <label class="block mb-2">Impostazione visualizzazione progetto</label>
+          <label class="block mb-2">Impostazione visualizzazione scheda</label>
           <div class="mb-4 relative inline-block">
             <div class="roles-dropdown-trigger input" id="selected-roles-display">
               Visualizzabile

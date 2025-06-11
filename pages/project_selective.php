@@ -20,10 +20,10 @@
     }
 
     if($selectedProject){
-        $message = $selectedProject['titolo'];
+        $message = $selectedProject['tipo'] . ": " . $selectedProject['titolo'];
 
     }else{
-        $message =  "Progetto: " . $projectId . " non trovato o non visibile per il tuo ruolo.";
+        $message = "Progetto: " . $projectId . " non trovato o non visibile per il tuo ruolo.";
 
     }
     
@@ -44,7 +44,7 @@
                     <div class="project-card">
 
                         <div class="project-images">
-                            <img src="<?php echo $image['path']; ?>" alt="<?php echo $image['name']; ?>" class="thumbnail-image <?php echo($index === 0 ? 'active' : ''); ?>">
+                            <img id="img-full" src="<?php echo $image['path']; ?>" alt="<?php echo $image['name']; ?>" class="thumbnail-image <?php echo($index === 0 ? 'active' : ''); ?>" style=" height: none;">
                         </div>
 
                     </div>
@@ -60,36 +60,21 @@
     <?php else:?>
         <h1 style="text-align: center; padding-bottom: 20px; font-size:30px;">Il progetto selezionato non ha contenuti multimediali</h1>
     <?php endif?>
-    
-    <!--
-    <div id="project-images">
-        <div class="about-image-right">
-            <?php
-            // Verifica se l'array 'images' esiste e non è vuoto
-            if (!empty($project['images'])) {
-                foreach ($project['images'] as $index => $image) {
-                    ?>
-                    <img src="<?php echo $image['path']; ?>" alt="<?php echo $image['name']; ?>" class="profile-card image-<?php echo $index; ?>">
-                    <?php
-                }
-            } else {
-                //fallback image
-                ?>
-                <img src="assets/img/placeholder.JPEG" alt="Immagine non disponibile" class="profile-card">
-                <?php
-            }
-            ?>
-        </div>
-    </div>
-    -->
-    <div class="about-content-wrapper" style="padding-left: 35px;">
-        <div class="about-text-left" style="text-align: center;">
+
+    <div class="project-info-wrapper" style="padding-left: 35px;">
+        <div class="project-info-left" style="text-align: center;">
             <h2 style="overflow-wrap: break-word;"><?php echo htmlspecialchars($project['titolo'])?></h2><br>
             <p style="text-align: left; overflow-wrap: break-word;"><?php echo htmlspecialchars($project['descrizione_completa'])?></p>
             
         </div>
+        
+        <div class="project-info-right" style="text-align: center;">
+            <h2><?php echo htmlspecialchars($project['tipo'])?></h2><br>
+            <p>ID: <?php echo htmlspecialchars($project['id']) ?></p>
+            <p>Tipo: <?php echo htmlspecialchars($project['tipo']) ?></p>
+            <p>creato il: <?php echo date("d/m/Y", strtotime($project['data_creazione'])); ?></p>
+        </div>
     </div>
-
 </section>
 
 <div id="page-title">

@@ -1,16 +1,35 @@
-<div id="page-title">
-    <h1>I miei progetti</h1> 
-</div>
-
 <?php
     $conn = (new database())->connect();
     $userOperations = new user($conn);
     $projectOperations = new project($conn);
     $userRoleId = $_SESSION['ruoloId'] ?? USER_AUTHORIZATION_LEVEL;
+    $allProjects = $projectOperations->getAllProjectsByRole($userRoleId);
 
-    $projects = $projectOperations->getAllProjectsByRole($userRoleId);
 
+    if($_GET['page'] === 'events'){
+        $richiesta_visualizzazione = "evento";
+
+    }else if($_GET['page'] === 'projects'){
+        $richiesta_visualizzazione = "progetto";
+
+    }
+
+    $projects = array_filter($allProjects, fn($p) => $p['tipo'] === $richiesta_visualizzazione);
     $conn->close();
+
+    if($richiesta_visualizzazione === "progetto"){
+        ?>
+            <div id="page-title">
+                <h1>Progetti recenti</h1> 
+            </div>
+        <?php
+    }else if($richiesta_visualizzazione === "evento"){
+        ?>
+            <div id="page-title">
+                <h1>Eventi recenti</h1> 
+            </div>
+        <?php
+    }
 
 ?>
 
@@ -35,7 +54,7 @@
                         
                         <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
                             <div id="container-link-scheda-progetto">
-                                <h3 class="link-scheda-progetto">Apri scheda progetto</h3>
+                                <h3 class="link-scheda-progetto">Apri scheda <?php echo htmlspecialchars($project['tipo'])?></h3>
                                 <i class="fa-solid fa-link link-scheda-progetto"></i>
                             </div>
                         </a>

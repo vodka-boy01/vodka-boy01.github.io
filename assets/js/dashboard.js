@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   imgs.addEventListener('change', e => {
     const files = Array.from(e.target.files);
-    const slots = 10 - uploadedImages.length;
+    const slots = 20 - uploadedImages.length;
     if (files.length > slots) {
-      return showToast('Puoi caricare massimo 10 immagini', 'error');
+      return showToast('Puoi caricare massimo 20 immagini', 'error');
     }
     files.forEach(file => {
-      if (uploadedImages.length < 10) {
+      if (uploadedImages.length < 20) {
         const reader = new FileReader();
         reader.onload = evt => {
           const wrapper = document.createElement('div');
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   status.addEventListener('change', () => {
-    statusText.textContent = status.checked ? 'Attivo' : 'Inattivo';
+    statusText.textContent = status.checked ? 'Progetto' : 'Evento';
   });
   
 });

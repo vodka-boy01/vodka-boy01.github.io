@@ -8,7 +8,7 @@
   $projects = $projectOperations->getAllProjectsByRole($userRoleId);//TODO:verifica funzionalita
 
   $conn->close();
-//TODO: se il raggrupopoamento di visualizzazione del progetto è uguale a null è visualizzabile a tutti, altrimenti solo a quelli presenti nellarray 
+  //TODO: se il raggrupopoamento di visualizzazione del progetto è uguale a null è visualizzabile a tutti, altrimenti solo a quelli presenti nellarray 
 ?>
 
 <section class="image-slider">
@@ -51,9 +51,9 @@
 
                         <p id="short-description" class="project-text"><?php echo htmlspecialchars($project['descrizione_breve']); ?></p>
                         
-                        <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                        <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda">
                             <div id="container-link-scheda-progetto">
-                                <h3 class="link-scheda-progetto">Apri scheda progetto</h3>
+                                <h3 class="link-scheda-progetto">Apri scheda <?php echo htmlspecialchars($project['tipo'])?></h3>
                                 <i class="fa-solid fa-arrow-up-right-from-square link-scheda-progetto"></i>
                             </div>
                         </a>
