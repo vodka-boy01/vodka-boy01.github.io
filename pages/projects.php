@@ -2,7 +2,7 @@
     $conn = (new database())->connect();
     $userOperations = new user($conn);
     $projectOperations = new project($conn);
-    $userRoleId = $_SESSION['ruoloId'] ?? USER_AUTHORIZATION_LEVEL;
+    $userRoleId = $_SESSION['ruoloId'] ?? GUEST_AUTHORIZATION_LEVEL;
     $allProjects = $projectOperations->getAllProjectsByRole($userRoleId);
 
 

@@ -2,7 +2,7 @@
     $conn = (new database())->connect();
     $userOperations = new user($conn);
     $projectOperations = new project($conn); 
-    $userRoleId = $_SESSION['ruoloId'];
+    $userRoleId = $_SESSION['ruoloId'] ?? GUEST_AUTHORIZATION_LEVEL;
     $message = '';
 
     //1: recupera tutti i progetti visibili in base al ruolo dell'utente

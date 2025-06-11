@@ -17,12 +17,15 @@
     </div>
     <!-- Header -->
     <?php 
+        //classi
     	require_once __DIR__ . "../php/protected/minimum_authorization_level.php";
     	require_once __DIR__ . "../php/query/database.php";
     	require_once __DIR__ . "../php/query/operations.php";
     	require_once __DIR__ . "../php/query/project.php";
     	require_once __DIR__ . "../php/query/user.php";
         session_start(); 
+
+        //verifica accesso
         $loggedIn = isset($_SESSION['username']);
 
 		//utente autorizzato per l'accesso alla pagina cpanel?

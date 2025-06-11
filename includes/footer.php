@@ -3,7 +3,7 @@
     $projectOperations = new project($conn); 
     
     //id progetto
-	$userRoleId = $_SESSION['ruoloId'] ?? 4;
+	$userRoleId = $_SESSION['ruoloId'] ?? GUEST_AUTHORIZATION_LEVEL;
 
 	$allProjects = $projectOperations->getAllProjectsByRole($userRoleId);
 	$lastFour = array_slice($allProjects, 0, 4);

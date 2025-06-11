@@ -235,7 +235,7 @@
                 <!--Conferma eliminazione con action request allert-->
                 <div class="flex items-center gap-[5px]"x>
                   <!--Link al progetto-->
-                  <button onclick="window.location.href='/../index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>'" class="w-8 h-8 flex items-center justify-center text-green-400 hover:text-green-600" title="vai alla scheda estesa">
+                  <button onclick="window.location.href='/../../index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>'" class="w-8 h-8 flex items-center justify-center text-green-400 hover:text-green-600" title="vai alla scheda estesa">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   </button>
 
