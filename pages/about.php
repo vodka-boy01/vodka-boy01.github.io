@@ -3,10 +3,9 @@
     $conn = (new database())->connect();
     $userOperations = new user($conn);
     $projectOperations = new project($conn); 
-    $role = $_SESSION['ruoloId'] ?? USER_AUTHORIZATION_LEVEL;
 
     // Recupera tutti i progetti dal database con ruolo about
-    $projects = $projectOperations->getAllProjectsByRole($role);//TODO:verifica funzionalita
+    $projects = $projectOperations->getAllProjectsByRole(ABOUT_PAGE);//TODO:verifica funzionalita
 
     $conn->close();
 ?>

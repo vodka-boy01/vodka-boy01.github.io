@@ -24,17 +24,17 @@ class Project {
      * @param array $raggruppamento array contenente gli ID dei ruoli.
      * @return bool|string true se ha successo, "duplicate_title" se il titolo esiste già, false per altri errori.
      */
-    public function addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details = [], $titolo_footer, $raggruppamento = []) {
+    public function addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details = [], $titolo_footer, $raggruppamento = [], $descrizione_link_1, $link_1, $descrizione_link_2, $link_2) {
         // avvio transazione
         $this->connection->begin_transaction();
 
         try {
             //query per l'inserimento del progetto
-            $query_project = "INSERT INTO progetti (titolo, descrizione_breve, descrizione_completa, stato, titolo_footer) VALUES (?, ?, ?, ?, ?)"; // Aggiunto un placeholder '?' per titolo_footer
+            $query_project = "INSERT INTO progetti (titolo, descrizione_breve, descrizione_completa, stato, titolo_footer, descrizione_link_1, link_1, descrizione_link_2, link_2) VALUES (?, ?, ?, ?, ?, ?, ?)"; // Aggiunto un placeholder '?' per titolo_footer
 
             $resSet_project = $this->connection->prepare($query_project);
 
-            $resSet_project->bind_param("sssss", $titolo, $descrizione_breve, $descrizione_completa, $stato, $titolo_footer); 
+            $resSet_project->bind_param("ssssssssss", $titolo, $descrizione_breve, $descrizione_completa, $stato, $titolo_footer, $descrizione_link_1, $link_1, $descrizione_link_2, $link_2); 
 
             if(!$resSet_project->execute()) {
                 // titolo duplicato codice 1062
@@ -214,6 +214,10 @@ class Project {
                 p.descrizione_breve,
                 p.descrizione_completa,
                 p.stato,
+                p.descrizione_link_1,
+                p.link_1,                
+                p.descrizione_link_2,
+                p.link_2,
                 GROUP_CONCAT(DISTINCT CONCAT(img.percorso_file, '|||', img.nome_file) ORDER BY img.id ASC) AS immagini_details,
                 GROUP_CONCAT(DISTINCT pr.ruolo_id ORDER BY pr.ruolo_id ASC) AS ruoli_ids
             FROM progetti p
@@ -254,7 +258,11 @@ class Project {
                 'descrizione_completa' => $row['descrizione_completa'],
                 'tipo' => ($row['stato'] === 1) ? 'progetto' : 'evento',//tipo scheda
                 'images' => [],
-                'roles' => []
+                'roles' => [],
+                'descrizione_link_1' => $row['descrizione_link_1'],
+                'link_1' => $row['link_1'],
+                'descrizione_link_1' => $row['descrizione_link_2'],
+                'link_2' => $row['link_2']
             ];
 
             // Elaborazione delle immagini

@@ -58,7 +58,7 @@
         </div>
     </section>
     <?php else:?>
-        <h1 style="text-align: center; padding-bottom: 20px; font-size:30px;">Il progetto selezionato non ha contenuti multimediali</h1>
+        <h1 style="text-align: center; padding-bottom: 20px; font-size:30px;">Il progetto selezionato non ha contenuti multimediali allegati</h1>
     <?php endif?>
 
     <div class="project-info-wrapper" style="padding-left: 35px;">
@@ -70,6 +70,7 @@
         
         <div class="project-info-right" style="text-align: center;">
             <h2><?php echo htmlspecialchars($project['tipo'])?></h2><br>
+            
             <p>ID: <?php echo htmlspecialchars($project['id']) ?></p>
             <p>Tipo: <?php echo htmlspecialchars($project['tipo']) ?></p>
             <p>creato il: <?php echo date("d/m/Y", strtotime($project['data_creazione'])); ?></p>

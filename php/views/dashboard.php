@@ -233,12 +233,12 @@
                 <!--Conferma eliminazione con action request allert-->
                 <div class="flex items-center gap-[5px]"x>
                   <!--Link al progetto-->
-                  <button onclick="window.location.href='/../../index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>'" class="w-8 h-8 flex items-center justify-center text-green-400 hover:text-green-600" title="vai alla scheda estesa">
+                  <button onclick="window.location.href='/../../index.php?page=progetto&id=<?php echo htmlspecialchars($project['id'])?>'" class="w-8 h-8 flex items-center justify-center text-green-400 hover:text-green-600" title="vai alla scheda estesa">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                   </button>
 
                   <!--Elimina progetto-->
-                  <form method="POST" style="display:inline;" onsubmit="return confirm('sei sicuro di voler eliminare questa scheda?');">
+                  <form method="POST" style="display:inline;" onsubmit="return confirm('sei sicuro di voler eliminare questo <?php echo $project['tipo']; ?>');">
 
                     <input type="hidden" name="action" value="delete_project">
 
@@ -322,13 +322,26 @@
             <div class="roles-dropdown-trigger input" id="selected-roles-display">
               Visualizzabile
             </div>
-            <!--lista di tutti i ruoli-->
-            <!--Mostra solo la lista dei ruoli al di sotto del MINIMUM_REQUIRED_AUTHORIZATION_LEVEL dei ruoli che amministratore che possono vedere tutti i progetti a prescindere-->
+            <!--lista dei ruoli non amministrativi-->
             <div class="roles-dropdown-content" id="roles-options">
               <p>Per utenti:</p>
               <?php 
                 foreach ($roles as $role): 
-                if(intval($role['id']) > MINIMUM_REQUIRED_AUTHORIZATION_LEVEL){
+                if(intval($role['id']) > MINIMUM_REQUIRED_AUTHORIZATION_LEVEL  && intval($role['id']) < PAGE_START_LEVEL){
+                  ?>
+                    <label class="block">
+                      <input type="checkbox" name="roles[]" value="<?= $role['id'] ?>" data-label="<?= htmlspecialchars($role['ruolo']) ?>">
+                      <?= htmlspecialchars($role['ruolo']) ?>
+                    </label>
+                  <?php
+                }
+                endforeach; 
+              ?>
+              <!--Lista pagine-->
+              <p>Per pagine:</p>
+              <?php 
+                foreach ($roles as $role): 
+                if(intval($role['id']) > MINIMUM_REQUIRED_AUTHORIZATION_LEVEL && intval($role['id']) >= PAGE_START_LEVEL){
                   ?>
                     <label class="block">
                       <input type="checkbox" name="roles[]" value="<?= $role['id'] ?>" data-label="<?= htmlspecialchars($role['ruolo']) ?>">
@@ -362,7 +375,7 @@
               <th class="p-4 text-left">cognome</th>
               <th class="p-4 text-left">username</th>
               <th class="p-4 text-left">email</th>
-              <th class="p-4 text-left">ruolo</th>
+              <th class="p-4 text-left">autorizzazione</th>
               <th class="p-4 text-left">azioni</th>
             </tr>
           </thead>
