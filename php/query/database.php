@@ -30,7 +30,11 @@ class database{
             die("errore di connessione: " . $connection->connect_error);
         }
 
+        //importante per la visualizzazione di caratteri come è ù à
+        $connection->set_charset("utf8");
+
         return $connection;
     }
+
 }
 ?>

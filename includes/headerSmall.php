@@ -50,17 +50,22 @@
                                 <i class="fas fa-user"></i> Visualizza profilo
                             </a>
                             <?php if ($loggedIn && $authorized): ?>
+                                <!--
                                 <a href="index.php?page=mysqlInfinity">
                                     <i class="fas fa-database"></i> PhpMyAdmin infinity
                                 </a>
                                 <a href="index.php?page=mysqlLocal">
                                     <i class="fas fa-hdd"></i> PhpMyAdmin locale
                                 </a>
+                                -->
                                 <a href="index.php?page=phpInfo">
                                     <i class="fas fa-info-circle"></i> Php info
                                 </a>
+                                <a href="index.php?page=debug">
+									<i class="fas fa-info-circle"></i> debug
+								</a>
                                 <a href="index.php?page=dashboard">
-                                    <i class="fas fa-tachometer-alt"></i> Admin dashboard
+                                    <i class="fas fa-tachometer-alt"></i> Dashboard
                                 </a>
                             <?php endif; ?>
                             <a href="includes/logout.php">

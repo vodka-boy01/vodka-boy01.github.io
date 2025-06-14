@@ -55,7 +55,7 @@
 		$authorized = $ruoloId <= MINIMUM_REQUIRED_AUTHORIZATION_LEVEL;	
     
 	}else{
-    header('location: pages\login.php');
+    header('location: /pages/login.php');
 
   }
 

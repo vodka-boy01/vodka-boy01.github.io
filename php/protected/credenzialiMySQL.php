@@ -12,7 +12,7 @@
         define('HOST', 'sql208.infinityfree.com');
         define('USER', 'if0_38885359');
         define('PASSWORD', '78421789');
-        define('DATABASE', 'if0_38885359_XXX');
+        define('DATABASE', 'if0_38885359_luigi_tanzillo');
 
     }
 ?>
