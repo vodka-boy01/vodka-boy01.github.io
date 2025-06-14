@@ -13,7 +13,7 @@ class Project {
         $this->connection = $db;
     }
 
-/**
+    /**
      * aggiunge un nuovo progetto e le sue immagini al database.
      * @param string $titolo titolo del progetto.
      * @param string $descrizione_breve breve descrizione.
@@ -21,6 +21,10 @@ class Project {
      * @param int $stato stato del progetto (1=attivo, 0=inattivo).
      * @param array $uploaded_image_details dettagli delle immagini caricate (nome e percorso).
      * @param string $titolo_footer titolo per il footer.
+     * @param string $descrizione_link_1 descrizione del link 1.
+     * @param string $link_1 link 1.
+     * @param string $descrizione_link_2 descrizione del link 2.
+     * @param string $link_2 link 2.
      * @param array $raggruppamento array contenente gli ID dei ruoli.
      * @return bool|string true se ha successo, "duplicate_title" se il titolo esiste già, false per altri errori.
      */
@@ -30,11 +34,11 @@ class Project {
 
         try {
             //query per l'inserimento del progetto
-            $query_project = "INSERT INTO progetti (titolo, descrizione_breve, descrizione_completa, stato, titolo_footer, descrizione_link_1, link_1, descrizione_link_2, link_2) VALUES (?, ?, ?, ?, ?, ?, ?)"; // Aggiunto un placeholder '?' per titolo_footer
+            $query_project = "INSERT INTO progetti (titolo, descrizione_breve, descrizione_completa, stato, titolo_footer, descrizione_link_1, link_1, descrizione_link_2, link_2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Aggiunto un placeholder '?' per titolo_footer
 
             $resSet_project = $this->connection->prepare($query_project);
 
-            $resSet_project->bind_param("ssssssssss", $titolo, $descrizione_breve, $descrizione_completa, $stato, $titolo_footer, $descrizione_link_1, $link_1, $descrizione_link_2, $link_2); 
+            $resSet_project->bind_param("sssisssss", $titolo, $descrizione_breve, $descrizione_completa, $stato, $titolo_footer, $descrizione_link_1, $link_1, $descrizione_link_2, $link_2); 
 
             if(!$resSet_project->execute()) {
                 // titolo duplicato codice 1062
@@ -261,7 +265,7 @@ class Project {
                 'roles' => [],
                 'descrizione_link_1' => $row['descrizione_link_1'],
                 'link_1' => $row['link_1'],
-                'descrizione_link_1' => $row['descrizione_link_2'],
+                'descrizione_link_2' => $row['descrizione_link_2'],
                 'link_2' => $row['link_2']
             ];
 

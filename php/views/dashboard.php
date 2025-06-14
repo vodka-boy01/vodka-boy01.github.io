@@ -77,7 +77,14 @@
     //la lista di ruoli che possono visionare il progetto 
     $raggruppamento = $_POST['roles'] ?? '';
     $uploaded_image_details = [];
-    $target_dir = __DIR__ . "/../../assets/uploads/projects/";//percorso
+
+    $descrizione_link_1 = $_POST['descrizione_link_1'] ?? '';
+    $link_1 = $_POST['link_1'] ?? '';
+    $descrizione_link_2 = $_POST['descrizione_link_2'] ?? '';
+    $link_2 = $_POST['link_2'] ?? '';
+
+    //percorso
+    $target_dir = __DIR__ . "/../../assets/uploads/projects/";
 
     // gestione delle immagini caricate
     if(isset($_FILES['imgs']) && !empty($_FILES['imgs']['name'][0])) {
@@ -124,7 +131,7 @@
 
     if(empty($error_message)) {
       // gestione del risultato
-      $add_result = $projectOperations->addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details, $titolo_footer, $raggruppamento);
+      $add_result = $projectOperations->addProject($titolo, $descrizione_breve, $descrizione_completa, $stato, $uploaded_image_details, $titolo_footer, $raggruppamento, $descrizione_link_1, $link_1, $descrizione_link_2, $link_2);
 
       if($add_result === true) { 
         // progetto aggiunto con successo
@@ -287,11 +294,33 @@
           </div>
 
           <div class="mb-4">
-            <label for="full" class="block mb-2">descrizione completa</label>
+            <label for="full" class="block mb-2">Descrizione completa</label>
             <p class="text-gray-400">Caratteri: <span id="contatore-full" class="contatore">0</span> / 1500</p>
             <textarea id="full" name="full" rows="5" class="input resize-none w-full" placeholder="descrizione dettagliata (massimo 1500 caratteri)" maxlength="1500" required></textarea>
           </div>
+          
+          <!--Sezione link-->
+          <div class="mb-4">
+            <label for="full" class="block mb-2">link 1</label>
+            <p class="text-gray-400">Caratteri: <span id="contatore-descrizione_link_1" class="contatore">0</span> / 20</p>
+            <textarea id="descrizione_link_1" name="descrizione_link_1" rows="2" class="input resize-none w-full" placeholder="Descrizione link (massimo 20 caratteri)" maxlength="20"></textarea>
+          </div>
 
+          <div class="mb-4">
+            <textarea id="link_1" name="link_1" rows="1" class="input resize-none w-full" placeholder="URL"></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label for="full" class="block mb-2">link 2</label>
+            <p class="text-gray-400">Caratteri: <span id="contatore-descrizione_link_2" class="contatore">0</span> / 20</p>
+            <textarea id="descrizione_link_2" name="descrizione_link_2" rows="2" class="input resize-none w-full" placeholder="Descrizione link (massimo 20 caratteri)" maxlength="20"></textarea>
+          </div>
+
+          <div class="mb-4">
+            <textarea id="link_2" name="link_2" rows="1" class="input resize-none w-full" placeholder="URL"></textarea>
+          </div>
+          
+          <!--Sezioni inserimento immagini-->
           <div class="mb-6">
             <label class="block mb-2 text-gray-400">immagini <span id="imgCount" class="text-sm text-gray-400">(0/20)</span></label>
             <div class="w-full mb-4">

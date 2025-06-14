@@ -38,17 +38,30 @@
 					<!--Rimozione benvenuto, nome utente, menu utente, avatar utente in caso l'utente non sia loggato-->
 					<?php if($loggedIn): ?>
 					<div class="dropdown">
-						<h1 class="dropdown-button"><?php echo htmlspecialchars($_SESSION['ruolo']). ' ' . htmlspecialchars($_SESSION['nome']); ?></h1>
+						<h1 class="dropdown-button">
+							<?php echo htmlspecialchars($_SESSION['ruolo']). ' ' . htmlspecialchars($_SESSION['nome']); ?>
+						</h1>
 						<div class="dropdown-content">
-							<a href="index.php?page=profilo" title="Visualizza il tuo profilo">Visualizza profilo</a>
-							<!--opzioni disponibili solo per gli utenti con ruolo admin e owner-->
-							<?php if($loggedIn && $authorized): ?>
-								<a href="index.php?page=mysqlInfinity">PhpMyAdmin infinity</a>
-								<a href="index.php?page=mysqlLocal">PhpMyAdmin locale</a>
-								<a href="index.php?page=phpInfo">Php info</a>
-								<a href="index.php?page=dashboard">Admin dashboard</a>
-							<?php endif; ?>	
-							<a href="includes/logout.php">Logout</a>
+							<a href="index.php?page=profilo" title="Visualizza il tuo profilo">
+								<i class="fas fa-user"></i> Visualizza profilo
+							</a>
+							<?php if ($loggedIn && $authorized): ?>
+								<a href="index.php?page=mysqlInfinity">
+									<i class="fas fa-database"></i> PhpMyAdmin infinity
+								</a>
+								<a href="index.php?page=mysqlLocal">
+									<i class="fas fa-hdd"></i> PhpMyAdmin locale
+								</a>
+								<a href="index.php?page=phpInfo">
+									<i class="fas fa-info-circle"></i> Php info
+								</a>
+								<a href="index.php?page=dashboard">
+									<i class="fas fa-tachometer-alt"></i> Admin dashboard
+								</a>
+							<?php endif; ?>
+							<a href="includes/logout.php">
+								<i class="fas fa-sign-out-alt"></i> Logout
+							</a>
 						</div>
 					</div>
 					<a href="index.php?page=profilo" id="login-icon" class="fa-solid fa-circle-user" title="Visualizza il tuo profilo"></a>

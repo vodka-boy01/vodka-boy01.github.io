@@ -26,7 +26,7 @@
         $message = "Progetto: " . $projectId . " non trovato o non visibile per il tuo ruolo.";
 
     }
-    
+
     $conn->close();
 ?>
 
@@ -70,10 +70,40 @@
         
         <div class="project-info-right" style="text-align: center;">
             <h2><?php echo htmlspecialchars($project['tipo'])?></h2><br>
-            
+
             <p>ID: <?php echo htmlspecialchars($project['id']) ?></p>
             <p>Tipo: <?php echo htmlspecialchars($project['tipo']) ?></p>
             <p>creato il: <?php echo date("d/m/Y", strtotime($project['data_creazione'])); ?></p>
+            <br>
+            
+            <p>Link utili:</p>
+            <?php if($project['link_1'] != null || $project['link_2'] != null):?>
+            <div style="flex-direction: row; display: flex; justify-content: center; gap: 7px; align-items: center;">
+                <?php if($project['link_1'] != null):?>
+                    <p><?php echo htmlspecialchars($project['descrizione_link_1'])?></p>
+
+                    <a href="<?php echo htmlspecialchars($project['link_1'])?>" target="_blank" title="Apri link esterno"> 
+                        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px;"></i>
+                    </a>
+                <?php endif?>
+
+            </div>
+
+            <div style="flex-direction: row; display: flex; justify-content: center; gap: 7px; align-items: center;">
+                <?php if($project['link_2'] != null):?>
+                    <p><?php echo htmlspecialchars($project['descrizione_link_2'])?></p>
+
+                    <a href="<?php echo htmlspecialchars($project['link_2'])?>" target="_blank" title="Apri link esterno"> 
+                        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px;"></i>
+                    </a>
+                <?php endif?>
+
+            </div>
+            <?php else:?>
+                <p>Non sono presenti link</p>
+            <?php endif?>
+            
+            
         </div>
     </div>
 </section>

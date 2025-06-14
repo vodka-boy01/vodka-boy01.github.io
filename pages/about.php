@@ -3,6 +3,7 @@
     $conn = (new database())->connect();
     $userOperations = new user($conn);
     $projectOperations = new project($conn); 
+    $role = ABOUT_PAGE;
 
     // Recupera tutti i progetti dal database con ruolo about
     $projects = $projectOperations->getAllProjectsByRole(ABOUT_PAGE);//TODO:verifica funzionalita
@@ -46,7 +47,7 @@
                                         $main_image_src = !empty($project['images'][0]['path']) ? htmlspecialchars($project['images'][0]['path']) : 'https://placehold.co/500x300/333/ffffff?text=Immagine+Non+Disponibile';
                                         ?>
                                         <!--Immagine cliccabile, link get con id progetto, verso index con p.id-->
-                                        <a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
+                                        <a href="index.php?page=progetto&id=<?php echo htmlspecialchars($project['id'])?>" title="Apri scheda Progetto">
                                             <!--Prima immagine del progetto-->
                                             <img src="<?php echo $main_image_src; ?>" alt="<?php echo htmlspecialchars($project['titolo']); ?>" class="main-project-image">
 

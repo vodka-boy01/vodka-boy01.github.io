@@ -29,7 +29,7 @@
 			<ul>
 				<?php foreach($lastFour AS $project):?>
 					<li>
-						<a href="index.php?page=project&id=<?php echo htmlspecialchars($project['id'])?>">
+						<a href="index.php?page=progetto&id=<?php echo htmlspecialchars($project['id'])?>">
 							<?php echo htmlspecialchars($project['titolo_footer'])?>
 						</a>
 					</li>
